@@ -1,0 +1,47 @@
+/* .sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5%;
+  height: 10vh;
+  overflow: auto;
+  max-height: 100vh;
+} */
+
+/* .left-sidenav {
+  background: #a48ff1;
+  position: fixed;
+  height: 100%;
+  top: 5;
+  left: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  padding-top: 20px;
+  overflow-y: scroll;
+} */
+
+/* .left-sidenav a {
+  color: #fff;
+  padding: 10px 15px 10px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+} */
+.btn {
+  background-color: #a48ff1;
+  color: white;
+  border-color: #a48ff1;
+}
+/* .btn-primary {
+  background-color: #a48ff1;
+  color: white;
+} */
+.btn:hover {
+  background-color: #a48ff1;
+  color: white;
+  border-color: #a48ff1;
+}
+
+.addSection {
+  text-align: center;
+  color: #a48ff1;
+}
