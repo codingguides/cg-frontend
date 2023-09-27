@@ -6,6 +6,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { SliderLatestPostsComponent } from './components/slider-latest-posts/slider-latest-posts.component';
 import { SectionComponent } from './section/section.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'features', component: FeaturesComponent },
   { path: 'slider-latest-posts', component: SliderLatestPostsComponent },
-  { path: 'section', component: SectionComponent }
+  { path: 'section', component: SectionComponent },
+  { path: 'quiz', component: QuizComponent }
 ];
 
 @NgModule({
