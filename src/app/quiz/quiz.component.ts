@@ -39,9 +39,21 @@ export class QuizComponent implements OnInit {
   }
 
   start() {
-    this.showWarning = true;
+    this.showWarning = false;
     this.isQuizEnded = false;
     this.isQuizStarted = false;
+    this.currentQuestionNo = 0;
+    this.loadQuestions();
+    this.correctAnswerCount = 0
+  }
+
+  replay() {
+    this.showWarning = false;
+    this.isQuizEnded = false;
+    this.isQuizStarted = true;
+    this.currentQuestionNo = 0;
+    this.loadQuestions();
+    this.correctAnswerCount = 0;
   }
 
 

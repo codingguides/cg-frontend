@@ -114,7 +114,7 @@
             </div>
           </div>
           <div class="buttons">
-            <button class="quit">Exit Quiz</button>
+            <button class="quit" (click)="start()">Exit Quiz</button>
             <button class="restart" (click)="startQuiz()">Continue</button>
           </div>
         </div>
@@ -191,8 +191,8 @@
             </span>
           </div>
           <div class="buttons">
-            <button class="restart">Replay quiz</button>
-            <button class="quit" (click)="start()">Quiz Quiz</button>
+            <button class="restart" (click)="replay()">Replay quiz</button>
+            <button class="quit" (click)="start()">Quit Quiz</button>
           </div>
         </div>
       </div>
