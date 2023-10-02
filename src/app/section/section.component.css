@@ -53,3 +53,16 @@
 .nav-tabs .nav-link.active {
   color: #4e22ed;
 }
+
+.ad_img {
+  height: 335px;
+  width: 182px;
+}
+
+.sideBar .nav li a {
+  margin-left: -21px;
+}
+
+hr:not([size]) {
+  height: 2px;
+}

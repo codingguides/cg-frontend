@@ -19,7 +19,7 @@
   position: absolute;
   /* top: 63%; */
   margin-top: 190px;
-  left: 50%;
+  left: 49%;
   transform: translate(-50%, -50%);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -74,7 +74,7 @@
   background: #795ed9;
 }
 .info_box {
-  width: 540px;
+  width: 600px;
   background: #efeafe;
   border-radius: 5px;
   transform: translate(-50%, -50%) scale(0.9);
@@ -130,7 +130,7 @@
 }
 
 .quiz_box {
-  width: 550px;
+  width: 750px;
   background: #efeafe;
   border-radius: 5px;
   transform: translate(-50%, -50%) scale(0.9);
@@ -207,7 +207,24 @@ section .option_list .option:hover {
   border: 1px solid #b8daff;
 }
 
-section .option_list .option.correct {
+section .option_list .option.select {
+  color: black;
+  background: #a48ff1;
+  border: 1px solid #b8daff;
+}
+/* section .option_list .option:hover {
+    color: black;
+    background: #a48ff1;
+    border: 1px solid #b8daff;
+  } */
+
+/* section .option_list .option::selection {
+  color: black;
+  background: #a48ff1;
+  border: 1px solid #b8daff;
+} */
+
+/* section .option_list .option.correct {
   color: #155724;
   background: #d4edda;
   border: 1px solid #c3e6cb;
@@ -217,7 +234,11 @@ section .option_list .option.incorrect {
   color: #721c24;
   background: #f8d7da;
   border: 1px solid #f5c6cb;
-}
+} */
+
+/* section .option_list .option.selected {
+  background-color: #007bff;
+} */
 
 section .option_list .option.disabled {
   pointer-events: none;
@@ -234,7 +255,7 @@ section .option_list .option .icon {
   transition: all 0.3s ease;
   line-height: 24px;
 }
-.option_list .option .icon.tick {
+/* .option_list .option .icon.tick {
   color: #23903c;
   border-color: #23903c;
   background: #d4edda;
@@ -244,7 +265,7 @@ section .option_list .option .icon {
   color: #a42834;
   background: #f8d7da;
   border-color: #a42834;
-}
+} */
 
 footer {
   height: 60px;
@@ -304,7 +325,8 @@ footer button.show {
   border-radius: 5px;
   display: flex;
   padding: 25px 30px;
-  width: 450px;
+  width: 600px;
+  height: 360px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -386,4 +408,17 @@ footer button.show {
 
 .nav-tabs .nav-link.active {
   color: #4e22ed;
+}
+
+.ad_img {
+  height: 335px;
+  width: 182px;
+}
+
+.sideBar .nav li a {
+  margin-left: -21px;
+}
+
+hr:not([size]) {
+  height: 2px;
 }

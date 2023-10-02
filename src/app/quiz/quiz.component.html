@@ -15,8 +15,9 @@
                 aria-controls="tab_1"
                 aria-selected="true"
                 routerLink="/section"
-                ><h5>JavaScript Quiz</h5></a
-              >
+                ><h4>JavaScript Quiz</h4>
+                <hr class="d-none d-md-block my-0 ms-0 me-0" />
+              </a>
             </li>
             <li class="nav-item" role="presentation">
               <a
@@ -67,8 +68,8 @@
                 role="tab"
                 aria-controls="tab_5"
                 aria-selected="false"
-                >Contact5</a
-              >
+                >Quiz for ES6
+              </a>
             </li>
             <li class="nav-item" role="presentation">
               <a
@@ -80,7 +81,7 @@
                 role="tab"
                 aria-controls="tab_6"
                 aria-selected="false"
-                >Contact6</a
+                >Quiz for JS Objects</a
               >
             </li>
             <li class="nav-item" role="presentation">
@@ -93,7 +94,46 @@
                 role="tab"
                 aria-controls="tab_7"
                 aria-selected="false"
-                >Contact7</a
+                >Quiz for JS Classes</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="tabPart_8"
+                data-bs-toggle="tab"
+                data-bs-target="#tab_8"
+                href="#"
+                role="tab"
+                aria-controls="tab_8"
+                aria-selected="false"
+                >Quiz for JS Functions</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="tabPart_9"
+                data-bs-toggle="tab"
+                data-bs-target="#tab_9"
+                href="#"
+                role="tab"
+                aria-controls="tab_9"
+                aria-selected="false"
+                >Quiz for JavaScript OOPs</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="tabPart_10"
+                data-bs-toggle="tab"
+                data-bs-target="#tab_10"
+                href="#"
+                role="tab"
+                aria-controls="tab_10"
+                aria-selected="false"
+                >Quiz for JS JSON</a
               >
             </li>
           </ul>
@@ -126,7 +166,7 @@
               <div class="timer_left_txt">Time Off</div>
               <div class="timer_sec">00</div>
             </div> -->
-            <div class="time_line" style="width: 550px"></div>
+            <div class="time_line" style="width: 750px"></div>
           </header>
           <section *ngIf="isQuizStarted">
             <div class="que_text">
@@ -143,7 +183,8 @@
                     questionsList[currentQuestionNo].options
                   ),
                   correct: option.isSelected && option.isCorrect,
-                  incorrect: option.isSelected && !option.isCorrect
+                  incorrect: option.isSelected && !option.isCorrect,
+                  select: option.isSelected
                 }"
                 (click)="selectOption(option)"
                 *ngFor="let option of questionsList[currentQuestionNo].options"
@@ -199,6 +240,12 @@
       <div class="col-lg-2">
         <div class="add_part">
           <h2 class="addSection">Ads Section</h2>
+          <hr class="d-none d-md-block my-2 ms-0" />
+          <img
+            class="ad_img"
+            src="assets\images\keralaspices-ad300×600-px-medium.jpg"
+            alt=""
+          />
         </div>
       </div>
     </div>
