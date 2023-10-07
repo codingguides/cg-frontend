@@ -12,6 +12,8 @@ import { FeaturesComponent } from './components/features/features.component';
 import { SliderLatestPostsComponent } from './components/slider-latest-posts/slider-latest-posts.component';
 import { HomeComponent } from './home/home.component';
 import { SectionComponent } from './section/section.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,11 +27,13 @@ import { SectionComponent } from './section/section.component';
     SliderLatestPostsComponent,
     HomeComponent,
     SectionComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

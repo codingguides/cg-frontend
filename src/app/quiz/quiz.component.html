@@ -6,7 +6,7 @@
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <a
-                class="nav-link active"
+                class="nav-link"
                 id="tabPart_1"
                 data-bs-toggle="tab"
                 data-bs-target="#tab_1"
@@ -14,13 +14,14 @@
                 role="tab"
                 aria-controls="tab_1"
                 aria-selected="true"
+                routerLink="/section"
                 ><h4>JavaScript Quiz</h4>
                 <hr class="d-none d-md-block my-0 ms-0 me-0" />
               </a>
             </li>
             <li class="nav-item" role="presentation">
               <a
-                class="nav-link"
+                class="nav-link active"
                 id="tabPart_2"
                 data-bs-toggle="tab"
                 data-bs-target="#tab_2"
@@ -138,81 +139,101 @@
           </ul>
         </aside>
       </div>
-      <div class="col-lg-8" style="background-color: white">
-        <div class="row">
-          <div class="col-sm-6 mt-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Beginners</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" routerLink="/quiz" class="btn btn-sm"
-                  >Click to Start</a
-                >
-              </div>
+      <div class="col-lg-8">
+        <div class="start_btn">
+          <button (click)="showWarningPopup()">Start Quiz</button>
+        </div>
+        <div class="info_box" [ngClass]="showWarning ? 'activeInfo' : ''">
+          <div class="info-title"><span>Some Rules of this Quiz</span></div>
+          <div class="info-list">
+            <div class="info">
+              1. Once you select your answer it can't be undone.
+            </div>
+            <div class="info">
+              2. You can't exit from the Quiz once Started.
             </div>
           </div>
-          <div class="col-sm-6 mt-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Intermediate</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Start Quiz</a>
-              </div>
-            </div>
+          <div class="buttons">
+            <button class="quit" (click)="start()">Exit Quiz</button>
+            <button class="restart" (click)="startQuiz()">Continue</button>
           </div>
-          <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Advanced</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Start Quiz</a>
+        </div>
+
+        <div class="quiz_box" [ngClass]="isQuizStarted ? 'activeQuiz' : ''">
+          <header>
+            <div class="title">JavaScript Quiz</div>
+            <!-- <div class="timer">
+              <div class="timer_left_txt">Time Off</div>
+              <div class="timer_sec">00</div>
+            </div> -->
+            <div class="time_line" style="width: 750px"></div>
+          </header>
+          <section *ngIf="isQuizStarted">
+            <div class="que_text">
+              <span
+                >{{ currentQuestionNo + 1 }}.
+                {{ questionsList[currentQuestionNo].question }}
+              </span>
+            </div>
+            <div class="option_list">
+              <div
+                class="option"
+                [ngClass]="{
+                  disabled: isOptionSelected(
+                    questionsList[currentQuestionNo].options
+                  ),
+                  correct: option.isSelected && option.isCorrect,
+                  incorrect: option.isSelected && !option.isCorrect,
+                  select: option.isSelected
+                }"
+                (click)="selectOption(option)"
+                *ngFor="let option of questionsList[currentQuestionNo].options"
+              >
+                <span>{{ option.answer }}</span>
               </div>
             </div>
+          </section>
+          <footer>
+            <div class="total_que">
+              <span
+                ><p>{{ currentQuestionNo + 1 }}</p>
+                of
+                <p>{{ questionsList.length }}</p>
+                Questions</span
+              >
+            </div>
+            <button
+              *ngIf="currentQuestionNo + 1 == questionsList.length"
+              class="next_btn show"
+              (click)="finish()"
+            >
+              Finish
+            </button>
+            <button
+              *ngIf="currentQuestionNo + 1 !== questionsList.length"
+              class="next_btn show"
+              (click)="nextQuestion()"
+            >
+              Next Que
+            </button>
+          </footer>
+        </div>
+        <div class="result_box" [ngClass]="isQuizEnded ? 'activeResult' : ''">
+          <div class="icon">
+            <i class="fas fa-crown"></i>
           </div>
-          <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Beginners</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Start Quiz</a>
-              </div>
-            </div>
+          <div class="complete_text">You've completed the Quiz!</div>
+          <div class="score_text">
+            <span
+              >and congrats! You got
+              <p>{{ correctAnswerCount }}</p>
+              out of
+              <p>{{ questionsList.length }}</p>
+            </span>
           </div>
-          <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Intermediate</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Click to Start</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Advanced</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Click to Start</a>
-              </div>
-            </div>
+          <div class="buttons">
+            <button class="restart" (click)="replay()">Replay quiz</button>
+            <button class="quit" (click)="start()">Quit Quiz</button>
           </div>
         </div>
       </div>

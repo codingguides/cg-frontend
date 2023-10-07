@@ -36,7 +36,7 @@
   color: white;
 } */
 .btn:hover {
-  background-color: #a48ff1;
+  background-color: #7251e9;
   color: white;
   border-color: #a48ff1;
 }
@@ -44,4 +44,25 @@
 .addSection {
   text-align: center;
   color: #a48ff1;
+}
+
+.nav-link:hover {
+  color: #623ceb;
+}
+
+.nav-tabs .nav-link.active {
+  color: #4e22ed;
+}
+
+.ad_img {
+  height: 335px;
+  width: 182px;
+}
+
+.sideBar .nav li a {
+  margin-left: -21px;
+}
+
+hr:not([size]) {
+  height: 2px;
 }
