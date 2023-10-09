@@ -140,21 +140,20 @@
       </div>
       <div class="col-lg-8" style="background-color: white">
         <div class="row">
-          <div class="col-sm-6 mt-3">
+          <div class="col-sm-6 mt-3" *ngFor="let quizlist of list">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Quiz for Beginners</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" routerLink="/quiz" class="btn btn-sm"
+                <h5 class="card-title" [routerLink]="quizlist.slug">
+                  {{ quizlist?.name }}
+                </h5>
+                <p class="card-text" [innerHTML]="quizlist.description"></p>
+                <a href="#" [routerLink]="quizlist.slug" class="btn btn-sm"
                   >Click to Start</a
                 >
               </div>
             </div>
           </div>
-          <div class="col-sm-6 mt-3">
+          <!-- <div class="col-sm-6 mt-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Quiz for Intermediate</h5>
@@ -165,8 +164,8 @@
                 <a href="#" class="btn btn-sm">Start Quiz</a>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 mt-3 mb-3">
+          </div> -->
+          <!-- <div class="col-sm-6 mt-3 mb-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Quiz for Advanced</h5>
@@ -177,8 +176,8 @@
                 <a href="#" class="btn btn-sm">Start Quiz</a>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 mt-3 mb-3">
+          </div> -->
+          <!-- <div class="col-sm-6 mt-3 mb-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Quiz for Beginners</h5>
@@ -189,8 +188,8 @@
                 <a href="#" class="btn btn-sm">Start Quiz</a>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 mt-3 mb-3">
+          </div> -->
+          <!-- <div class="col-sm-6 mt-3 mb-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Quiz for Intermediate</h5>
@@ -201,8 +200,8 @@
                 <a href="#" class="btn btn-sm">Click to Start</a>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 mt-3 mb-3">
+          </div> -->
+          <!-- <div class="col-sm-6 mt-3 mb-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Quiz for Advanced</h5>
@@ -213,7 +212,7 @@
                 <a href="#" class="btn btn-sm">Click to Start</a>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-lg-2">

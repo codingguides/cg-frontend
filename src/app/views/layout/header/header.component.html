@@ -95,8 +95,10 @@
         <div class="container-fluid">
           <div class="customNav">
             <ul class="list-unstyled">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/section">JavaScript</a>
+              <li class="nav-item" *ngFor="let menulist of menu">
+                <a class="nav-link" [routerLink]="menulist.slug">{{
+                  menulist?.name
+                }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" routerLink="/section">Angular</a>

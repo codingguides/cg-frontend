@@ -3,17 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './common/header/header.component';
-import { FooterComponent } from './common/footer/footer.component';
-import { SubscribeComponent } from './common/subscribe/subscribe.component';
+import { HeaderComponent } from '../app/views/layout/header/header.component';
+import { FooterComponent } from '../app/views/layout/footer/footer.component';
+import { SubscribeComponent } from '../app/views/layout/subscribe/subscribe.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { SliderLatestPostsComponent } from './components/slider-latest-posts/slider-latest-posts.component';
-import { HomeComponent } from './home/home.component';
-import { SectionComponent } from './section/section.component';
-import { QuizComponent } from './quiz/quiz.component';
+import { HomeComponent } from '../app/views/home/home.component';
+import { ListingComponent } from '../app/views/inner/listing/listing.component';
+import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
 import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -26,9 +27,10 @@ import { HttpClientModule } from '@angular/common/http';
     FeaturesComponent,
     SliderLatestPostsComponent,
     HomeComponent,
-    SectionComponent,
+    ListingComponent,
     AboutUsComponent,
-    QuizComponent
+    QuizComponent,
+
   ],
   imports: [
     BrowserModule,
