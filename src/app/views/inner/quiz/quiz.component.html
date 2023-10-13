@@ -6,7 +6,7 @@
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <a
-                class="nav-link"
+                class="nav-link active"
                 id="tabPart_1"
                 data-bs-toggle="tab"
                 data-bs-target="#tab_1"
@@ -14,14 +14,17 @@
                 role="tab"
                 aria-controls="tab_1"
                 aria-selected="true"
-                routerLink="/section"
                 ><h4>JavaScript Quiz</h4>
                 <hr class="d-none d-md-block my-0 ms-0 me-0" />
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li
+              class="nav-item"
+              role="presentation"
+              *ngFor="let quizlist2 of menu_sidebar"
+            >
               <a
-                class="nav-link active"
+                class="nav-link"
                 id="tabPart_2"
                 data-bs-toggle="tab"
                 data-bs-target="#tab_2"
@@ -29,111 +32,7 @@
                 role="tab"
                 aria-controls="tab_2"
                 aria-selected="false"
-                >Quiz for Beginners</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_3"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_3"
-                href="#"
-                role="tab"
-                aria-controls="tab_3"
-                aria-selected="false"
-                >Quiz for Intermediate</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_4"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_4"
-                href="#"
-                role="tab"
-                aria-controls="tab_4"
-                aria-selected="false"
-                >Quiz for Advanced</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_5"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_5"
-                href="#"
-                role="tab"
-                aria-controls="tab_5"
-                aria-selected="false"
-                >Quiz for ES6
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_6"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_6"
-                href="#"
-                role="tab"
-                aria-controls="tab_6"
-                aria-selected="false"
-                >Quiz for JS Objects</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_7"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_7"
-                href="#"
-                role="tab"
-                aria-controls="tab_7"
-                aria-selected="false"
-                >Quiz for JS Classes</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_8"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_8"
-                href="#"
-                role="tab"
-                aria-controls="tab_8"
-                aria-selected="false"
-                >Quiz for JS Functions</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_9"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_9"
-                href="#"
-                role="tab"
-                aria-controls="tab_9"
-                aria-selected="false"
-                >Quiz for JavaScript OOPs</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_10"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_10"
-                href="#"
-                role="tab"
-                aria-controls="tab_10"
-                aria-selected="false"
-                >Quiz for JS JSON</a
+                >{{ quizlist2?.name }}</a
               >
             </li>
           </ul>
@@ -170,26 +69,21 @@
           </header>
           <section *ngIf="isQuizStarted">
             <div class="que_text">
-              <span
-                >{{ currentQuestionNo + 1 }}.
-                {{ questionsList[currentQuestionNo].question }}
+              {{ currentQuestionNo + 1 }}.
+              <span [innerHTML]="questionsList[currentQuestionNo].question">
               </span>
             </div>
             <div class="option_list">
               <div
                 class="option"
-                [ngClass]="{
-                  disabled: isOptionSelected(
-                    questionsList[currentQuestionNo].options
-                  ),
-                  correct: option.isSelected && option.isCorrect,
-                  incorrect: option.isSelected && !option.isCorrect,
-                  select: option.isSelected
-                }"
-                (click)="selectOption(option)"
-                *ngFor="let option of questionsList[currentQuestionNo].options"
+                [ngClass]="activeId == i ? 'option bulet' : 'option'"
+                (click)="selectOption(i, option)"
+                *ngFor="
+                  let option of questionsList[currentQuestionNo].options;
+                  index as i
+                "
               >
-                <span>{{ option.answer }}</span>
+                <span>{{ option }}</span>
               </div>
             </div>
           </section>
@@ -212,7 +106,7 @@
             <button
               *ngIf="currentQuestionNo + 1 !== questionsList.length"
               class="next_btn show"
-              (click)="nextQuestion()"
+              (click)="nextQuestion(questionsList[currentQuestionNo])"
             >
               Next Que
             </button>
@@ -226,7 +120,7 @@
           <div class="score_text">
             <span
               >and congrats! You got
-              <p>{{ correctAnswerCount }}</p>
+              <p>{{ userPoint }}</p>
               out of
               <p>{{ questionsList.length }}</p>
             </span>

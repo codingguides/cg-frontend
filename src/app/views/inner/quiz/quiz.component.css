@@ -155,6 +155,7 @@
 .quiz_box header .title {
   font-size: 1.4rem;
   font-weight: 600;
+  color: #795ed9;
 }
 
 .quiz_box header .time_line {
@@ -173,7 +174,15 @@ section {
 section .que_text {
   font-size: 1.1rem;
   font-weight: 600;
-  padding: 10px;
+  /* padding: 10px; */
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+  display: flex;
+}
+
+section .que_text span {
+  margin-left: 3px;
 }
 
 section .option_list {
@@ -211,6 +220,12 @@ section .option_list .option.select {
   color: black;
   background: #a48ff1;
   border: 1px solid #b8daff;
+}
+
+.bulet {
+  color: black !important;
+  background: #a48ff1 !important;
+  border: 1px solid #b8daff !important;
 }
 /* section .option_list .option:hover {
     color: black;
@@ -269,7 +284,7 @@ section .option_list .option .icon {
 
 footer {
   height: 60px;
-  padding: 0 30px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -405,6 +420,15 @@ footer button.show {
 .nav-link:hover {
   color: #623ceb;
 }
+
+.nav-tabs .nav-link {
+  /* color: #4e22ed; */
+  color: #a48ff1;
+}
+
+/* .nav-link.active:hover {
+  color: #623ceb;
+} */
 
 .nav-tabs .nav-link.active {
   color: #4e22ed;

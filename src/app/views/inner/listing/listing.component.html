@@ -18,7 +18,11 @@
                 <hr class="d-none d-md-block my-0 ms-0 me-0" />
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li
+              class="nav-item"
+              role="presentation"
+              *ngFor="let quizlist2 of menu_sidebar"
+            >
               <a
                 class="nav-link"
                 id="tabPart_2"
@@ -28,111 +32,7 @@
                 role="tab"
                 aria-controls="tab_2"
                 aria-selected="false"
-                >Quiz for Beginners</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_3"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_3"
-                href="#"
-                role="tab"
-                aria-controls="tab_3"
-                aria-selected="false"
-                >Quiz for Intermediate</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_4"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_4"
-                href="#"
-                role="tab"
-                aria-controls="tab_4"
-                aria-selected="false"
-                >Quiz for Advanced</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_5"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_5"
-                href="#"
-                role="tab"
-                aria-controls="tab_5"
-                aria-selected="false"
-                >Quiz for ES6
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_6"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_6"
-                href="#"
-                role="tab"
-                aria-controls="tab_6"
-                aria-selected="false"
-                >Quiz for JS Objects</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_7"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_7"
-                href="#"
-                role="tab"
-                aria-controls="tab_7"
-                aria-selected="false"
-                >Quiz for JS Classes</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_8"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_8"
-                href="#"
-                role="tab"
-                aria-controls="tab_8"
-                aria-selected="false"
-                >Quiz for JS Functions</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_9"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_9"
-                href="#"
-                role="tab"
-                aria-controls="tab_9"
-                aria-selected="false"
-                >Quiz for JavaScript OOPs</a
-              >
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tabPart_10"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_10"
-                href="#"
-                role="tab"
-                aria-controls="tab_10"
-                aria-selected="false"
-                >Quiz for JS JSON</a
+                >{{ quizlist2?.name }}</a
               >
             </li>
           </ul>
@@ -153,66 +53,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-sm-6 mt-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Intermediate</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Start Quiz</a>
-              </div>
-            </div>
-          </div> -->
-          <!-- <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Advanced</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Start Quiz</a>
-              </div>
-            </div>
-          </div> -->
-          <!-- <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Beginners</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Start Quiz</a>
-              </div>
-            </div>
-          </div> -->
-          <!-- <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Intermediate</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Click to Start</a>
-              </div>
-            </div>
-          </div> -->
-          <!-- <div class="col-sm-6 mt-3 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Quiz for Advanced</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-sm">Click to Start</a>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
       <div class="col-lg-2">
