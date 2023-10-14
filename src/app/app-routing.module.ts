@@ -7,6 +7,10 @@ import { FeaturesComponent } from './components/features/features.component';
 import { SliderLatestPostsComponent } from './components/slider-latest-posts/slider-latest-posts.component';
 import { ListingComponent } from '../app/views/inner/listing/listing.component';
 import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { PagenotfoundComponent } from
+  './pagenotfound/pagenotfound.component';
 
 
 
@@ -16,11 +20,17 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'features', component: FeaturesComponent },
   { path: 'slider-latest-posts', component: SliderLatestPostsComponent },
-  { path: ':topic', component: ListingComponent },
-  { path: ':topic/:subtopic', component: ListingComponent },
-  { path: ':topic/:subtopic/:quiz', component: QuizComponent }, //topic/subtopic/quiz
+  { path: 'quiz/:topic', component: ListingComponent },
+  { path: 'quiz/:topic/:subtopic', component: ListingComponent },
+  { path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent }, //topic/subtopic/quiz
   //            topic/          subtopic/      quiz
   //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
+  {
+    path: '**', pathMatch: 'full',
+    component: PagenotfoundComponent
+  },
 
 ];
 

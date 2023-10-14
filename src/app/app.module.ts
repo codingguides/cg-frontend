@@ -16,6 +16,9 @@ import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdSidebarComponent } from './views/layout/ad-sidebar/ad-sidebar.component';
 import { SidebarMenuComponent } from './views/layout/sidebar-menu/sidebar-menu.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 
@@ -35,6 +38,9 @@ import { SidebarMenuComponent } from './views/layout/sidebar-menu/sidebar-menu.c
     QuizComponent,
     AdSidebarComponent,
     SidebarMenuComponent,
+    LoginComponent,
+    SignUpComponent,
+    PagenotfoundComponent,
 
 
   ],
