@@ -1,0 +1,15 @@
+.btn:hover {
+    background-color: #7251e9;
+    color: white;
+    border-color: #a48ff1;
+}
+
+.addSection {
+    text-align: center;
+    color: #a48ff1;
+}
+
+.ad_img {
+    height: 335px;
+    width: 182px;
+  }

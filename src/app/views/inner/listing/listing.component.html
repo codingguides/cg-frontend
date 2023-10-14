@@ -1,44 +1,10 @@
 <section class="inner_wrap">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-2">
-        <aside class="sideBar">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link active"
-                id="tabPart_1"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_1"
-                href="#"
-                role="tab"
-                aria-controls="tab_1"
-                aria-selected="true"
-                ><h4>JavaScript Quiz</h4>
-                <hr class="d-none d-md-block my-0 ms-0 me-0" />
-              </a>
-            </li>
-            <li
-              class="nav-item"
-              role="presentation"
-              *ngFor="let quizlist2 of menu_sidebar"
-            >
-              <a
-                class="nav-link"
-                id="tabPart_2"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_2"
-                href="#"
-                role="tab"
-                aria-controls="tab_2"
-                aria-selected="false"
-                >{{ quizlist2?.name }}</a
-              >
-            </li>
-          </ul>
-        </aside>
+      <div class="col-lg-3">
+        <app-sidebar-menu></app-sidebar-menu>
       </div>
-      <div class="col-lg-8" style="background-color: white">
+      <div class="col-lg-7" style="background-color: white">
         <div class="row">
           <div class="col-sm-6 mt-3" *ngFor="let quizlist of list">
             <div class="card">
@@ -56,15 +22,7 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="add_part">
-          <h2 class="addSection">Ads Section</h2>
-          <hr class="d-none d-md-block my-2 ms-0" />
-          <img
-            class="ad_img"
-            src="assets\images\keralaspices-ad300×600-px-medium.jpg"
-            alt=""
-          />
-        </div>
+        <app-ad-sidebar></app-ad-sidebar>
       </div>
     </div>
   </div>

@@ -1,12 +1,4 @@
 <header>
-  <!--[if lte IE 9]>
-    <p class="browserupgrade">
-      You are using an <strong>outdated</strong> browser. Please
-      <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-      your experience and security.
-    </p>
-  <![endif]-->
-
   <section class="navbar_wrap">
     <div class="top_header">
       <div class="container-fluid">
@@ -96,7 +88,7 @@
           <div class="customNav">
             <ul class="list-unstyled">
               <li class="nav-item" *ngFor="let menulist of menu">
-                <a class="nav-link" [routerLink]="menulist.slug">{{
+                <a class="nav-link" routerLink="quiz/{{ menulist.slug }}">{{
                   menulist?.name
                 }}</a>
               </li>

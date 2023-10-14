@@ -14,11 +14,9 @@ export class ListingComponent {
   ) { }
 
   list: any;
-  menu_sidebar: any;
 
   ngOnInit() {
     this.getList();
-    this.getMenuSidebar();
   }
 
   async getList() {
@@ -41,15 +39,5 @@ export class ListingComponent {
       });
   }
 
-  async getMenuSidebar() {
-    await this.commonservice
-      .get(`page/get-quiz-list/${this.router.snapshot.params['topic']}`)
-      .subscribe((result) => {
-        const apiResult2 = JSON.parse(JSON.stringify(result));
 
-        if (apiResult2 && apiResult2.status == 'SUCCESS') {
-          this.menu_sidebar = apiResult2 && apiResult2.payload;
-        }
-      });
-  }
 }
