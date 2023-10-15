@@ -14,6 +14,8 @@ export class ListingComponent {
   ) { }
 
   list: any;
+  flag: boolean = false;
+  error:any = "";
 
   ngOnInit() {
     this.getList();
@@ -32,9 +34,13 @@ export class ListingComponent {
       .get(`page/get-quiz-list/${param}`)
       .subscribe((res) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-
+        console.log("apiResult>>>>>",apiResult)
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.list = apiResult && apiResult.payload;
+          this.flag = true;
+        }else{
+          this.flag = false;
+          this.error = ""
         }
       });
   }

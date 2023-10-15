@@ -5,7 +5,7 @@
         <app-sidebar-menu></app-sidebar-menu>
       </div>
       <div class="col-lg-7" style="background-color: white">
-        <div class="row">
+        <div class="row" *ngIf="flag">
           <div class="col-sm-6 mt-3" *ngFor="let quizlist of list">
             <div class="card">
               <div class="card-body">
@@ -18,6 +18,11 @@
                 >
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!flag">
+          <div class="alert alert-danger" role="alert">
+            Oops ! quiz not found
           </div>
         </div>
       </div>
