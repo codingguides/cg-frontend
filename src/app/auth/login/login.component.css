@@ -1,0 +1,27 @@
+.form-box {
+  width: 480px;
+  height: 268px;
+  padding: 25px;
+  background-color: #a48ff1;
+  position: relative;
+  transform: translate(-50%, -5%);
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  color: white;
+}
+
+.error-msg {
+  transform: translate(0%, -85%);
+  text-align: center;
+  color: red;
+  margin-bottom: -24px;
+}
+
+.eyeicon {
+  position: absolute;
+  right: 33px;
+  bottom: 80px;
+  cursor: pointer;
+  color: #a48ff1;
+}

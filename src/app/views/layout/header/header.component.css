@@ -1,0 +1,18 @@
+#user {
+  float: right;
+}
+.btn {
+  background-color: #a48ff1;
+  color: white;
+  float: right;
+}
+
+button#dropdownMenuButton1 {
+  border-color: #a48ff1;
+  background-color: #a48ff1;
+  box-shadow: none;
+}
+
+a.footer_text.text-center {
+  margin-top: -5px;
+}

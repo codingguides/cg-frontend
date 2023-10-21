@@ -1,0 +1,11 @@
+.nav-tabs .nav-link.active {
+  color: #4e22ed;
+}
+
+hr:not([size]) {
+  height: 1.5px;
+}
+
+hr.d-none.d-md-block.my-0.ms-0.me-0 {
+  width: 70%;
+}

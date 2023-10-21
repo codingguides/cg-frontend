@@ -1,0 +1,20 @@
+.form-box1 {
+  width: 480px;
+  height: auto;
+  padding: 25px;
+  background-color: #a48ff1;
+  position: relative;
+  transform: translate(-50%, -3%);
+  left: 50%;
+  top: 50%;
+  color: white;
+  /* z-index: -1; */
+}
+
+.error-msg {
+  text-align: center;
+  color: red;
+  font-size: 15px;
+  margin-bottom: -22px;
+  transform: translate(0%, -100%);
+}

@@ -26,7 +26,7 @@ const routes: Routes = [
   //            topic/          subtopic/      quiz
   //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent },
+  { path: 'sign-up', component: SignUpComponent },
   {
     path: '**', pathMatch: 'full',
     component: PagenotfoundComponent

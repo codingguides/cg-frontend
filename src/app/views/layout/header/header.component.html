@@ -3,7 +3,7 @@
     <div class="top_header">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <div class="social_part">
               <ul class="list-inline">
                 <li class="list-inline-item">
@@ -37,7 +37,7 @@
               /></a>
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <div class="search_part">
               <form>
                 <input
@@ -48,6 +48,77 @@
                   aria-describedby="search-addon"
                 />
               </form>
+            </div>
+          </div>
+          <div class="col-lg-2" *ngIf="!status">
+            <button id="user" class="btn" (click)="openModal()">Sign In</button>
+          </div>
+          <div class="col-lg-2" *ngIf="status">
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{ name }}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- The Modal -->
+          <div [class]="modalClass" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">
+                    {{ showLogin == true ? "Sign In" : "Sign Up" }}
+                  </h4>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    #closebutton
+                    data-bs-dismiss="modal"
+                    (click)="closeModal()"
+                  ></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <div *ngIf="showLogin">
+                    <app-login></app-login>
+                  </div>
+                  <div *ngIf="!showLogin">
+                    <app-sign-up></app-sign-up>
+                  </div>
+                </div>
+                <a
+                  class="footer_text text-center"
+                  (click)="changeLogin(showLogin)"
+                  >{{ showLoginText }}</a
+                >
+
+                <!-- Modal footer -->
+                <!-- <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn"
+                    data-bs-dismiss="modal"
+                    (click)="closeModal()"
+                  >
+                    Close
+                  </button>
+                </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -88,7 +159,7 @@
           <div class="customNav">
             <ul class="list-unstyled">
               <li class="nav-item" *ngFor="let menulist of menu">
-                <a class="nav-link" routerLink="quiz/{{ menulist.slug }}">{{
+                <a class="nav-link" routerLink="quiz/{{ menulist.slug }}">{{
                   menulist?.name
                 }}</a>
               </li>

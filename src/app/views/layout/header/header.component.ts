@@ -9,12 +9,37 @@ import { CommonService } from '../../../common/common.service';
 })
 export class HeaderComponent {
   menu: any
+  showLogin: boolean = true;
+  showLoginText: String = "Don't have an account? Sign Up";
+  loginTrue: any //= localStorage.getItem('accessToken')
+  status: boolean = false;
+  username: string = "";
+  modalClass = "modal"
+  name: string = ""
+
   constructor(public commonservice: CommonService,) {
 
   }
 
   ngOnInit() {
     this.getMenu();
+    this.commonservice.getLoggedIn()
+
+
+    if (localStorage.getItem('accessToken')) {
+      this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
+      this.commonservice.setLoggedIn(true, this.name);
+    } else {
+      this.commonservice.setLoggedIn(false, this.name)
+    }
+
+    this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
+      this.status = obj.status
+      this.name = obj.username
+    });
+    console.log(this.loginTrue.status)
+    console.log(this.loginTrue.name)
+    console.log(this.status, "<<<<<<<<<<<loginTrue>>>>>>>>>>>", this.loginTrue)
   }
 
   async getMenu() {
@@ -26,4 +51,29 @@ export class HeaderComponent {
       }
     })
   }
+
+  openModal() {
+    const modalDiv = document.getElementById('myModal');
+    if (modalDiv != null) {
+      modalDiv.style.display = 'block'
+    }
+  }
+
+  closeModal() {
+    const modalDiv = document.getElementById('myModal');
+    if (modalDiv != null) {
+      modalDiv.style.display = 'none'
+    }
+  }
+
+  changeLogin(val: boolean) {
+    this.showLogin = !val;
+    if (val == true) {
+      this.showLoginText = "Already have an account? Sign In";
+    } else {
+      this.showLoginText = "Don't have an account? Sign Up";
+    }
+  }
+
+
 }

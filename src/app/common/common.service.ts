@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import jwt_decode from "jwt-decode";
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,12 @@ export class CommonService {
       'Authorization': `${this.token}`
     })
   };
+  private loginstatus = new BehaviorSubject<object>({ status: false, username: "" });
+  // obj={
+  //   status:false,
+  //   uername :""
+  // }
+  castLogin = this.loginstatus.asObservable();
 
   constructor(private httpClient: HttpClient, private _router: Router) { }
 
@@ -40,15 +48,22 @@ export class CommonService {
     return this.httpClient.delete(this.url + endPoints, this.headerOptions)
   }
 
-  public isLoggedIn() {
-    let status = "LoggedIn"
-    if (!sessionStorage.getItem('accessToken') || sessionStorage.getItem('accessToken') == undefined) {
-      status = "LogOut"
-      this._router.navigate(['./login']);
-    }
-    sessionStorage.setItem('status', status)
-    console.log("status: ", status)
-    return status;
+  public login(postData: Object, endPoints: String) {
+    return this.httpClient.post(this.url + endPoints, postData,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+  }
+
+  public setLoggedIn(status: any, username: any) {
+    console.log(">>>>>>>>>>>>>>>>>>>>>status>>>>>>>>>>>>>>>>>>>", status, username)
+    this.loginstatus.next({ status, username });
+  }
+  public getLoggedIn() {
+    console.log(">>>>>>>>>>>>>>>>>this.castLogin>>>>>>>>>>>>>>>>>>>>>>>", this.castLogin)
+    return this.castLogin;
   }
 
   public getTokenDetails(param: string) {
