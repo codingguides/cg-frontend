@@ -16,6 +16,8 @@ export class SidebarMenuComponent {
 
   menu_sidebar: any;
   param: any;
+  subparam: any;
+  selectedquiz: any;
 
   ngOnInit() {
     this.getMenuSidebar();
@@ -23,7 +25,9 @@ export class SidebarMenuComponent {
   async getMenuSidebar() {
 
     this.param = this.router.snapshot.params['topic'];
-
+    this.subparam = this.router.snapshot.params['subtopic'];
+    this.selectedquiz = this.router.snapshot.params['quiz'];
+    console.log("this.router.snapshot.params>>>>>>",this.router.snapshot.params)
     await this.commonservice
       .get(`page/get-sidebar-menu`)
       .subscribe((result) => {
@@ -35,7 +39,17 @@ export class SidebarMenuComponent {
         }
       });
   }
-  navigate(path:string){
-    this.routerurl.navigate(['quiz',this.param, path])
+
+  navigate(parentpath:string, path:string){
+    if(parentpath == this.param){
+      window.location.href = 'quiz/' + parentpath + '/' + path
+    }else{
+      window.location.href = 'quiz/'+ this.param + '/' + parentpath + '/' + path
+    }
   }
+
+  apitalizeFirstLetter(string:string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  
 }

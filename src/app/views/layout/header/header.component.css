@@ -1,11 +1,15 @@
 #user {
   float: right;
 }
+
 .btn {
-  background-color: #a48ff1;
-  color: white;
+  color: #fff;
+  background: linear-gradient(90deg,#614b68 0%,#423963 100%);
   float: right;
+  border-radius: 10;
+  min-height: 50px;
 }
+
 
 button#dropdownMenuButton1 {
   border-color: #a48ff1;

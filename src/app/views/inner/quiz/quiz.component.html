@@ -1,44 +1,20 @@
 <section class="inner_wrap">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-2">
-        <aside class="sideBar">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link active"
-                id="tabPart_1"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_1"
-                href="#"
-                role="tab"
-                aria-controls="tab_1"
-                aria-selected="true"
-                ><h4>JavaScript Quiz</h4>
-                <hr class="d-none d-md-block my-0 ms-0 me-0" />
-              </a>
-            </li>
-            <li
-              class="nav-item"
-              role="presentation"
-              *ngFor="let quizlist2 of menu_sidebar"
-            >
-              <a
-                class="nav-link"
-                id="tabPart_2"
-                data-bs-toggle="tab"
-                data-bs-target="#tab_2"
-                href="#"
-                role="tab"
-                aria-controls="tab_2"
-                aria-selected="false"
-                >{{ quizlist2?.name }}</a
-              >
-            </li>
-          </ul>
-        </aside>
+      <div class="col-lg-3">
+        <app-sidebar-menu></app-sidebar-menu>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-7">
+          <div class="info-title"><span>Some Rules of this Quiz</span></div>
+          <div class="info-list">
+            <div class="info">
+              1. Once you select your answer it can't be undone.
+            </div>
+            <div class="info">
+              2. You can't exit from the Quiz once Started.
+            </div>
+          </div>
+
         <div class="start_btn">
           <button (click)="showWarningPopup()">Start Quiz</button>
         </div>

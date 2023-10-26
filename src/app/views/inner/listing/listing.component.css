@@ -27,7 +27,7 @@
   display: block;
 } */
 .btn {
-  background-color: #a48ff1;
+  background: linear-gradient(90deg,#614b68 0%,#423963 100%);
   color: white;
   border-color: #a48ff1;
 }

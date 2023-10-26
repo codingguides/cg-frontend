@@ -32,13 +32,14 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.start_btn {
-  position: absolute;
-  /* top: 60%; */
-  margin-top: 150px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+/* .start_btn {
+  */
+  .start_btn {
+    position: absolute;
+    margin-top: 150px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
 .info_box {
   position: absolute;
@@ -66,7 +67,7 @@
   outline: none;
   border: none;
   border-radius: 35px;
-  background: #a48ff1;
+  background: linear-gradient(90deg,#614b68 0%,#423963 100%);
   cursor: pointer;
 }
 

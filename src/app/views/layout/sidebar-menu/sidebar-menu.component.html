@@ -3,23 +3,23 @@
     <li class="nav-item" role="presentation">
       <a class="nav-link active" id="tabPart_1" data-bs-toggle="tab" data-bs-target="#tab_1" href="#" role="tab"
         aria-controls="tab_1" aria-selected="true">
-        <h4>JavaScript Quiz</h4>
+        <h4>{{apitalizeFirstLetter(param)}} Quiz</h4>
         <hr class="d-none d-md-block my-0 ms-0 me-0" />
       </a>
     </li>
-    <li class="nav-item" role="presentation" *ngFor="let quizlist of menu_sidebar">
-      <a class="nav-link" id="tabPart_2" data-bs-toggle="tab" data-bs-target="#tab_2" 
-      (click)="navigate(quizlist.slug)" role="tab"
-        aria-controls="tab_2" aria-selected="false">{{ quizlist?.name }}</a>
+    <li class="nav-item" role="presentation" *ngFor="let quizlist of menu_sidebar; let i=index">
+      
+      <a [ngClass]="subparam === quizlist.slug ? 'nav-link checked' : 'nav-link'" [attr.id]="'tabPart_' + i" data-bs-toggle="tab" [attr.data-bs-target]="'#tab_'+i" (click)="navigate(param,quizlist.slug)" role="tab" [attr.aria-controls]="'tab_'+i" aria-selected="false">{{ quizlist?.name }}</a>
         <ul>
-          <li *ngFor="let child of quizlist.children">
-            <a class="nav-link" id="tabPart_2" data-bs-toggle="tab" data-bs-target="#tab_2" href="#" role="tab"
-              aria-controls="tab_2" aria-selected="false">
+          <li *ngFor="let child of quizlist.children; let j=index">
+            <a [ngClass]="selectedquiz === child.slug ? 'nav-link checked' : 'nav-link'" id="tabPart_2" data-bs-toggle="tab" data-bs-target="#tab_2" href="javascript:void(0)" role="tab"
+              aria-controls="tab_2" aria-selected="false" (click)="navigate(quizlist.slug,child.slug)"
+              >
               {{ child?.name }}
               <ul>
                 <li *ngFor="let subchild of child.children">
-                  <a class="nav-link" id="tabPart_2" data-bs-toggle="tab" data-bs-target="#tab_2" href="#" role="tab"
-                    aria-controls="tab_2" aria-selected="false">
+                  <a class="nav-link" id="tabPart_2" data-bs-toggle="tab" data-bs-target="#tab_2" href="javascript:void(0)" role="tab"
+                    aria-controls="tab_2" aria-selected="false" (click)="navigate(child.slug,subchild.slug)">
                     {{ subchild?.name }}
                   </a>
                 </li>
