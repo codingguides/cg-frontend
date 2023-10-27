@@ -1,0 +1,13 @@
+.error-msg {
+    transform: translate(0%, -85%);
+    text-align: center;
+    color: red;
+    margin-bottom: -5px;
+}
+
+.success-msg {
+    transform: translate(0%, -85%);
+    text-align: center;
+    color: rgb(0, 255, 8);
+    margin-bottom: -24px;
+  }

@@ -94,7 +94,8 @@
   border-radius: 5px 5px 0 0;
   font-size: 20px;
   font-weight: 600;
-  color: #795ed9;
+  /* color: #795ed9; */
+  color: #423963;
 }
 
 .info_box .info-list {
@@ -228,33 +229,6 @@ section .option_list .option.select {
   background: #a48ff1 !important;
   border: 1px solid #b8daff !important;
 }
-/* section .option_list .option:hover {
-    color: black;
-    background: #a48ff1;
-    border: 1px solid #b8daff;
-  } */
-
-/* section .option_list .option::selection {
-  color: black;
-  background: #a48ff1;
-  border: 1px solid #b8daff;
-} */
-
-/* section .option_list .option.correct {
-  color: #155724;
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
-}
-
-section .option_list .option.incorrect {
-  color: #721c24;
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-} */
-
-/* section .option_list .option.selected {
-  background-color: #007bff;
-} */
 
 section .option_list .option.disabled {
   pointer-events: none;
@@ -271,17 +245,6 @@ section .option_list .option .icon {
   transition: all 0.3s ease;
   line-height: 24px;
 }
-/* .option_list .option .icon.tick {
-  color: #23903c;
-  border-color: #23903c;
-  background: #d4edda;
-}
-
-.option_list .option .icon.cross {
-  color: #a42834;
-  background: #f8d7da;
-  border-color: #a42834;
-} */
 
 footer {
   height: 60px;
@@ -396,7 +359,8 @@ footer button.show {
 
 .buttons button.restart {
   color: #fff;
-  background: #a48ff1;
+  /* background: #a48ff1; */
+  background: linear-gradient(90deg,#614b68 0%,#423963 100%);
 }
 
 .buttons button.restart:hover {
@@ -424,7 +388,8 @@ footer button.show {
 
 .nav-tabs .nav-link {
   /* color: #4e22ed; */
-  color: #a48ff1;
+  /* color: #a48ff1; */
+  color: linear-gradient(90deg,#614b68 0%,#423963 100%);
 }
 
 /* .nav-link.active:hover {
@@ -432,7 +397,8 @@ footer button.show {
 } */
 
 .nav-tabs .nav-link.active {
-  color: #4e22ed;
+  /* color: #4e22ed; */
+  color: linear-gradient(90deg,#614b68 0%,#423963 100%);
 }
 
 .ad_img {

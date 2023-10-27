@@ -25,21 +25,24 @@ export class QuizComponent implements OnInit {
   userSelected: any = '';
   activeId: any;
 
+  getslug: string = ""
+
   constructor(
     private http: HttpClient,
     public commonservice: CommonService,
     private router: ActivatedRoute
-  ) { }
+  ) {
+    this.getslug = this.router.snapshot.params['quiz']
+  }
 
   ngOnInit(): void {
     this.loadQuestions();
-    this.getMenuSidebar();
     this.selectOption(this.payload, this.option);
   }
 
   async loadQuestions() {
     await this.commonservice
-      .get(`page/quiz/${this.router.snapshot.params['quiz']}`)
+      .get(`page/quiz/${this.getslug}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
 
@@ -49,17 +52,6 @@ export class QuizComponent implements OnInit {
       });
   }
 
-  async getMenuSidebar() {
-    await this.commonservice
-      .get(`page/get-quiz-list/${this.router.snapshot.params['topic']}`)
-      .subscribe((result) => {
-        const apiResult2 = JSON.parse(JSON.stringify(result));
-
-        if (apiResult2 && apiResult2.status == 'SUCCESS') {
-          this.menu_sidebar = apiResult2 && apiResult2.payload;
-        }
-      });
-  }
 
   nextQuestion(payload: any) {
     this.activeId = 10;
