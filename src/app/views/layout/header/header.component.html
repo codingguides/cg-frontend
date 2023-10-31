@@ -54,7 +54,7 @@
             <button id="user" class="btn" (click)="openModal()">Sign In</button>
           </div>
           <div class="col-lg-1" *ngIf="status">
-            <div class="dropdown">
+            <div class="dropdown" (click)="show()">
               <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
@@ -64,51 +64,15 @@
               >
                 {{ name }}
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+              <ul [class]="dropdownClass" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
               </ul>
             </div>
           </div>
 
-          <!-- The Modal -->
-          <div [class]="modalClass" id="myModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title">
-                    {{ showLogin == true ? "Sign In" : "Sign Up" }}
-                  </h4>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    #closebutton
-                    data-bs-dismiss="modal"
-                    (click)="closeModal()"
-                  ></button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                  <div *ngIf="showLogin">
-                    <app-login></app-login>
-                  </div>
-                  <div *ngIf="!showLogin">
-                    <app-sign-up></app-sign-up>
-                  </div>
-                </div>
-                <a
-                  class="footer_text text-center"
-                  (click)="changeLogin(showLogin)"
-                  >{{ showLoginText }}</a
-                >
-              </div>
-            </div>
-          </div>
+          <app-login-modal></app-login-modal>
         </div>
       </div>
     </div>
@@ -175,7 +139,7 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/">Digital Marketing</a>
               </li>
-             </ul>
+            </ul>
           </div>
         </div>
       </div>

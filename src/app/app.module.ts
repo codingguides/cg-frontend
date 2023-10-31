@@ -23,6 +23,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoginModalComponent } from './shared/login-modal/login-modal.component';
 
 
 
@@ -45,6 +46,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     LoginComponent,
     SignUpComponent,
     PagenotfoundComponent,
+    LoginModalComponent,
 
 
   ],

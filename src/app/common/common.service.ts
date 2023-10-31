@@ -58,11 +58,9 @@ export class CommonService {
   }
 
   public setLoggedIn(status: any, username: any) {
-    console.log(">>>>>>>>>>>>>>>>>>>>>status>>>>>>>>>>>>>>>>>>>", status, username)
     this.loginstatus.next({ status, username });
   }
   public getLoggedIn() {
-    console.log(">>>>>>>>>>>>>>>>>this.castLogin>>>>>>>>>>>>>>>>>>>>>>>", this.castLogin)
     return this.castLogin;
   }
 
@@ -70,6 +68,19 @@ export class CommonService {
     const gettoken: any = this.token;
     const decoded: any = jwt_decode(gettoken);
     return decoded[param];
+  }
+
+  private quizStatus = new BehaviorSubject<object>({ status: false, currentUrl: "", userId: "" });
+
+  castQuizStatus = this.quizStatus.asObservable();
+
+  public setQuizStatus(status: any, currentUrl: any, userId: any) {
+    console.log(">>>>>>>>>>>>>>>>>>>>>status>>>>>>>>>>>>>>>>>>>", status, currentUrl, userId)
+    this.quizStatus.next({ status, currentUrl, userId });
+  }
+  public getQuizStatus() {
+    console.log(">>>>>>>>>>>>>>>>>this.castLogin>>>>>>>>>>>>>>>>>>>>>>>", this.castQuizStatus)
+    return this.castQuizStatus;
   }
 
 }

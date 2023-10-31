@@ -10,6 +10,14 @@ hr.d-none.d-md-block.my-0.ms-0.me-0 {
   width: 70%;
 }
 
-.checked{
-  color: #423963 !important;
+.checked {
+  color: #4e22ed !important;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  font-weight: 600;
 }

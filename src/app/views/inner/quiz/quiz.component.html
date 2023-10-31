@@ -7,6 +7,9 @@
       <div class="col-lg-7">
         <div class="start_btn">
           <button (click)="showWarningPopup()">Start Quiz</button>
+          <div *ngIf="status">
+            <app-login-modal></app-login-modal>
+          </div>
         </div>
         <div class="info_box" [ngClass]="showWarning ? 'activeInfo' : ''">
           <div class="info-title"><span>Some Rules of this Quiz</span></div>

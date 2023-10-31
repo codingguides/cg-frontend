@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,10 +15,13 @@ export class HeaderComponent {
   loginTrue: any //= localStorage.getItem('accessToken')
   status: boolean = false;
   username: string = "";
-  modalClass = "modal"
-  name: string = ""
+  modalClass = "modal";
+  name: string = "";
+  dropdownStatus: boolean = false;
+  dropdownClass: string = 'dropdown-menu';
 
-  constructor(public commonservice: CommonService,) {
+
+  constructor(public commonservice: CommonService, private router: Router) {
 
   }
 
@@ -59,21 +63,38 @@ export class HeaderComponent {
     }
   }
 
-  closeModal() {
-    const modalDiv = document.getElementById('myModal');
-    if (modalDiv != null) {
-      modalDiv.style.display = 'none'
+  // closeModal() {
+  //   const modalDiv = document.getElementById('myModal');
+  //   if (modalDiv != null) {
+  //     modalDiv.style.display = 'none'
+  //   }
+  // }
+
+  // changeLogin(val: boolean) {
+  //   this.showLogin = !val;
+  //   if (val == true) {
+  //     this.showLoginText = "Already have an account? Sign In";
+  //   } else {
+  //     this.showLoginText = "Don't have an account? Sign Up";
+  //   }
+  // }
+
+  show() {
+    this.dropdownStatus = !this.dropdownStatus;
+
+    if (this.dropdownStatus == true) {
+      this.dropdownClass = 'dropdown-menu show';
+    }
+    else {
+      this.dropdownClass = 'dropdown-menu';
     }
   }
 
-  changeLogin(val: boolean) {
-    this.showLogin = !val;
-    if (val == true) {
-      this.showLoginText = "Already have an account? Sign In";
-    } else {
-      this.showLoginText = "Don't have an account? Sign Up";
-    }
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+    this.ngOnInit();
   }
-
 
 }

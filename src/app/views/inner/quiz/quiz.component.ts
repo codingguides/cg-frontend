@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../../../common/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
+// import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -25,19 +26,40 @@ export class QuizComponent implements OnInit {
   userSelected: any = '';
   activeId: any;
 
-  getslug: string = ""
+  getslug: string = "";
+  name: string = "";
+  loginTrue: any;
+  status: boolean = false;
 
   constructor(
     private http: HttpClient,
     public commonservice: CommonService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private router2: Router
   ) {
     this.getslug = this.router.snapshot.params['quiz']
   }
 
   ngOnInit(): void {
+
+    // console.log(this.router2.url)
     this.loadQuestions();
     this.selectOption(this.payload, this.option);
+
+    if (localStorage.getItem('accessToken')) {
+      this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
+      this.commonservice.setLoggedIn(true, this.name);
+    } else {
+      this.commonservice.setLoggedIn(false, this.name)
+    }
+
+    this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
+      this.status = obj.status
+      this.name = obj.username
+    });
+    console.log(this.loginTrue.status)
+    console.log(this.loginTrue.name)
+    console.log(this.status, "<<<<<<<<<<<loginTrue>>>>>>>>>>>", this.loginTrue)
   }
 
   async loadQuestions() {
@@ -89,11 +111,51 @@ export class QuizComponent implements OnInit {
   }
 
   showWarningPopup() {
-    this.showWarning = true;
+    if (this.status == false) {
+      if (localStorage.getItem('notInterested') !== 'yes') {
+        const modalDiv = document.getElementById('myModal');
+        if (modalDiv != null) {
+          modalDiv.style.display = 'block'
+          this.showWarning = false;
+        }
+      } else {
+        this.showWarning = true;
+      }
+    } else {
+
+      this.showWarning = true;
+    }
+
+
+
+    // const modalDiv = document.getElementById('myModal');
+    // if (modalDiv != null) {
+    //   modalDiv.style.display = 'block'
+    //   this.showWarning = false;
+    // }
+    // else {
+    //   this.showWarning = true;
+    // }
+
+
   }
+
+  // openModal() {
+  //   const modalDiv = document.getElementById('myModal');
+  //   if (modalDiv != null) {
+  //     modalDiv.style.display = 'block'
+  //     this.showWarning = false;
+  //   }
+  //   else {
+  //     this.showWarning = true;
+
+  //   }
+  // }
   startQuiz() {
     this.showWarning = false;
     this.isQuizStarted = true;
+    localStorage.removeItem('notInterested');
+    this.commonservice.setQuizStatus(true, this.router2.url, "")
   }
 
   selectOption(event: any, option: any) {

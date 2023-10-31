@@ -5,22 +5,22 @@
       <h4 class="mb-5"><strong>Latest posts</strong></h4>
       <div class="post_list">
         <div class="owl-carousel owl-theme">
-
-          <div class="item" *ngFor="let val of blog; let i=index">
+          <div class="item" *ngFor="let val of blog; let i = index">
             <div class="card bg-dark text-white">
               <img
                 src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
                 class="card-img"
-                alt="{{val.title}}"
+                alt="{{ val.title }}"
               />
               <div class="card-img-overlay">
-                <h5 class="card-title">{{val.title}}</h5>
-                <!-- <p class="card-text" [innerHTML]="val.description"></p> -->
-                <p class="card-text">{{val.updatedAt | date: "dd.MM.yyyy"}}</p>
+                <h5 class="card-title">{{ val.title }}</h5>
+                <p class="card-text" [innerHTML]="val.description"></p>
+                <p class="card-text">
+                  {{ val.updatedAt | date : "dd.MM.yyyy" }}
+                </p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

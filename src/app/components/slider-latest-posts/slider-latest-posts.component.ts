@@ -19,7 +19,7 @@ export class SliderLatestPostsComponent {
   }
 
   blog: any;
-  showBlog:boolean = false;
+  showBlog: boolean = false;
 
   // ngOnInit() {
   //   this.getBlog();
@@ -32,9 +32,9 @@ export class SliderLatestPostsComponent {
         const apiResult = JSON.parse(JSON.stringify(result));
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.blog = apiResult && apiResult.payload;
-          console.log("this.blog>>>>>>>>>>",this.blog)
+          console.log("this.blog>>>>>>>>>>", this.blog)
           this.showBlog = true;
-        }else{
+        } else {
           this.showBlog = false;
         }
       });

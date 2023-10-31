@@ -27,9 +27,13 @@
   display: block;
 } */
 .btn {
-  background: linear-gradient(90deg,#614b68 0%,#423963 100%);
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
   color: white;
   border-color: #a48ff1;
+}
+
+.btn:hover {
+  font-weight: 600;
 }
 /* .btn-primary {
   background-color: #a48ff1;
