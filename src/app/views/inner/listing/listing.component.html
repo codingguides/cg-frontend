@@ -1,10 +1,13 @@
 <section class="inner_wrap">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3" *ngIf="!upcoming">
         <app-sidebar-menu></app-sidebar-menu>
       </div>
-      <div class="col-lg-7" style="background-color: white">
+      <div
+        [class]="upcoming ? 'col-lg-10' : 'col-lg-7'"
+        style="background-color: white"
+      >
         <div class="row" *ngIf="flag">
           <div class="col-sm-6 mt-3" *ngFor="let quizlist of list">
             <div class="card">
@@ -21,6 +24,11 @@
           </div>
         </div>
         <div class="row" *ngIf="!flag">
+          <div class="alert" role="alert">
+            <app-pagenotfound></app-pagenotfound>
+          </div>
+        </div>
+        <div class="row" *ngIf="upcoming">
           <div class="alert" role="alert">
             <app-pagenotfound></app-pagenotfound>
           </div>

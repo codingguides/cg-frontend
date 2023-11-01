@@ -7,29 +7,37 @@
             <div class="social_part">
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a
+                    href="https://www.facebook.com/codingguidesofficial?mibextid=LQQJ4d"
+                    target="_blank"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="mailto:info.codingguides@gmail.com" target="_blank"
+                    ><i class="fab fa-google"></i
+                  ></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#"><i class="fab fa-google"></i></a>
+                  <a
+                    href="https://instagram.com/coding_guides?igshid=OGQ5ZDc2ODk2ZA=="
+                    target="_blank"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><i class="fab fa-linkedin"></i></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><i class="fab fa-github"></i></a>
+                  <a
+                    href="https://www.linkedin.com/company/codingguides/"
+                    target="_blank"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-lg-7">
             <div class="logo_brand text-center">
-              <a href="index.html" class="navbar-brand"
+              <a href="/" class="navbar-brand"
                 ><img
                   class="img-fluid"
                   src="assets/images/logo.png"
@@ -111,14 +119,11 @@
           <div class="customNav">
             <ul class="list-unstyled">
               <li class="nav-item" *ngFor="let menulist of menu">
-                <a class="nav-link" routerLink="quiz/{{ menulist.slug }}">{{
+                <a class="nav-link" (click)="renderUrl(menulist.slug)">{{
                   menulist?.name
                 }}</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">Angular</a>
-              </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="/">React Js</a>
               </li>
               <li class="nav-item">
@@ -138,7 +143,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" routerLink="/">Digital Marketing</a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
+import { SharedService } from '../../../common/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,7 @@ export class SidebarMenuComponent {
   quizCurrentUrl: any;
   constructor(
     public commonservice: CommonService,
+    public sharedService: SharedService,
     private router: ActivatedRoute,
     private routerurl: Router
   ) { }
@@ -51,51 +53,14 @@ export class SidebarMenuComponent {
   }
 
   navigate(parentpath: string, path: string) {
-    if (this.quizStatus == false) {
-
-      if (parentpath == this.param) {
-        window.location.href = 'quiz/' + parentpath + '/' + path
-      } else {
-        window.location.href = 'quiz/' + this.param + '/' + parentpath + '/' + path
-      }
+    let url = '';
+    if (parentpath == this.param) {
+      url = 'quiz/' + parentpath + '/' + path
     } else {
-
-
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger',
-        },
-        buttonsStyling: true,
-      });
-
-      swalWithBootstrapButtons
-        .fire({
-          title: 'Are you sure?',
-          text: "You want to exit to this page surely!!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, exit it!',
-          cancelButtonText: 'No, cancel!',
-          reverseButtons: true,
-          allowOutsideClick: false,
-          allowEscapeKey: false
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            console.log("ERRORRRRR")
-          }
-        })
-
-
-      console.log(this.quizCurrentUrl)
-      console.log(this.routerurl.url)
-      if (this.quizCurrentUrl !== this.routerurl.url) {
-        alert("ERorrrrrrrrrrrrrrr")
-      }
+      url = 'quiz/' + this.param + '/' + parentpath + '/' + path
     }
 
-
+    this.sharedService.isQuizLiveCheck(url, true);
   }
 
   apitalizeFirstLetter(string: string) {

@@ -11,6 +11,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { PagenotfoundComponent } from
   './pagenotfound/pagenotfound.component';
+import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
+import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
 
 
 
@@ -27,6 +29,10 @@ const routes: Routes = [
   //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
+
+  { path: 'disclaimer', component: DisclaimerComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+
   {
     path: '**', pathMatch: 'full',
     component: PagenotfoundComponent

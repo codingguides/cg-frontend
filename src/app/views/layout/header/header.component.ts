@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../common/shared.service';
 
 
 @Component({
@@ -21,14 +22,14 @@ export class HeaderComponent {
   dropdownClass: string = 'dropdown-menu';
 
 
-  constructor(public commonservice: CommonService, private router: Router) {
+
+  constructor(public sharedService: SharedService, public commonservice: CommonService, private router: Router) {
 
   }
 
   ngOnInit() {
     this.getMenu();
-    this.commonservice.getLoggedIn()
-
+    this.commonservice.getLoggedIn();
 
     if (localStorage.getItem('accessToken')) {
       this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
@@ -63,21 +64,6 @@ export class HeaderComponent {
     }
   }
 
-  // closeModal() {
-  //   const modalDiv = document.getElementById('myModal');
-  //   if (modalDiv != null) {
-  //     modalDiv.style.display = 'none'
-  //   }
-  // }
-
-  // changeLogin(val: boolean) {
-  //   this.showLogin = !val;
-  //   if (val == true) {
-  //     this.showLoginText = "Already have an account? Sign In";
-  //   } else {
-  //     this.showLoginText = "Don't have an account? Sign Up";
-  //   }
-  // }
 
   show() {
     this.dropdownStatus = !this.dropdownStatus;
@@ -95,6 +81,10 @@ export class HeaderComponent {
     sessionStorage.clear();
     this.router.navigate(['/']);
     this.ngOnInit();
+  }
+
+  renderUrl(link: any) {
+    this.sharedService.isQuizLiveCheck(`quiz/${link}`, false);
   }
 
 }

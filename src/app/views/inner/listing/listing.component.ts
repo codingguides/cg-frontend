@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
+import { SharedService } from '../../../common/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,15 +11,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListingComponent {
   constructor(
     public commonservice: CommonService,
+    public sharedservice: SharedService,
     private router: ActivatedRoute
   ) { }
 
   list: any;
   flag: boolean = false;
-  error:any = "";
+  upcoming: boolean = false;
+  error: any = "";
 
   ngOnInit() {
     this.getList();
+    // this.sharedservice.isQuizLiveCheck()
   }
 
   async getList() {
@@ -34,13 +38,18 @@ export class ListingComponent {
       .get(`page/get-quiz-list/${param}`)
       .subscribe((res) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log("apiResult>>>>>",apiResult)
+        console.log("apiResult>>>>>", apiResult)
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.list = apiResult && apiResult.payload;
           this.flag = true;
-        }else{
+          this.upcoming = false
+          if (this.list.length == 0) {
+            this.upcoming = true
+          }
+        } else {
           this.flag = false;
-          this.error = ""
+          this.error = "";
+          this.upcoming = false;
         }
       });
   }

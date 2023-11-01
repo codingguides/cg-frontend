@@ -24,6 +24,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoginModalComponent } from './shared/login-modal/login-modal.component';
+import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
+import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
 
 
 
@@ -47,6 +49,8 @@ import { LoginModalComponent } from './shared/login-modal/login-modal.component'
     SignUpComponent,
     PagenotfoundComponent,
     LoginModalComponent,
+    DisclaimerComponent,
+    PrivacyPolicyComponent,
 
 
   ],
