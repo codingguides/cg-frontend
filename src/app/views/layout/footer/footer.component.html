@@ -21,9 +21,9 @@
               <div class="col-lg-2 col-sm-4">
                 <div class="foot_nav">
                   <ul class="list-unstyled">
-                    <li class="nav-item" *ngFor="let menulist of menu">
-                      <a class="nav-link" (click)="renderUrl(menulist.slug)">{{
-                        menulist?.name
+                    <li class="nav-item" *ngFor="let firstlist of firstNav">
+                      <a class="nav-link" (click)="renderUrl(firstlist.slug)">{{
+                        firstlist?.name
                       }}</a>
                     </li>
                   </ul>
@@ -33,9 +33,13 @@
               <div class="col-lg-2 col-sm-4">
                 <div class="foot_nav">
                   <ul class="list-unstyled">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Careers</a></li>
+                    <li class="nav-item" *ngFor="let secondlist of secondNav">
+                      <a
+                        class="nav-link"
+                        (click)="renderUrl(secondlist.slug)"
+                        >{{ secondlist?.name }}</a
+                      >
+                    </li>
                   </ul>
                 </div>
               </div>

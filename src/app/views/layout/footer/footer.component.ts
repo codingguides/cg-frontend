@@ -11,6 +11,8 @@ import { SharedService } from '../../../common/shared.service';
 })
 export class FooterComponent {
   menu: any
+  firstNav: any[] = [];
+  secondNav: any[] = [];
 
   constructor(public sharedService: SharedService, public commonservice: CommonService, private router: Router) { }
 
@@ -24,6 +26,14 @@ export class FooterComponent {
       console.log(apiResult.payload);
       if (apiResult && apiResult.status == 'SUCCESS') {
         this.menu = apiResult && apiResult.payload;
+        this.menu.map((val: any, index: number) => {
+          if (index < 4) {
+            this.firstNav.push(val)
+          } else if (index >= 4 && index < 10) {
+            this.secondNav.push(val)
+          }
+        })
+        // console.log(this.menu)
       }
     })
   }
