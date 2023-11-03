@@ -30,6 +30,7 @@ export class QuizComponent implements OnInit {
   name: string = "";
   loginTrue: any;
   status: boolean = false;
+  param: any;
 
   constructor(
     private http: HttpClient,
@@ -63,6 +64,7 @@ export class QuizComponent implements OnInit {
   }
 
   async loadQuestions() {
+    this.param = this.router.snapshot.params['topic'];
     await this.commonservice
       .get(`page/quiz/${this.getslug}`)
       .subscribe((res: any) => {
@@ -161,5 +163,9 @@ export class QuizComponent implements OnInit {
   selectOption(event: any, option: any) {
     this.userSelected = option;
     this.activeId = event;
+  }
+
+  apitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

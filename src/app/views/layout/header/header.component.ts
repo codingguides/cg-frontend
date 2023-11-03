@@ -84,7 +84,7 @@ export class HeaderComponent {
   }
 
   renderUrl(link: any) {
-    this.sharedService.isQuizLiveCheck(`quiz/${link}`, false);
+    this.sharedService.isQuizLiveCheck(`quiz/${link}`, true);
   }
 
 }

@@ -9,10 +9,11 @@ import { ListingComponent } from '../app/views/inner/listing/listing.component';
 import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { PagenotfoundComponent } from
-  './pagenotfound/pagenotfound.component';
 import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
 import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
+import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
+import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
+
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes = [
 
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: '**', component: ComingSoonComponent },
 
   {
     path: '**', pathMatch: 'full',

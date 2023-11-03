@@ -15,7 +15,7 @@
 .four_zero_four_bg {
   background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
   height: 330px;
-  background-position: center;
+  background-position: right;
 }
 
 .four_zero_four_bg h1 {
@@ -33,10 +33,18 @@
   /* margin: 20px 0; */
   display: inline-block;
 }
+
+.link_404:hover {
+  font-weight: 600;
+}
 .contant_box_404 {
   margin-top: -30px;
 }
 
 p.subtitle.text-center {
   margin-top: -10px;
+}
+
+.col-sm-12.col-sm-offset-1 {
+  margin-top: -40px;
 }

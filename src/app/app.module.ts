@@ -18,7 +18,7 @@ import { AdSidebarComponent } from './views/layout/ad-sidebar/ad-sidebar.compone
 import { SidebarMenuComponent } from './views/layout/sidebar-menu/sidebar-menu.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -26,6 +26,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoginModalComponent } from './shared/login-modal/login-modal.component';
 import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
 import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
+import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
+import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
+
+
 
 
 
@@ -47,10 +52,15 @@ import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.c
     SidebarMenuComponent,
     LoginComponent,
     SignUpComponent,
-    PagenotfoundComponent,
     LoginModalComponent,
     DisclaimerComponent,
     PrivacyPolicyComponent,
+    ComingSoonComponent,
+    PagenotfoundComponent,
+    DashboardComponent,
+
+
+
 
 
   ],

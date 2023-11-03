@@ -23,7 +23,7 @@
   --maincolor: #efeafe;
   --seconcolor: #212529;
   /* --btncolor: #a48ff1; */
-  --btncolor: linear-gradient(90deg,#614b68 0%,#423963 100%);
+  --btncolor: linear-gradient(90deg, #614b68 0%, #423963 100%);
   --mainfont: "Noto Sans", sans-serif;
   --fw-light: 300;
   --fw-normal: 400;
@@ -562,6 +562,7 @@ body {
   border: none;
   border-radius: 0px;
   color: #a48ff1;
+  margin-left: -10px;
 }
 .card-body {
   background-color: #efeafe;
@@ -905,7 +906,7 @@ header {
   }
   #nav_bg {
     top: -70px;
-    background: linear-gradient(90deg,#614b68 0%,#423963 100%);
+    background: linear-gradient(90deg, #614b68 0%, #423963 100%);
   }
   .customNav {
     display: -ms-flexbox;

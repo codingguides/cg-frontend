@@ -4,12 +4,11 @@
 
 .btn {
   color: #fff;
-  background: linear-gradient(90deg,#614b68 0%,#423963 100%);
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
   float: right;
   border-radius: 10;
   min-height: 50px;
 }
-
 
 button#dropdownMenuButton1 {
   border-color: #a48ff1;
@@ -19,4 +18,8 @@ button#dropdownMenuButton1 {
 
 a.footer_text.text-center {
   margin-top: -5px;
+}
+
+a.nav-link {
+  cursor: pointer;
 }

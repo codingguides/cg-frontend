@@ -56,7 +56,7 @@
   opacity: 1;
   z-index: 5;
   pointer-events: auto;
-  transform: translate(-47%, -50%) scale(1);
+  transform: translate(-44%, -50%) scale(1);
 }
 
 .start_btn button {

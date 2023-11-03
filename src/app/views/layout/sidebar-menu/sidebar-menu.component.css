@@ -7,7 +7,7 @@ hr:not([size]) {
 }
 
 hr.d-none.d-md-block.my-0.ms-0.me-0 {
-  width: 70%;
+  width: 60%;
 }
 
 .checked {

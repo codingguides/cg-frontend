@@ -45,6 +45,7 @@ export class ListingComponent {
           this.upcoming = false
           if (this.list.length == 0) {
             this.upcoming = true
+            this.flag = true
           }
         } else {
           this.flag = false;

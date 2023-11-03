@@ -1,0 +1,41 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  display: table;
+  font-family: Lato, "Segoe UI", Avenir, Ubuntu, Tahoma, Verdana, Helvetica,
+    sans-serif;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: normal;
+  text-transform: lowercase;
+  text-align: center;
+  margin-top: -25px;
+}
+
+svg {
+  width: -webkit-fill-available;
+  height: 250px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #cd2e2e;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.link_404:hover {
+  font-weight: 800;
+}
