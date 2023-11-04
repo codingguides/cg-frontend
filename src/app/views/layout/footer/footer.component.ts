@@ -39,7 +39,7 @@ export class FooterComponent {
   }
 
   renderUrl(link: any) {
-    this.sharedService.isQuizLiveCheck(`quiz/${link}`, false);
+    this.sharedService.isQuizLiveCheck(`quiz/${link}`, true);
   }
 
   navigate(path: string) {

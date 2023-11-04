@@ -1,12 +1,15 @@
 <section class="inner_wrap">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3" *ngIf="!upcoming">
+      <div class="col-lg-3" *ngIf="!upcoming && flag">
         <app-sidebar-menu></app-sidebar-menu>
       </div>
+      <div class="col-lg-2" *ngIf="upcoming || !flag">
+        <app-ad-sidebar></app-ad-sidebar>
+      </div>
       <div
-        [class]="upcoming ? 'col-lg-10' : 'col-lg-7'"
         style="background-color: white"
+        [class]="upcoming || !flag ? 'col-lg-8' : 'col-lg-7'"
       >
         <div class="row" *ngIf="flag">
           <div class="col-sm-6 mt-3" *ngFor="let quizlist of list">
