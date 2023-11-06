@@ -165,7 +165,7 @@ export class QuizComponent implements OnInit {
     this.activeId = event;
   }
 
-  apitalizeFirstLetter(string: string) {
+  capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

@@ -63,7 +63,7 @@ export class SidebarMenuComponent {
     this.sharedService.isQuizLiveCheck(url, true);
   }
 
-  apitalizeFirstLetter(string: string) {
+  capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

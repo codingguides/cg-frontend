@@ -13,6 +13,7 @@ import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
 import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
+import { ExamplesComponent } from './views/home/examples/examples.component';
 
 
 
@@ -33,6 +34,7 @@ const routes: Routes = [
 
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'examples/:topic', component: ExamplesComponent },
   { path: '**', component: ComingSoonComponent },
 
   {

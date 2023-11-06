@@ -29,6 +29,7 @@ import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.c
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { ExamplesComponent } from './views/home/examples/examples.component';
 
 
 
@@ -58,6 +59,8 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
     ComingSoonComponent,
     PagenotfoundComponent,
     DashboardComponent,
+    ExamplesComponent,
+
 
 
 

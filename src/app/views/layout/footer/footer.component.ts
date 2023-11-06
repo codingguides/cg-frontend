@@ -43,6 +43,7 @@ export class FooterComponent {
   }
 
   navigate(path: string) {
-    this.sharedService.isQuizLiveCheck(path, true);
+    console.log(path)
+    // this.sharedService.isQuizLiveCheck(path, true);
   }
 }
