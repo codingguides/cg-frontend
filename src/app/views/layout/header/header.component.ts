@@ -87,4 +87,7 @@ export class HeaderComponent {
     this.sharedService.isQuizLiveCheck(`quiz/${link}`, true);
   }
 
+  searchDate(val:String){
+    this.sharedService.isQuizLiveCheck(`search/${val}`, false);
+  }
 }

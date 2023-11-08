@@ -7,55 +7,37 @@
             <div class="social_part">
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <a
-                    href="https://www.facebook.com/codingguidesofficial?mibextid=LQQJ4d"
-                    target="_blank"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
+                  <a href="https://www.facebook.com/codingguidesofficial?mibextid=LQQJ4d" target="_blank"><i
+                      class="fab fa-facebook-f"></i></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="mailto:info.codingguides@gmail.com" target="_blank"
-                    ><i class="fab fa-google"></i
-                  ></a>
+                  <a href="mailto:info.codingguides@gmail.com" target="_blank"><i class="fab fa-google"></i></a>
                 </li>
                 <li class="list-inline-item">
-                  <a
-                    href="https://instagram.com/coding_guides?igshid=OGQ5ZDc2ODk2ZA=="
-                    target="_blank"
-                    ><i class="fab fa-instagram"></i
-                  ></a>
+                  <a href="https://instagram.com/coding_guides?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><i
+                      class="fab fa-instagram"></i></a>
                 </li>
                 <li class="list-inline-item">
-                  <a
-                    href="https://www.linkedin.com/company/codingguides/"
-                    target="_blank"
-                    ><i class="fab fa-linkedin"></i
-                  ></a>
+                  <a href="https://www.linkedin.com/company/codingguides/" target="_blank"><i
+                      class="fab fa-linkedin"></i></a>
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-lg-7">
             <div class="logo_brand text-center">
-              <a href="/" class="navbar-brand"
-                ><img
-                  class="img-fluid"
-                  src="assets/images/logo.png"
-                  width="200px"
-              /></a>
+              <a href="/" class="navbar-brand"><img class="img-fluid" src="assets/images/logo.png" width="200px" /></a>
             </div>
           </div>
           <div class="col-lg-2">
             <div class="search_part">
-              <form>
-                <input
-                  type="search"
-                  class="form-control rounded search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  aria-describedby="search-addon"
-                />
-              </form>
+              <div class="input-group md-form form-sm form-2 pl-0">
+                <input class="form-control my-0 py-1 lime-border" type="text" placeholder="Search" id="search"
+                  name="search" #search aria-label="Search">
+                <button class="input-group-append" type="submit" (click)="searchDate(search.value)">
+                  <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
           </div>
           <div class="col-lg-1" *ngIf="!status">
@@ -63,23 +45,19 @@
           </div>
           <div class="col-lg-1" *ngIf="status">
             <div class="dropdown" (click)="show()">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
                 {{ name }}
               </button>
               <ul [class]="dropdownClass" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
                 <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
               </ul>
             </div>
           </div>
-
           <app-login-modal></app-login-modal>
         </div>
       </div>
@@ -90,22 +68,13 @@
           <ul class="list-inline clearfix">
             <li class="list-inline-item">
               <div class="logo_brand">
-                <a href="index.html" class="navbar-brand"
-                  ><img
-                    class="img-fluid"
-                    src="assets/images/logo.png"
-                    width="200px"
-                /></a>
+                <a href="index.html" class="navbar-brand"><img class="img-fluid" src="assets/images/logo.png"
+                    width="200px" /></a>
               </div>
             </li>
             <li class="list-inline-item">
-              <button
-                class="btn hamburger_btn"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasTop"
-                aria-controls="offcanvasTop"
-              >
+              <button class="btn hamburger_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
+                aria-controls="offcanvasTop">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -121,49 +90,18 @@
               <li class="nav-item" *ngFor="let menulist of menu">
                 <a class="nav-link" (click)="renderUrl(menulist.slug)">{{
                   menulist?.name
-                }}</a>
+                  }}</a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" routerLink="/">React Js</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">Node Js</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">MongoDb</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">MySql</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">PHP</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">AWS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">Digital Marketing</a>
-              </li> -->
             </ul>
           </div>
         </div>
       </div>
     </nav>
 
-    <div
-      class="offcanvas offcanvas-start"
-      tabindex="-1"
-      id="offcanvasTop"
-      aria-labelledby="offcanvasTopLabel"
-    >
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
       <div class="offcanvas-header">
         <div class="btn_sec">
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
       </div>
       <div class="offcanvas-body">
