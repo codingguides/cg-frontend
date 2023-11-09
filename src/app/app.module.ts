@@ -14,7 +14,7 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { ListingComponent } from '../app/views/inner/listing/listing.component';
 import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AdSidebarComponent } from './views/layout/ad-sidebar/ad-sidebar.component';
+import { AdRightSidebarComponent } from './views/layout/ad-right-sidebar/ad-right-sidebar.component';
 import { SidebarMenuComponent } from './views/layout/sidebar-menu/sidebar-menu.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
@@ -29,6 +29,8 @@ import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.c
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { SearchComponent } from './views/inner/search/search.component';
+import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-sidebar.component';
 
 
 
@@ -48,7 +50,7 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
     ListingComponent,
     AboutUsComponent,
     QuizComponent,
-    AdSidebarComponent,
+    AdRightSidebarComponent,
     SidebarMenuComponent,
     LoginComponent,
     SignUpComponent,
@@ -58,6 +60,8 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
     ComingSoonComponent,
     PagenotfoundComponent,
     DashboardComponent,
+    SearchComponent,
+    AdLeftSidebarComponent,
 
 
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../common/shared.service';
 
 
@@ -20,16 +20,30 @@ export class HeaderComponent {
   name: string = "";
   dropdownStatus: boolean = false;
   dropdownClass: string = 'dropdown-menu';
+  href: string = "";
 
-
-
-  constructor(public sharedService: SharedService, public commonservice: CommonService, private router: Router) {
+  constructor(
+    public sharedService: SharedService, 
+    public commonservice: CommonService, 
+    private router: Router,
+    private activerouter: ActivatedRoute
+  ) {
 
   }
+
+  searchvalue:string = "" 
 
   ngOnInit() {
     this.getMenu();
     this.commonservice.getLoggedIn();
+
+
+    this.href = this.router.url;
+    if(this.findWord(this.href)){
+      this.searchvalue = this.activerouter.snapshot.params['topic'];
+    }else{
+      this.searchvalue = "";
+    }
 
     if (localStorage.getItem('accessToken')) {
       this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
@@ -42,9 +56,6 @@ export class HeaderComponent {
       this.status = obj.status
       this.name = obj.username
     });
-    console.log(this.loginTrue.status)
-    console.log(this.loginTrue.name)
-    console.log(this.status, "<<<<<<<<<<<loginTrue>>>>>>>>>>>", this.loginTrue)
   }
 
   async getMenu() {
@@ -62,6 +73,11 @@ export class HeaderComponent {
     if (modalDiv != null) {
       modalDiv.style.display = 'block'
     }
+  }
+
+  findWord(str:string) {
+    let word = "search"
+    return RegExp('\\b'+ word +'\\b').test(str)
   }
 
 
@@ -87,4 +103,7 @@ export class HeaderComponent {
     this.sharedService.isQuizLiveCheck(`quiz/${link}`, true);
   }
 
+  searchDate(val:String){
+    this.sharedService.isQuizLiveCheck(`search/${val}`, false);
+  }
 }
