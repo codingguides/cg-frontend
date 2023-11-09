@@ -12,12 +12,12 @@ export class SearchComponent {
   
   constructor(
     public commonservice: CommonService,
-    public sharedservice: SharedService,
+    public sharedService: SharedService,
     private router: ActivatedRoute
   ) { }
 
   list: any;
-  flag!: boolean;
+  flag: boolean = false;
   error: string = "";
   param = this.router.snapshot.params['topic'];
 
@@ -27,6 +27,8 @@ export class SearchComponent {
   }
 
   async getList() {
+    console.clear();
+    console.log(`-------------page/search/${this.param}----------------`)
     await this.commonservice
       .get(`page/search/${this.param}`)
       .subscribe((res) => {
@@ -34,13 +36,23 @@ export class SearchComponent {
         console.log("apiResult>>>>>", apiResult)
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.list = apiResult && apiResult.payload;
-          if (this.list.length == 0) {
-            this.flag = true
+          console.log(">length<<<<<<<<<",this.list.length)
+          console.log(">this.list<<<<<<<<<",this.list)
+          if (this.list.length > 0) {
+            this.flag = true;
+            console.log(">>>>>>>>>if<<<<<<<<<<<")
+          }else{
+            this.flag = false;
+            console.log(">>>>>>>>>else<<<<<<<<<<<")
           }
         } else {
           this.flag = false;
           this.error = "";
         }
       });
+  }
+
+  render(slug:string){
+    this.sharedService.isQuizLiveCheck(`quiz/${slug}`, false);
   }
 }

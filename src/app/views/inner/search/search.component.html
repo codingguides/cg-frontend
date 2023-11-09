@@ -9,13 +9,18 @@
         >
           <div class="row">
             <div class="col-sm-12 mt-3">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                    <li class="list-group-item">A fourth item</li>
-                    <li class="list-group-item">And a fifth one</li>
-                  </ul>
+                <ul class="list-group list-group-flush" *ngIf="flag">
+                  <li class="list-group-item" (click)="render(searchlist.slug)" *ngFor="let searchlist of list" >
+                    <img [src]="searchlist?.featureImg">{{ searchlist?.name }}
+                    <p [innerHTML]="searchlist?.description"></p>
+                  </li>
+                </ul>
+                <div class="alert alert-light" role="alert" *ngIf="!flag">
+                  <h4 class="alert-heading">Oops! search result not found</h4>
+                  <!-- <p>Please search again</p> -->
+                  <hr>
+                  <p class="mb-0">Please search again.</p>
+                </div>
             </div>
           </div>
         </div>
