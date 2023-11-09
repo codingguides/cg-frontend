@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
 
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult)
+        console.log(apiResult['payload'])
 
         if (apiResult['result'] == "ok") {
           if (apiResult && apiResult['data']['payload']) {

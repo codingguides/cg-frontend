@@ -30,6 +30,7 @@ import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.componen
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { ExamplesComponent } from './views/home/examples/examples.component';
+import { SidebarListComponent } from './views/home/sidebar-list/sidebar-list.component';
 
 
 
@@ -60,6 +61,7 @@ import { ExamplesComponent } from './views/home/examples/examples.component';
     PagenotfoundComponent,
     DashboardComponent,
     ExamplesComponent,
+    SidebarListComponent,
 
 
 
