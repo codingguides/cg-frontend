@@ -14,21 +14,21 @@ import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.c
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
 import { ExamplesComponent } from './views/home/examples/examples.component';
+import { SearchComponent } from './views/inner/search/search.component';
 
 
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'banner', component: BannerComponent },
-  { path: 'about-us', component: AboutUsComponent },
-  { path: 'features', component: FeaturesComponent },
-  { path: 'slider-latest-posts', component: SliderLatestPostsComponent },
   { path: 'quiz/:topic', component: ListingComponent },
   { path: 'quiz/:topic/:subtopic', component: ListingComponent },
   { path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent }, //topic/subtopic/quiz
   //            topic/          subtopic/      quiz
   //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
+
+  { path: 'search/:topic', component: SearchComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
 
