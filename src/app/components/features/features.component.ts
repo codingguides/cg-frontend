@@ -11,7 +11,7 @@ import { cilList, cilShieldAlt } from '@coreui/icons';
 export class FeaturesComponent {
   icons = { cilList, cilShieldAlt };
 
-  menu: any
+  menu: any;
 
   constructor(public commonservice: CommonService, private router: Router) { }
 

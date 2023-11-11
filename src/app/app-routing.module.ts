@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../app/components/home/home.component';
-import { BannerComponent } from './components/banner/banner.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { FeaturesComponent } from './components/features/features.component';
-import { SliderLatestPostsComponent } from './components/slider-latest-posts/slider-latest-posts.component';
 import { ListingComponent } from '../app/views/inner/listing/listing.component';
 import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -31,8 +27,8 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
-
   { path: 'examples/:topic', component: ExamplesComponent },
+
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: '**', component: ComingSoonComponent },

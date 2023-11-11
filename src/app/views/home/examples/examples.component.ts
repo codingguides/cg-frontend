@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,7 +13,6 @@ export class ExamplesComponent {
   constructor(
     public commonservice: CommonService,
     private router: ActivatedRoute,
-    private routerurl: Router
   ) { }
 
   param: any;
@@ -40,6 +39,5 @@ export class ExamplesComponent {
 
   capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-
   }
 }
