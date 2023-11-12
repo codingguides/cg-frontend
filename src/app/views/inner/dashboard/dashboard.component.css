@@ -1,0 +1,46 @@
+.nav-pills .nav-link {
+    color: #614b68;
+    background: #fff;
+    position: relative;
+}
+
+.nav-pills .nav-link.active {
+    color: #614b68;
+    background: #f9eded;
+}
+
+
+/* Add indicator arrow for the active tab */
+@media (min-width: 992px) {
+    .nav-pills .nav-link::before {
+        content: '';
+        display: block;
+        border-top: 8px solid transparent;
+        border-left: 10px solid #fff;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
+
+.nav-pills .nav-link.active::before {
+    opacity: 1;
+}
+
+
+
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*/
+.header {
+    min-height: 100vh;
+    background: linear-gradient(to left, #edeff1, #f9eded);
+}
