@@ -48,9 +48,12 @@ export class HeaderComponent {
 
     if (localStorage.getItem('accessToken')) {
       this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
-      this.commonservice.setLoggedIn(true, this.name);
+      console.log("this.name>>>>>>", this.name)
+
+      let id = this.commonservice.getTokenDetails('id');
+      this.commonservice.setLoggedIn(true, this.name, id, localStorage.getItem('accessToken'));
     } else {
-      this.commonservice.setLoggedIn(false, this.name)
+      this.commonservice.setLoggedIn(false, this.name, '', '')
     }
 
     this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {

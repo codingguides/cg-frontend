@@ -41,6 +41,7 @@ export class ListingComponent {
         console.log("apiResult>>>>>", apiResult)
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.list = apiResult && apiResult.payload;
+          console.log("LIST>>>>>>>>>", this.list)
           this.flag = true;
           this.upcoming = false
           if (this.list.length == 0) {

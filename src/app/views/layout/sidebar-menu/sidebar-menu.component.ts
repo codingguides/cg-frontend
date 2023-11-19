@@ -64,7 +64,6 @@ export class SidebarMenuComponent {
   }
 
   capitalizeFirstLetter(string: string) {
-    console.log(string.charAt(0) + string.slice(-4))
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

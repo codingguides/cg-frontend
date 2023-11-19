@@ -3,13 +3,10 @@
     <div class="header_banners header_banner_example">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-12" *ngIf="examplesHeader">
             <div class="header_title">
               <div class="header_title_image">
-                <img
-                  src="https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/100/423963/external-Javascript-social-media-tanah-basah-basic-outline-tanah-basah.png"
-                  alt=""
-                />
+                <img src="{{ examplesHeader.featureImg }}" alt="" />
               </div>
               <div class="title_details">
                 <h2 class="title_details_title">
@@ -18,15 +15,10 @@
               </div>
             </div>
             <div class="header_description pb-9x">
-              <p class="description">
-                JavaScript is a versatile and widely-used programming language
-                primarily used for front-end web development. It allows
-                developers to create interactive and dynamic elements on
-                websites, enhancing user experiences. JavaScript is a
-                client-side scripting language, meaning it runs in the user's
-                web browser, enabling real-time interactions without the need
-                for frequent server requests.
-              </p>
+              <p
+                class="description"
+                [innerHTML]="examplesHeader.description"
+              ></p>
             </div>
           </div>
         </div>
@@ -44,11 +36,11 @@
                       class="ctools-auto-submit-full-form ctools-auto-submit-processed jquery-once-2-processed"
                     >
                       <div class="form_widget">
-                        <div class="form_items">
+                        <div class="form_items" *ngFor="let key of keys">
                           <div class="form_items items_link">
-                            <a href="" class="items_link_node">All Examples</a>
+                            <a href="" class="items_link_node">{{ key }}</a>
                           </div>
-                          <div class="form_items items_link">
+                          <!-- <div class="form_items items_link">
                             <a href="" class="items_link_node">Introduction</a>
                           </div>
                           <div class="form_items items_link">
@@ -58,7 +50,7 @@
                             <a href="" class="items_link_node"
                               >Arrays and Objects</a
                             >
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </form>
@@ -66,12 +58,12 @@
                 </div>
                 <div class="example_section_right">
                   <ol>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program To Print Hello World</a
-                      >
+                    <li *ngFor="let examples of array">
+                      <a class="example_link_node" href="">{{
+                        examples.title
+                      }}</a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a class="example_link_node" href=""
                         >JavaScript Program to Add Two Numbers</a
                       >
@@ -91,7 +83,7 @@
                       <a class="example_link_node" href=""
                         >JavaScript Program to Swap Two Variables</a
                       >
-                    </li>
+                    </li> -->
                   </ol>
                 </div>
               </div>

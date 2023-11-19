@@ -68,7 +68,7 @@
             <button
               *ngIf="currentQuestionNo + 1 == questionsList.length"
               class="next_btn show"
-              (click)="finish()"
+              (click)="finish(questionsList[currentQuestionNo])"
             >
               Finish
             </button>

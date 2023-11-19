@@ -12,19 +12,23 @@ import { BehaviorSubject } from 'rxjs';
 export class CommonService {
 
   url: string = `${environment.apiURL}/api/`;
-  token = localStorage.getItem("accessToken");
+  token = localStorage.getItem('accessToken')
   headerOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${this.token}`
     })
   };
-  private loginstatus = new BehaviorSubject<object>({ status: false, username: "" });
-  // obj={
-  //   status:false,
-  //   uername :""
-  // }
+
+  private loginstatus = new BehaviorSubject<object>({
+    status: false,
+    username: "",
+    user_id: "",
+    token: ""
+  });
   castLogin = this.loginstatus.asObservable();
+
+
 
   constructor(private httpClient: HttpClient, private _router: Router) { }
 
@@ -33,6 +37,7 @@ export class CommonService {
   }
 
   public post(postData: Object, endPoints: String) {
+    console.log("this.headerOptions>>>>>>>>>>", this.headerOptions)
     return this.httpClient.post(this.url + endPoints, postData, this.headerOptions)
   }
 
@@ -57,11 +62,11 @@ export class CommonService {
       })
   }
 
-  public setLoggedIn(status: any, username: any) {
-    this.loginstatus.next({ status, username });
+  public setLoggedIn(status: any, username: any, user_id: any, token: any) {
+    this.loginstatus.next({ status, username, user_id, token });
   }
   public getLoggedIn() {
-    return this.castLogin;
+    return this.loginstatus.value;
   }
 
   public getTokenDetails(param: string) {
