@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../app/components/home/home.component';
-import { BannerComponent } from './components/banner/banner.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { FeaturesComponent } from './components/features/features.component';
-import { SliderLatestPostsComponent } from './components/slider-latest-posts/slider-latest-posts.component';
 import { ListingComponent } from '../app/views/inner/listing/listing.component';
 import { QuizComponent } from '../app/views/inner/quiz/quiz.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -13,16 +9,45 @@ import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
 import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
+import { ExamplesComponent } from './views/home/examples/examples.component';
 import { SearchComponent } from './views/inner/search/search.component';
 
 
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'quiz/:topic', component: ListingComponent },
-  { path: 'quiz/:topic/:subtopic', component: ListingComponent },
-  { path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent }, //topic/subtopic/quiz
+  {
+    path: '', component: HomeComponent,
+    data: {
+      title: 'Home Component',
+      descrption: 'Description of Home Component',
+      ogTitle: 'Description of Home Component for social media',
+    }
+  },
+  {
+    path: 'quiz/:topic', component: ListingComponent,
+    data: {
+      title: 'Listing Component ',
+      descrption: 'Description of list Component',
+      ogTitle: 'Description of list Component for social media',
+    }
+  },
+  {
+    path: 'quiz/:topic/:subtopic', component: ListingComponent,
+    data: {
+      title: 'Topic Component ',
+      descrption: 'Description of topic Component',
+      ogTitle: 'Description of topic Component for social media',
+    }
+  },
+  {
+    path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent,
+    data: {
+      title: 'Quiz Component ',
+      descrption: 'Description of quiz Component',
+      ogTitle: 'Description of quiz Component for social media',
+    }
+  }, //topic/subtopic/quiz
   //            topic/          subtopic/      quiz
   //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
 
@@ -30,6 +55,7 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'examples/:topic', component: ExamplesComponent },
 
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
@@ -43,7 +69,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

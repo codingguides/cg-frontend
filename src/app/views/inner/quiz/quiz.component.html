@@ -29,7 +29,7 @@
 
         <div class="quiz_box" [ngClass]="isQuizStarted ? 'activeQuiz' : ''">
           <header>
-            <div class="title">{{ apitalizeFirstLetter(param) }} Quiz</div>
+            <div class="title">{{ capitalizeFirstLetter(param) }} Quiz</div>
             <!-- <div class="timer">
               <div class="timer_left_txt">Time Off</div>
               <div class="timer_sec">00</div>
@@ -39,8 +39,7 @@
           <section *ngIf="isQuizStarted">
             <div class="que_text">
               {{ currentQuestionNo + 1 }}.
-              <span [innerHTML]="questionsList[currentQuestionNo].question">
-              </span>
+              <span [innerHTML]="shuffled[currentQuestionNo].question"> </span>
             </div>
             <div class="option_list">
               <div
@@ -68,7 +67,7 @@
             <button
               *ngIf="currentQuestionNo + 1 == questionsList.length"
               class="next_btn show"
-              (click)="finish()"
+              (click)="finish(questionsList[currentQuestionNo])"
             >
               Finish
             </button>
@@ -83,16 +82,64 @@
         </div>
         <div class="result_box" [ngClass]="isQuizEnded ? 'activeResult' : ''">
           <div class="icon">
-            <i class="fas fa-crown"></i>
+            <i class="fa fa-trophy"></i>
           </div>
           <div class="complete_text">You've completed the Quiz!</div>
           <div class="score_text">
-            <span
-              >and congrats! You got
+            <span class="complete_result"
+              >You got
               <p>{{ userPoint }}</p>
               out of
               <p>{{ questionsList.length }}</p>
             </span>
+          </div>
+          <div class="buttons">
+            <button class="restart" (click)="replay()">Replay quiz</button>
+            <button class="quit" (click)="start()">Quit Quiz</button>
+            <div *ngIf="userLogin">
+              <button class="details" (click)="inDetails()">
+                Result Details
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="result_details_box"
+          [ngClass]="isResultDetails ? 'activeResultDetails' : ''"
+        >
+          <div *ngIf="resultDetails">
+            <div class="details_title">
+              Result in Details of the {{ capitalizeFirstLetter(param) }} Quiz
+            </div>
+            <div class="result-list">
+              <div class="result">
+                1. Quiz Name:
+                <span class="result_outcome">{{ getslug }}</span>
+              </div>
+              <div class="result">
+                2. Result:
+                <span class="result_outcome">{{ resultDetails.status }}</span>
+              </div>
+              <div class="result">
+                3. Total Question Attend:
+                <span class="result_outcome">{{
+                  resultDetails.attendedQuestionCount
+                }}</span>
+              </div>
+              <div class="result">
+                4. Total Right Answer Attend:
+                <span class="result_outcome">{{
+                  resultDetails.rightAnswerCount
+                }}</span>
+              </div>
+              <div class="result">
+                5. Get Total Point:
+                <span class="result_outcome">{{ resultDetails.point }}</span>
+              </div>
+            </div>
+            <div class="result">
+              <div class="message">{{ statusMessage }}</div>
+            </div>
           </div>
           <div class="buttons">
             <button class="restart" (click)="replay()">Replay quiz</button>

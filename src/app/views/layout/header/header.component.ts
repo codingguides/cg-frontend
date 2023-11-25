@@ -23,15 +23,15 @@ export class HeaderComponent {
   href: string = "";
 
   constructor(
-    public sharedService: SharedService, 
-    public commonservice: CommonService, 
+    public sharedService: SharedService,
+    public commonservice: CommonService,
     private router: Router,
     private activerouter: ActivatedRoute
   ) {
 
   }
 
-  searchvalue:string = "" 
+  searchvalue: string = ""
 
   ngOnInit() {
     this.getMenu();
@@ -39,17 +39,21 @@ export class HeaderComponent {
 
 
     this.href = this.router.url;
-    if(this.findWord(this.href)){
+    if (this.findWord(this.href)) {
       this.searchvalue = this.activerouter.snapshot.params['topic'];
-    }else{
+      alert(this.searchvalue)
+    } else {
       this.searchvalue = "";
     }
 
     if (localStorage.getItem('accessToken')) {
       this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
-      this.commonservice.setLoggedIn(true, this.name);
+      console.log("this.name>>>>>>", this.name)
+
+      let id = this.commonservice.getTokenDetails('id');
+      this.commonservice.setLoggedIn(true, this.name, id, localStorage.getItem('accessToken'));
     } else {
-      this.commonservice.setLoggedIn(false, this.name)
+      this.commonservice.setLoggedIn(false, this.name, '', '')
     }
 
     this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
@@ -75,9 +79,9 @@ export class HeaderComponent {
     }
   }
 
-  findWord(str:string) {
+  findWord(str: string) {
     let word = "search"
-    return RegExp('\\b'+ word +'\\b').test(str)
+    return RegExp('\\b' + word + '\\b').test(str)
   }
 
 
@@ -103,7 +107,7 @@ export class HeaderComponent {
     this.sharedService.isQuizLiveCheck(`quiz/${link}`, true);
   }
 
-  searchDate(val:String){
-    this.sharedService.isQuizLiveCheck(`search/${val}`, false);
+  searchDate(val: String) {
+    this.sharedService.isQuizLiveCheck(`search/${val}`, true);
   }
 }

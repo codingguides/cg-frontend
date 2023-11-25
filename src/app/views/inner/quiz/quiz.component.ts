@@ -13,7 +13,10 @@ export class QuizComponent implements OnInit {
   showWarning: boolean = false;
   isQuizStarted: boolean = false;
   isQuizEnded: boolean = false;
+  isResultDetails: boolean = false;
   questionsList: any[] = [];
+  qns: any = [];
+  resultDetails: any;
   currentQuestionNo: number = 0;
   correctAnswerCount: number = 0;
   menu_sidebar: any;
@@ -31,6 +34,20 @@ export class QuizComponent implements OnInit {
   loginTrue: any;
   status: boolean = false;
   param: any;
+  xxx: any = 0;
+  attendedAnswer: number = 0;
+  attenedQuestion: number = 0;
+  statusMessage: String = "";
+  _id: string = "";
+  id: string = "";
+  obj: any;
+  token: any = "";
+  rightAnsCount: number = 0;
+  userLogin: boolean = false;
+  qnsList: any;
+  shuffled: any;
+  shuffledList: any;
+
 
   constructor(
     private http: HttpClient,
@@ -39,29 +56,67 @@ export class QuizComponent implements OnInit {
     private router2: Router
   ) {
     this.getslug = this.router.snapshot.params['quiz']
+    console.log("SLUG>>>>>>>>", this.getslug);
   }
 
   ngOnInit(): void {
 
-    // console.log(this.router2.url)
+    // window.addEventListener("beforeunload", function (e) {
+    //   var confirmationMessage = "\o/";
+
+    //   (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    //   return confirmationMessage;                            //Webkit, Safari, Chrome
+    // });
+
+
+    /////////////////////////////////////////////////////////////////////////////////
+
+
+    // document.addEventListener("visibilitychange", () => {
+    //   // it could be either hidden or visible
+    //   document.title = document.visibilityState;
+    //   if (document.title == 'hidden') {
+    //     alert("abc")
+    //   }
+    // });
+
     this.loadQuestions();
     this.selectOption(this.payload, this.option);
 
-    if (localStorage.getItem('accessToken')) {
-      this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
-      this.commonservice.setLoggedIn(true, this.name);
-    } else {
-      this.commonservice.setLoggedIn(false, this.name)
-    }
 
-    this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
-      this.status = obj.status
-      this.name = obj.username
-    });
-    console.log(this.loginTrue.status)
-    console.log(this.loginTrue.name)
-    console.log(this.status, "<<<<<<<<<<<loginTrue>>>>>>>>>>>", this.loginTrue)
+    this.commonservice.castLogin.subscribe((result) => {
+      this.obj = JSON.parse(JSON.stringify(result))
+      this.name = this.obj.username;
+      this._id = this.obj.user_id;
+      this.token = this.obj.token;
+      this.status = this.obj.status;
+      this.showWarning = false;
+      console.log("Token in ngOnInit", this.token)
+    })
+
   }
+
+  //////////////////////////
+
+  shuffle(array: any) {
+    var currentIndex = array.length, temporaryValue, randomIndex
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
+
+
+
+
+
+  /////////////////////////
 
   async loadQuestions() {
     this.param = this.router.snapshot.params['topic'];
@@ -72,26 +127,124 @@ export class QuizComponent implements OnInit {
 
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.questionsList = apiResult && apiResult.payload;
+          // this.questionsList.map((qqq) => {
+          // this.qns.push(qqq.question);
+          // this.qnsList = this.qns;
+          // console.log(this.qnsList);
+          this.shuffled = this.shuffle(this.questionsList);
+          console.log(this.shuffled)
+          // this.shuffledList = (this.shuffled[0], this.shuffled[1], this.shuffled[2], this.shuffled[3], this.shuffled[4]);
+          // })
         }
       });
   }
 
 
   nextQuestion(payload: any) {
+
+    console.log("OBJ>>>>", this.obj);
     this.activeId = 10;
 
     if (payload.rightoption == this.userSelected) {
-      this.userPoint = this.userPoint + parseFloat(payload.point);
+      this.attendedAnswer++;
+      this.rightAnsCount++;
+      if (!this.userSelected) {
+        this.userPoint = 0;
+        console.log("NOT SELECTED", this.userPoint);
+      }
+      else {
+        this.userPoint = this.userPoint + parseFloat(payload.point);
+        console.log("this.userPoint", this.userPoint);
+        console.log("IN IF part ALL QUESTION ATTEND", this.attendedAnswer);
+      }
     }
+    else if (payload.rightoption !== this.userSelected) {
+      console.log("IN ELSE part ALL QUESTION ATTEND", this.attendedAnswer = this.attendedAnswer + 1);
+      if (!this.userSelected) {
+        this.rightAnsCount = 0;
+        console.log("Not select any option", this.userPoint);
+      }
+    }
+
     if (this.currentQuestionNo < this.questionsList.length - 1) {
       this.currentQuestionNo++;
+      this.attenedQuestion++;
+      console.log("ATTEND QUESTION", this.attenedQuestion);
     }
-    this.userSelected = '';
+    console.log("IN NEXT Button", this.attendedAnswer)
   }
 
-  finish() {
-    this.isQuizEnded = true;
+  finish(payload: any) {
+    if (payload.rightoption == this.userSelected) {
+      this.userPoint = this.userPoint + parseFloat(payload.point);
+      this.rightAnsCount++;
+    }
+    else if (payload.rightoption !== this.userSelected) {
+      if (!this.userSelected) {
+        this.userPoint = 0;
+        this.rightAnsCount = 0
+        console.log("Not select any option ATLAST", this.userPoint);
+      }
+    }
+    console.log("IN FINISH Button", this.attendedAnswer++)
+
+
+    // console.clear()
+    if (this.token) {
+      this.userLogin = true;
+      console.log("TOKENNNNNNNN>>>>>", this.token)
+      this.getslug = this.router.snapshot.params['quiz'];
+      // this.nextQuestion(this.userPoint);
+      let totalPoint = Math.ceil((this.rightAnsCount / this.attendedAnswer) * 100)
+      if (totalPoint < 60) {
+        this.statusMessage = "You are not Qualified, You first upgrade your skill as soon as possible."
+      }
+      if (totalPoint >= 60 && totalPoint < 70) {
+        this.statusMessage = "You are Qualified, but you need to improve yourself and practice more."
+      }
+      else if (totalPoint >= 70 && totalPoint < 80) {
+        this.statusMessage = "You are Good, but you need to practice more and improve your skill more."
+      }
+      else if (totalPoint >= 80 && totalPoint < 90) {
+        this.statusMessage = "You are Awesome, but you need to practice more quiz to upgrade yourself."
+      }
+      else if (totalPoint >= 90 && totalPoint < 100) {
+        this.statusMessage = "You are Excellent, but you access our more excitement quiz."
+      }
+      else if (totalPoint == 100) {
+        this.statusMessage = "You are Extraordinary, you just follow up the same way of your skill."
+      }
+      const data = {
+        topic_slug: this.getslug,
+        user_id: this._id,
+        attendedQuestionCount: this.attendedAnswer,
+        rightAnswerCount: this.rightAnsCount,
+        status: Math.ceil((this.rightAnsCount / this.attendedAnswer) * 100) >= 60 ? 'pass' : 'failed',
+        point: this.userPoint,
+      }
+      console.log(">>>>>data>>>>", data);
+
+      this.commonservice.post(data, 'topic/analytics').subscribe((res) => {
+        const apiResult2 = JSON.parse(JSON.stringify(res))
+        if (apiResult2 && apiResult2.status == 'SUCCESS') {
+          this.resultDetails = apiResult2 && apiResult2.payload;
+          console.log(this.resultDetails)
+
+
+        }
+      })
+      this.isQuizEnded = true;
+      this.isQuizStarted = false;
+    } else {
+      this.isQuizEnded = true;
+      this.isQuizStarted = false;
+    }
+  }
+
+  inDetails() {
+    this.isQuizEnded = false;
     this.isQuizStarted = false;
+    this.isResultDetails = true;
   }
 
   start() {
@@ -101,6 +254,10 @@ export class QuizComponent implements OnInit {
     this.currentQuestionNo = 0;
     this.loadQuestions();
     this.userPoint = 0;
+    this.selectOption(this.payload, this.option);
+    this.attendedAnswer = 0;
+    this.isResultDetails = false;
+    this.rightAnsCount = 0;
   }
 
   replay() {
@@ -110,9 +267,16 @@ export class QuizComponent implements OnInit {
     this.currentQuestionNo = 0;
     this.loadQuestions();
     this.userPoint = 0;
+    this.selectOption(this.payload, this.option);
+    this.attendedAnswer = 0;
+    this.isResultDetails = false;
+    this.rightAnsCount = 0;
+
   }
 
   showWarningPopup() {
+
+    console.log(">>>>>>this.obj>>>showWarningPopup>>>>>", this.obj)
     if (this.status == false) {
       if (localStorage.getItem('notInterested') !== 'yes') {
         const modalDiv = document.getElementById('myModal');
@@ -122,38 +286,17 @@ export class QuizComponent implements OnInit {
         }
       } else {
         this.showWarning = true;
+        this.isResultDetails = false
       }
     } else {
 
       this.showWarning = true;
+      this.isResultDetails = false
     }
-
-
-
-    // const modalDiv = document.getElementById('myModal');
-    // if (modalDiv != null) {
-    //   modalDiv.style.display = 'block'
-    //   this.showWarning = false;
-    // }
-    // else {
-    //   this.showWarning = true;
-    // }
-
-
   }
 
-  // openModal() {
-  //   const modalDiv = document.getElementById('myModal');
-  //   if (modalDiv != null) {
-  //     modalDiv.style.display = 'block'
-  //     this.showWarning = false;
-  //   }
-  //   else {
-  //     this.showWarning = true;
-
-  //   }
-  // }
   startQuiz() {
+    this.isResultDetails = false;
     this.showWarning = false;
     this.isQuizStarted = true;
     localStorage.removeItem('notInterested');
@@ -165,7 +308,7 @@ export class QuizComponent implements OnInit {
     this.activeId = event;
   }
 
-  apitalizeFirstLetter(string: string) {
+  capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

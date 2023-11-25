@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   errr: string = "";
   error2: any;
   name: any;
+  _id: any;
   visible: boolean = true;
   changetype: boolean = true;
 
@@ -62,19 +63,25 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
 
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult)
+        console.log(apiResult['payload'])
 
         if (apiResult['result'] == "ok") {
           if (apiResult && apiResult['data']['payload']) {
             localStorage.clear();
 
             console.log(apiResult && apiResult['data']['token']);
+            console.log(apiResult && apiResult['data']['payload']);
+
             localStorage.setItem("accessToken", apiResult && apiResult['data']['token']);
             sessionStorage.setItem("accessToken", apiResult && apiResult['data']['token']);
             this.name = apiResult && apiResult['data']['payload'].name.split(' ').map((n: any) => n[0]).join('');
+            this._id = apiResult && apiResult['data']['payload'].id
             console.log(this.name)
-            this.commonservice.setLoggedIn(true, this.name)
+            console.log(this._id)
+            let token = apiResult && apiResult['data']['token']
+            this.commonservice.setLoggedIn(true, this.name, this._id, token)
           }
+          window.location.reload();
           this.login.reset()
           $('#myModal').hide();
           Swal.fire({

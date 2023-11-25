@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Meta } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,10 +29,12 @@ import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.c
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { ExamplesComponent } from './views/home/examples/examples.component';
+import { SidebarListComponent } from './views/home/sidebar-list/sidebar-list.component';
 import { SearchComponent } from './views/inner/search/search.component';
 import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-sidebar.component';
 
-
+import { MetaService } from './common/meta.service';
 
 
 
@@ -60,6 +62,8 @@ import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-s
     ComingSoonComponent,
     PagenotfoundComponent,
     DashboardComponent,
+    ExamplesComponent,
+    SidebarListComponent,
     SearchComponent,
     AdLeftSidebarComponent,
 
@@ -77,7 +81,7 @@ import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-s
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [Meta, MetaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
