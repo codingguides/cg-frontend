@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonService } from 'src/app/common/common.service';
 import { Router } from '@angular/router';
-import { cilList, cilShieldAlt } from '@coreui/icons';
+// import { cilList, cilShieldAlt } from '@coreui/icons';
 
 @Component({
   selector: 'app-features',
@@ -9,7 +9,7 @@ import { cilList, cilShieldAlt } from '@coreui/icons';
   styleUrls: ['./features.component.css']
 })
 export class FeaturesComponent {
-  icons = { cilList, cilShieldAlt };
+  // icons = { cilList, cilShieldAlt };
 
   menu: any;
 

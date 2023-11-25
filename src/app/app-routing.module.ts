@@ -16,10 +16,38 @@ import { SearchComponent } from './views/inner/search/search.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'quiz/:topic', component: ListingComponent },
-  { path: 'quiz/:topic/:subtopic', component: ListingComponent },
-  { path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent }, //topic/subtopic/quiz
+  {
+    path: '', component: HomeComponent,
+    data: {
+      title: 'Home Component',
+      descrption: 'Description of Home Component',
+      ogTitle: 'Description of Home Component for social media',
+    }
+  },
+  {
+    path: 'quiz/:topic', component: ListingComponent,
+    data: {
+      title: 'Listing Component ',
+      descrption: 'Description of list Component',
+      ogTitle: 'Description of list Component for social media',
+    }
+  },
+  {
+    path: 'quiz/:topic/:subtopic', component: ListingComponent,
+    data: {
+      title: 'Topic Component ',
+      descrption: 'Description of topic Component',
+      ogTitle: 'Description of topic Component for social media',
+    }
+  },
+  {
+    path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent,
+    data: {
+      title: 'Quiz Component ',
+      descrption: 'Description of quiz Component',
+      ogTitle: 'Description of quiz Component for social media',
+    }
+  }, //topic/subtopic/quiz
   //            topic/          subtopic/      quiz
   //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
 

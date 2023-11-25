@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Meta } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,7 +34,7 @@ import { SidebarListComponent } from './views/home/sidebar-list/sidebar-list.com
 import { SearchComponent } from './views/inner/search/search.component';
 import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-sidebar.component';
 
-
+import { MetaService } from './common/meta.service';
 
 
 
@@ -81,7 +81,7 @@ import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-s
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [Meta, MetaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

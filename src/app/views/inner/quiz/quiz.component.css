@@ -50,13 +50,30 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.result_details_box {
+  position: absolute;
+  /* top: 60%; */
+  margin-top: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .info_box.activeInfo,
 .quiz_box.activeQuiz,
-.result_box.activeResult {
+.result_box.activeResult,
+.result_details_box.activeResultDetails {
   opacity: 1;
   z-index: 5;
   pointer-events: auto;
-  transform: translate(-44%, -50%) scale(1);
+  transform: translate(-44%, -47%) scale(1);
+}
+
+.result_details_box.activeResultDetails {
+  opacity: 1;
+  z-index: 5;
+  pointer-events: auto;
+  transform: translate(-44%, -36%) scale(1);
 }
 
 .start_btn button {
@@ -185,6 +202,11 @@ section .que_text {
 
 section .que_text span {
   margin-left: 3px;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 section .option_list {
@@ -206,6 +228,11 @@ section .option_list .option {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 section .option_list .option:last-child {
@@ -314,16 +341,78 @@ footer button.show {
   pointer-events: none;
   transition: all 0.3s ease;
 }
+.result_details_box {
+  width: 600px;
+  background: #efeafe;
+  border-radius: 5px;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.result_details_box .details_title {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  border-radius: 5px 5px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  /* color: #795ed9; */
+  color: #fff;
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
+}
+
+.result_details_box .result-list {
+  padding: 15px 30px;
+}
+
+.result_details_box .result-list .result {
+  margin: 5px 0;
+  font-size: 17px;
+  color: #a48ff1;
+}
+
+.result_details_box .result-list .result .result_outcome {
+  color: #4e22ed;
+  font-weight: 500;
+}
+
+.result_details_box .result-list .result .message {
+  color: #4e22ed;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.result_details_box .result .message {
+  height: 60px;
+  width: 100%;
+  border-top: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  padding: 35px 30px;
+  border-radius: 5px 5px 5px 5px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  /* background: linear-gradient(90deg, #614b68 0%, #423963 100%); */
+  background: #795ed9;
+}
 
 .result_box .icon {
   font-size: 100px;
   color: #795ed9;
-  margin-bottom: 10px;
+  margin-bottom: -15px;
+  margin-top: -50px;
 }
 
 .result_box .complete_text {
   font-size: 20px;
   font-weight: 500;
+  color: #795ede;
 }
 
 .result_box .score_text span {
@@ -333,14 +422,27 @@ footer button.show {
   font-weight: 500;
 }
 
-.result_box .score_text span p {
+.result_box .score_text .complete_result {
+  color: #795ede;
+}
+
+.result_box .score_text .complete_result p {
   padding: 0 4px;
   font-weight: 600;
+  color: #4922ed;
 }
 
 .result_box .buttons {
   display: flex;
   margin: 20px 0;
+}
+
+.result_details_box .buttons {
+  display: flex;
+  margin: 5px 0;
+  /* justify-content: flex-end; */
+  padding: 0 149px;
+  border-top: 1px solid lightgrey;
 }
 
 .result_box .buttons button {
@@ -357,6 +459,25 @@ footer button.show {
   transition: all 0.3s ease;
 }
 
+.result_details_box .buttons button {
+  margin: 0 10px;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #a48ff1;
+  transition: all 0.3s ease;
+}
+
+/* .buttons button.restart {
+  color: #fff;
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
+} */
+
 .buttons button.restart {
   color: #fff;
   /* background: #a48ff1; */
@@ -368,11 +489,20 @@ footer button.show {
 }
 
 .buttons button.quit {
-  color: #a48ff1;
-  background: #fff;
+  color: #fff;
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
+}
+.buttons button.details {
+  color: #fff;
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
 }
 
 .buttons button.quit:hover {
+  color: #fff;
+  background: #795ed9;
+}
+
+.buttons button.details:hover {
   color: #fff;
   background: #795ed9;
 }
