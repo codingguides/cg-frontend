@@ -19,7 +19,11 @@
                   {{ quizlist?.name }}
                 </h5>
                 <p class="card-text" [innerHTML]="quizlist.description"></p>
-                <a href="#" [routerLink]="quizlist.slug" class="btn btn-sm"
+                <a
+                  href="#"
+                  (click)="setListData(quizlist)"
+                  [routerLink]="quizlist.slug"
+                  class="btn btn-sm"
                   >Click to Start</a
                 >
               </div>

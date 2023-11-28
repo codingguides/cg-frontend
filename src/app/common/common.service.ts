@@ -32,6 +32,8 @@ export class CommonService {
 
   constructor(private httpClient: HttpClient, private _router: Router) { }
 
+  public selectedTopicID: any;
+
   public get(endPoints: String) {
     return this.httpClient.get(this.url + endPoints, this.headerOptions)
   }
@@ -87,5 +89,17 @@ export class CommonService {
     console.log(">>>>>>>>>>>>>>>>>this.castLogin>>>>>>>>>>>>>>>>>>>>>>>", this.castQuizStatus)
     return this.castQuizStatus;
   }
+
+  // private listingData = new BehaviorSubject<object>({ data: "" });
+  // castListingData = this.listingData.asObservable();
+
+  // public setListingData(data: any) {
+  //   console.log(">>>>>>>>>In SET", data)
+  //   this.listingData.next({ data })
+  // }
+  // public getListingData() {
+  //   console.log(">>>>>>>>>>In GET", this.castListingData)
+  //   return this.castListingData;
+  // }
 
 }
