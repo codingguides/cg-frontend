@@ -70,7 +70,8 @@
 
 .info_box.activeInfo,
 .quiz_box.activeQuiz,
-.result_box.activeResult {
+.result_box.activeResult,
+.result_details_box.activeResultDetails {
   opacity: 1;
   z-index: 5;
   pointer-events: auto;

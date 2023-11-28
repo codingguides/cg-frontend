@@ -73,10 +73,12 @@ export class QuizComponent implements OnInit {
       this.token = this.obj.token;
       this.status = this.obj.status;
       this.showWarning = false;
-      console.log("Token in ngOnInit", this.token);
+      console.log("Token in ngOnInit", this.token)
     })
 
   }
+
+  //////////////////////////
 
   shuffle(array: any) {
     var currentIndex = array.length, temporaryValue, randomIndex
@@ -91,6 +93,12 @@ export class QuizComponent implements OnInit {
     }
     return array;
   }
+
+
+
+
+
+  /////////////////////////
 
   async loadQuestions() {
     this.param = this.router.snapshot.params['topic'];
@@ -139,11 +147,10 @@ export class QuizComponent implements OnInit {
       this.attenedQuestion++;
       console.log("ATTEND QUESTION", this.attenedQuestion);
     }
-    console.log("IN NEXT Button", this.attendedAnswer);
+    console.log("IN NEXT Button", this.attendedAnswer)
   }
 
   finish(payload: any) {
-    this.commonservice.setQuizStatus(false, this.router2.url, "");
     if (payload.rightoption == this.userSelected) {
       this.userPoint = this.userPoint + parseFloat(payload.point);
       this.rightAnsCount++;
