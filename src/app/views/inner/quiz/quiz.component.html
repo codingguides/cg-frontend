@@ -95,6 +95,7 @@
           </div>
           <div class="buttons">
             <button class="restart" (click)="replay()">Replay quiz</button>
+            <!-- <button class="quit" (click)="start()">Quit Quiz</button> -->
             <button class="quit" (click)="start()">Quit Quiz</button>
             <div *ngIf="userLogin">
               <button class="details" (click)="inDetails()">
@@ -141,9 +142,51 @@
               <div class="message">{{ statusMessage }}</div>
             </div>
           </div>
-          <div class="buttons">
-            <button class="restart" (click)="replay()">Replay quiz</button>
-            <button class="quit" (click)="start()">Quit Quiz</button>
+          <div class="button">
+            <!-- <button class="restart" (click)="replay()">Replay quiz</button>
+            <button class="quit" (click)="start()">Quit Quiz</button> -->
+            <button class="description" (click)="description()">
+              Answer Description
+            </button>
+          </div>
+        </div>
+        <div
+          class="ans_description_box"
+          [ngClass]="isAnswerDescription ? 'activeAnswerDetails' : ''"
+        >
+          <div>
+            <div class="description_title">
+              Answer Description of {{ capitalizeFirstLetter(param) }} Quiz
+            </div>
+            <div
+              class="description-list"
+              *ngFor="let ans of questionsList; let i = index"
+            >
+              <div class="description_question">
+                <span class="ansDescription_title">Q{{ i + 1 }}. </span>
+                <span
+                  class="description_outcome"
+                  [innerHTML]="ans.question"
+                  style="margin-left: 4px"
+                >
+                </span>
+              </div>
+              <div class="description_correct">
+                <!-- <span class="ansDescription_title">Correct Answer:</span> -->
+                <span class="ansDescription_rightans">
+                  {{ ans.rightoption }}</span
+                >
+              </div>
+              <div class="description_answer">
+                <span class="ansDescription_title">Description:</span>
+                <span
+                  class="description_outcome"
+                  [innerHTML]="ans.rightAnswerDescription"
+                  style="margin-left: 4px"
+                >
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

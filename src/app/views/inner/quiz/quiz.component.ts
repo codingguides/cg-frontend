@@ -14,6 +14,7 @@ export class QuizComponent implements OnInit {
   isQuizStarted: boolean = false;
   isQuizEnded: boolean = false;
   isResultDetails: boolean = false;
+  isAnswerDescription: boolean = false;
   questionsList: any[] = [];
   qns: any = [];
   resultDetails: any;
@@ -53,32 +54,13 @@ export class QuizComponent implements OnInit {
     private http: HttpClient,
     public commonservice: CommonService,
     private router: ActivatedRoute,
-    private router2: Router
+    private router2: Router,
   ) {
     this.getslug = this.router.snapshot.params['quiz']
     console.log("SLUG>>>>>>>>", this.getslug);
   }
 
   ngOnInit(): void {
-
-    // window.addEventListener("beforeunload", function (e) {
-    //   var confirmationMessage = "\o/";
-
-    //   (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-    //   return confirmationMessage;                            //Webkit, Safari, Chrome
-    // });
-
-
-    /////////////////////////////////////////////////////////////////////////////////
-
-
-    // document.addEventListener("visibilitychange", () => {
-    //   // it could be either hidden or visible
-    //   document.title = document.visibilityState;
-    //   if (document.title == 'hidden') {
-    //     alert("abc")
-    //   }
-    // });
 
     this.loadQuestions();
     this.selectOption(this.payload, this.option);
@@ -127,14 +109,8 @@ export class QuizComponent implements OnInit {
 
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.questionsList = apiResult && apiResult.payload;
-          // this.questionsList.map((qqq) => {
-          // this.qns.push(qqq.question);
-          // this.qnsList = this.qns;
-          // console.log(this.qnsList);
           this.shuffled = this.shuffle(this.questionsList);
-          console.log(this.shuffled)
-          // this.shuffledList = (this.shuffled[0], this.shuffled[1], this.shuffled[2], this.shuffled[3], this.shuffled[4]);
-          // })
+          console.log(this.shuffled);
         }
       });
   }
@@ -182,19 +158,17 @@ export class QuizComponent implements OnInit {
     else if (payload.rightoption !== this.userSelected) {
       if (!this.userSelected) {
         this.userPoint = 0;
-        this.rightAnsCount = 0
+        this.rightAnsCount = 0;
         console.log("Not select any option ATLAST", this.userPoint);
       }
     }
-    console.log("IN FINISH Button", this.attendedAnswer++)
+    console.log("IN FINISH Button", this.attendedAnswer++);
 
 
-    // console.clear()
     if (this.token) {
       this.userLogin = true;
-      console.log("TOKENNNNNNNN>>>>>", this.token)
+      console.log("TOKENNNNNNNN>>>>>", this.token);
       this.getslug = this.router.snapshot.params['quiz'];
-      // this.nextQuestion(this.userPoint);
       let totalPoint = Math.ceil((this.rightAnsCount / this.attendedAnswer) * 100)
       if (totalPoint < 60) {
         this.statusMessage = "You are not Qualified, You first upgrade your skill as soon as possible."
@@ -215,7 +189,7 @@ export class QuizComponent implements OnInit {
         this.statusMessage = "You are Extraordinary, you just follow up the same way of your skill."
       }
       const data = {
-        topic_slug: this.getslug,
+        topic_id: this.commonservice.selectedTopicID,
         user_id: this._id,
         attendedQuestionCount: this.attendedAnswer,
         rightAnswerCount: this.rightAnsCount,
@@ -225,10 +199,10 @@ export class QuizComponent implements OnInit {
       console.log(">>>>>data>>>>", data);
 
       this.commonservice.post(data, 'topic/analytics').subscribe((res) => {
-        const apiResult2 = JSON.parse(JSON.stringify(res))
+        const apiResult2 = JSON.parse(JSON.stringify(res));
         if (apiResult2 && apiResult2.status == 'SUCCESS') {
           this.resultDetails = apiResult2 && apiResult2.payload;
-          console.log(this.resultDetails)
+          console.log(this.resultDetails);
 
 
         }
@@ -239,12 +213,21 @@ export class QuizComponent implements OnInit {
       this.isQuizEnded = true;
       this.isQuizStarted = false;
     }
+
+
   }
 
   inDetails() {
     this.isQuizEnded = false;
     this.isQuizStarted = false;
     this.isResultDetails = true;
+  }
+
+  description() {
+    this.isQuizEnded = false;
+    this.isQuizStarted = false;
+    this.isResultDetails = false;
+    this.isAnswerDescription = true;
   }
 
   start() {
@@ -276,7 +259,7 @@ export class QuizComponent implements OnInit {
 
   showWarningPopup() {
 
-    console.log(">>>>>>this.obj>>>showWarningPopup>>>>>", this.obj)
+    console.log(">>>>>>this.obj>>>showWarningPopup>>>>>", this.obj);
     if (this.status == false) {
       if (localStorage.getItem('notInterested') !== 'yes') {
         const modalDiv = document.getElementById('myModal');
@@ -286,12 +269,12 @@ export class QuizComponent implements OnInit {
         }
       } else {
         this.showWarning = true;
-        this.isResultDetails = false
+        this.isResultDetails = false;
       }
     } else {
 
       this.showWarning = true;
-      this.isResultDetails = false
+      this.isResultDetails = false;
     }
   }
 
@@ -300,7 +283,7 @@ export class QuizComponent implements OnInit {
     this.showWarning = false;
     this.isQuizStarted = true;
     localStorage.removeItem('notInterested');
-    this.commonservice.setQuizStatus(true, this.router2.url, "")
+    this.commonservice.setQuizStatus(true, this.router2.url, "");
   }
 
   selectOption(event: any, option: any) {

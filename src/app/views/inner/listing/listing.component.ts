@@ -12,7 +12,7 @@ export class ListingComponent {
   constructor(
     public commonservice: CommonService,
     public sharedservice: SharedService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
   ) { }
 
   list: any;
@@ -22,7 +22,6 @@ export class ListingComponent {
 
   ngOnInit() {
     this.getList();
-    // this.sharedservice.isQuizLiveCheck()
   }
 
   async getList() {
@@ -56,5 +55,9 @@ export class ListingComponent {
       });
   }
 
+  setListData(quizlist: any) {
+    console.log("IDDDDDDDDD", quizlist._id)
+    this.commonservice.selectedTopicID = quizlist._id;
+  }
 
 }
