@@ -153,6 +153,8 @@ export class QuizComponent implements OnInit {
   }
 
   finish(payload: any) {
+    this.commonservice.setQuizStatus(false, this.router2.url, "");
+
     if (payload.rightoption == this.userSelected) {
       this.userPoint = this.userPoint + parseFloat(payload.point);
       this.rightAnsCount++;
@@ -192,6 +194,7 @@ export class QuizComponent implements OnInit {
       }
       const data = {
         topic_id: this.topicId,
+        topic_url: this.router2.url,
         user_id: this._id,
         attendedQuestionCount: this.attendedAnswer,
         rightAnswerCount: this.rightAnsCount,
@@ -286,6 +289,7 @@ export class QuizComponent implements OnInit {
     this.isQuizStarted = true;
     localStorage.removeItem('notInterested');
     this.commonservice.setQuizStatus(true, this.router2.url, "");
+    console.log("FOR URL>>>>>>>>>>>>", this.router2.url)
   }
 
   selectOption(event: any, option: any) {
