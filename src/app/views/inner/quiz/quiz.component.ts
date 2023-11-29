@@ -249,6 +249,7 @@ export class QuizComponent implements OnInit {
   }
 
   replay() {
+    this.commonservice.setQuizStatus(true, this.router2.url, "");
     this.showWarning = false;
     this.isQuizEnded = false;
     this.isQuizStarted = true;
