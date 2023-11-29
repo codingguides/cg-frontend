@@ -48,6 +48,7 @@ export class QuizComponent implements OnInit {
   qnsList: any;
   shuffled: any;
   shuffledList: any;
+  topicId: any;
 
 
   constructor(
@@ -62,6 +63,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.topicId = this.commonservice.selectedTopicID;
     this.loadQuestions();
     this.selectOption(this.payload, this.option);
 
@@ -189,7 +191,7 @@ export class QuizComponent implements OnInit {
         this.statusMessage = "You are Extraordinary, you just follow up the same way of your skill."
       }
       const data = {
-        topic_id: this.commonservice.selectedTopicID,
+        topic_id: this.topicId,
         user_id: this._id,
         attendedQuestionCount: this.attendedAnswer,
         rightAnswerCount: this.rightAnsCount,
