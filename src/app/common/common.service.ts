@@ -12,13 +12,8 @@ import { BehaviorSubject } from 'rxjs';
 export class CommonService {
 
   url: string = `${environment.apiURL}/api/`;
-  token = localStorage.getItem('accessToken')
-  headerOptions: any = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `${this.token}`
-    })
-  };
+  // token = localStorage.getItem('accessToken')
+  headerOptions: any = {};
 
   private loginstatus = new BehaviorSubject<object>({
     status: false,
@@ -32,26 +27,40 @@ export class CommonService {
 
   constructor(private httpClient: HttpClient, private _router: Router) { }
 
+  public setHeaderOption() {
+    this.headerOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `${localStorage.getItem('accessToken')}`
+      })
+    };
+  }
+
   public selectedTopicID: any;
 
   public get(endPoints: String) {
+    this.setHeaderOption();
     return this.httpClient.get(this.url + endPoints, this.headerOptions)
   }
 
   public post(postData: Object, endPoints: String) {
+    this.setHeaderOption();
     console.log("this.headerOptions>>>>>>>>>>", this.headerOptions)
     return this.httpClient.post(this.url + endPoints, postData, this.headerOptions)
   }
 
   public put(postData: Object, endPoints: String) {
+    this.setHeaderOption();
     return this.httpClient.put(this.url + endPoints, postData, this.headerOptions)
   }
 
   public update(postData: Object, endPoints: String) {
+    this.setHeaderOption();
     return this.httpClient.put(this.url + endPoints, postData, this.headerOptions)
   }
 
   public delete(endPoints: String) {
+    this.setHeaderOption();
     return this.httpClient.delete(this.url + endPoints, this.headerOptions)
   }
 
@@ -72,7 +81,7 @@ export class CommonService {
   }
 
   public getTokenDetails(param: string) {
-    const gettoken: any = this.token;
+    const gettoken: any = localStorage.getItem('accessToken');
     const decoded: any = jwt_decode(gettoken);
     return decoded[param];
   }

@@ -1,26 +1,221 @@
-<div class="col-sm-6">
-  <h3>Dashboard</h3>
-  <hr />
-  <div class="col-xs-3">
-    <!-- required for floating -->
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs tabs-left sideways">
-      <li class="active"><a href="#home-v" data-toggle="tab">Home</a></li>
-      <li><a href="#profile-v" data-toggle="tab">Profile</a></li>
-      <li><a href="#messages-v" data-toggle="tab">Messages</a></li>
-      <li><a href="#settings-v" data-toggle="tab">Settings</a></li>
-    </ul>
-  </div>
+<div class="container-fluid">
+  <div class="col-sm-12">
+    <h3>Dashboard</h3>
+    <hr />
+    <div class="d-flex align-items-start">
+      <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
+          type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+          Home
+        </button>
+        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+          type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="profileUserData()">
+          Profile
+        </button>
+        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages"
+          type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+          History
+        </button>
+        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
+          type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+          Settings
+        </button>
+      </div>
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          This is some placeholder content the Home tab's associated content.
+          Clicking another tab will toggle the visibility of this one for the
+          next. The tab JavaScript swaps classes to control the content
+          visibility and styling. You can use it with tabs, pills, and any other
+          .nav-powered navigation.
+        </div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          This is some placeholder content the Profile tab's associated content.
+          Clicking another tab will toggle the visibility of this one for the
+          next. The tab JavaScript swaps classes to control the content
+          visibility and styling. You can use it with tabs, pills, and any other
+          .nav-powered navigation.
+          <div class="container-xl px-4 mt-4">
+            <!-- Account page navigation-->
+            <hr class="mt-0 mb-4" />
+            <div class="row">
+              <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                  <div class="card-header">Profile Picture</div>
+                  <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2"
+                      src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">
+                      JPG or PNG no larger than 5 MB
+                    </div>
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button">
+                      Upload new image
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                  <div class="card-header">Profile Details</div>
+                  <div class="card-body">
+                    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+                      <!-- Form Row-->
+                      <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="inputFirstName">First name</label>
+                          <input class="form-control" id="inputFirstName" type="text"
+                            placeholder="Enter your first name" value="" formControlName="first_name" />
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="inputLastName">Last name</label>
+                          <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name"
+                            value="" formControlName="last_name" />
+                        </div>
+                      </div>
+                      <!-- Form Row        -->
+                      <div class="row gx-3 mb-3">
+                        <!-- Form Group (organization name)-->
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="inputOrgName">Organization name</label>
+                          <input class="form-control" id="inputOrgName" type="text"
+                            placeholder="Enter your organization name" value="" formControlName="organization" />
+                        </div>
+                        <!-- Form Group (location)-->
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="inputLocation">Location</label>
+                          <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location"
+                            value="" formControlName="location" />
+                        </div>
+                      </div>
+                      <!-- Form Group (email address)-->
+                      <div class="mb-3" *ngIf="userProfileDetailsByID">
+                        <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                        <input class="form-control" id="inputEmailAddress" type="email"
+                          placeholder="Enter your email address" value="" formControlName="email" />
+                      </div>
+                      <!-- Form Row-->
+                      <div class="row gx-3 mb-3">
+                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6" *ngIf="userProfileDetailsByID">
+                          <label class="small mb-1" for="inputPhone">Phone number</label>
+                          <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number"
+                            value="" formControlName="phone" />
+                        </div>
+                        <!-- Form Group (birthday)-->
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="inputBirthday">Birthday</label>
+                          <input class="form-control" id="inputBirthday" type="text" name="birthday"
+                            placeholder="Enter your birthday" value="" formControlName="birthday" />
+                        </div>
+                      </div>
+                      <!-- Save changes button-->
+                      <button class="btn btn-primary" type="submit">
+                        Save changes
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <div class="title">
+            This is some placeholder content the User History tab's associated
+            content. This is for the User Quiz Result for all topics.
+          </div>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr class="heading">
+                      <th scope="col">#</th>
+                      <th scope="col">Topic</th>
+                      <th scope="col">Attend Question</th>
+                      <th scope="col">Right Answer</th>
+                      <th scope="col">Result</th>
+                      <th scope="col">Point</th>
+                      <th scope="col">Dated</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="
+                        let details of userDetailsByID | paginate : {itemsPerPage: 5,
+                        currentPage: page,
+                        totalItems: totalLength, };
+                        let i = index
+                      " class="details">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>{{ details.topic_name }}</td>
+                      <td>{{ details.attendedQuestionCount }}</td>
+                      <td>{{ details.rightAnswerCount }}</td>
+                      <td [class]="details.status">
+                        {{ details.status }}
+                      </td>
+                      <td>{{ details.point }}</td>
+                      <td>{{ details.createdAt | date:'yyyy-MM-dd' }}</td>
+                      <td class="tryAgain" (click)="tryAgain()">Try Again</td>
+                    </tr>
+                  </tbody>
+                </table>
 
-  <div class="col-xs-9">
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div class="tab-pane active" id="home-v">Home Tab.</div>
-      <div class="tab-pane" id="profile-v">Profile Tab.</div>
-      <div class="tab-pane" id="messages-v">Messages Tab.</div>
-      <div class="tab-pane" id="settings-v">Settings Tab.</div>
+                <div class="pagination">
+                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+
+                <!-- <ul class="list-group">
+                  <li class="list-group-item">
+                    Topic Name:
+                    <span class="result_outcome">{{ details.topic_name }}</span>
+                  </li>
+                  <li class="list-group-item">
+                    Topic Url:
+                    <span class="result_outcome">{{ details.topic_url }}</span>
+                  </li>
+                  <li class="list-group-item">
+                    Attend Question:
+                    <span class="result_outcome">{{
+                      details.attendedQuestionCount
+                    }}</span>
+                  </li>
+                  <li class="list-group-item">
+                    Right Answer:
+                    <span class="result_outcome">{{
+                      details.rightAnswerCount
+                    }}</span>
+                  </li>
+                  <li class="list-group-item">
+                    Result Status:
+                    <span class="result_outcome">{{ details.status }}</span>
+                  </li>
+                  <li class="list-group-item">
+                    User Point:
+                    <span class="result_outcome">{{ details.point }}</span>
+                  </li>
+                </ul> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          This is some placeholder content the Settings tab's associated
+          content. Clicking another tab will toggle the visibility of this one
+          for the next. The tab JavaScript swaps classes to control the content
+          visibility and styling. You can use it with tabs, pills, and any other
+          .nav-powered navigation.
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="clearfix"></div>
+    <div class="clearfix"></div>
+  </div>
 </div>

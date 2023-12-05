@@ -85,7 +85,9 @@
                 {{ name }}
               </button>
               <ul [class]="dropdownClass" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                <li>
+                  <a class="dropdown-item" (click)="dashboard()">Dashboard</a>
+                </li>
                 <li>
                   <hr class="dropdown-divider" />
                 </li>

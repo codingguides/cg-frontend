@@ -35,3 +35,7 @@ a.nav-link {
   box-shadow: none;
   border-color: #fff;
 }
+
+.dropdown-item {
+  cursor: pointer;
+}

@@ -63,7 +63,8 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.topicId = this.commonservice.selectedTopicID;
+    this.topicId = this.commonservice.selectedTopicID == undefined ? localStorage.getItem('topic_id') : this.commonservice.selectedTopicID;
+    localStorage.removeItem('topic_id');
     this.loadQuestions();
     this.selectOption(this.payload, this.option);
 
@@ -120,7 +121,7 @@ export class QuizComponent implements OnInit {
 
   nextQuestion(payload: any) {
 
-    console.log("OBJ>>>>", this.obj);
+    // console.log("OBJ>>>>", this.obj);
     this.activeId = 10;
 
     if (payload.rightoption == this.userSelected) {
@@ -198,7 +199,7 @@ export class QuizComponent implements OnInit {
         user_id: this._id,
         attendedQuestionCount: this.attendedAnswer,
         rightAnswerCount: this.rightAnsCount,
-        status: Math.ceil((this.rightAnsCount / this.attendedAnswer) * 100) >= 60 ? 'pass' : 'failed',
+        status: Math.ceil((this.rightAnsCount / this.attendedAnswer) * 100) >= 60 ? 'Pass' : 'Fail',
         point: this.userPoint,
       }
       console.log(">>>>>data>>>>", data);

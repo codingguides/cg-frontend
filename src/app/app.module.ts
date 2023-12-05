@@ -18,6 +18,8 @@ import { AdRightSidebarComponent } from './views/layout/ad-right-sidebar/ad-righ
 import { SidebarMenuComponent } from './views/layout/sidebar-menu/sidebar-menu.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -79,7 +81,9 @@ import { MetaService } from './common/meta.service';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CommonModule,
+    NgxPaginationModule
   ],
   providers: [Meta, MetaService],
   bootstrap: [AppComponent]

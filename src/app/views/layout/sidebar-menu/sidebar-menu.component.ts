@@ -52,12 +52,15 @@ export class SidebarMenuComponent {
       });
   }
 
-  navigate(parentpath: string, path: string) {
+  navigate(parentpath: any, path: any) {
+    this.commonservice.selectedTopicID = path._id;
+    console.log("IDDDD........", this.commonservice.selectedTopicID)
+    localStorage.setItem('topic_id', path._id)
     let url = '';
-    if (parentpath == this.param) {
-      url = 'quiz/' + parentpath + '/' + path
+    if (parentpath.slug == this.param) {
+      url = 'quiz/' + parentpath.slug + '/' + path.slug
     } else {
-      url = 'quiz/' + this.param + '/' + parentpath + '/' + path
+      url = 'quiz/' + this.param + '/' + parentpath.slug + '/' + path.slug
     }
 
     this.sharedService.isQuizLiveCheck(url, true);

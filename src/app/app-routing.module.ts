@@ -11,6 +11,7 @@ import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.componen
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
 import { ExamplesComponent } from './views/home/examples/examples.component';
 import { SearchComponent } from './views/inner/search/search.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
 
 
 
@@ -55,6 +56,7 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'examples/:topic', component: ExamplesComponent },
 
   { path: 'disclaimer', component: DisclaimerComponent },

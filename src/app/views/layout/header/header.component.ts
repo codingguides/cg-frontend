@@ -103,6 +103,10 @@ export class HeaderComponent {
     this.ngOnInit();
   }
 
+  dashboard() {
+    this.router.navigate(['dashboard']);
+  }
+
   renderUrl(link: any) {
     this.sharedService.isQuizLiveCheck(`quiz/${link}`, true);
   }
