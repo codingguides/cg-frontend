@@ -306,8 +306,11 @@ export class DashboardComponent implements OnInit {
   two(val:any) {
     console.log("val>>>>>>>>>>",val)
     console.log(val.replace('http://localhost:4200', ''))
-    this.image = '/assets/images/avatar3.png';
+    this.image = val.replace('http://localhost:4200', '');
     $('.title-text').hide();
+    $('.fa-spinner').show();
+    //api call
+    $('.fa-spinner').hide();
     this.text = 'Second picture Selected.';
   }
   three() {
