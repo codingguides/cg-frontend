@@ -160,3 +160,119 @@ table.table.table-bordered {
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+.panel-title {
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0px;
+}
+
+.second.card.mb-4.mb-xl-0 {
+  margin-top: 5px;
+}
+
+input.cPassword.form-control {
+  padding: 0.375rem 0.75rem;
+  margin-top: -5px;
+}
+input.nPassword.form-control {
+  padding: 0.375rem 0.75rem;
+  margin-top: 5px;
+}
+button.change.btn.btn-primary {
+  margin-top: 10px;
+}
+/* .picture.card-header {
+  margin-top: -10px;
+} */
+
+.picture.card-body.text-center {
+  margin-top: -10px;
+}
+
+/* form {
+  margin-bottom: 36px;
+} */
+
+/* form.ng-valid.ng-dirty.ng-touched {
+  margin-bottom: 36px;
+} */
+
+/* form.ng-valid.ng-dirty.ng-touched {
+  margin-bottom: 36px;
+} */
+
+button.save.btn.btn-primary {
+  margin-top: 16px;
+}
+
+form.password {
+  margin-bottom: 10px;
+}
+
+.success-msg {
+  color: green;
+  margin-bottom: 0px;
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.error-msg {
+  color: red;
+  margin-bottom: -15px;
+  /* margin-top: 5px; */
+  font-size: 14px;
+}
+
+.eyeicon1 {
+  position: absolute;
+  right: 25px;
+  cursor: pointer;
+  color: #a48ff1;
+  bottom: 137px;
+}
+
+span.eyeicon2 {
+  cursor: pointer;
+  color: #a48ff1;
+  position: absolute;
+  right: 25px;
+  bottom: 101px;
+}
+
+.eyeicon3 {
+  cursor: pointer;
+  color: #a48ff1;
+  position: absolute;
+  right: 25px;
+  bottom: 64px;
+}
+
+.images {
+  height: 30px;
+  width: 30px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+p.msg {
+  margin-bottom: 0px;
+  text-align: center;
+  color: green;
+  font-size: 16px;
+}
+
+p.text {
+  margin-bottom: 0px;
+  margin-top: -14px;
+  font-size: 16px;
+  color: green;
+  text-align: center;
+}
+
+.title-text {
+  color: gray;
+  /* margin-bottom: 0px; */
+  margin-top: -14px;
+  font-size: 16px;
+}

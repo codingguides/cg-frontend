@@ -57,13 +57,21 @@ export class SidebarMenuComponent {
     console.log("IDDDD........", this.commonservice.selectedTopicID)
     localStorage.setItem('topic_id', path._id)
     let url = '';
-    if (parentpath.slug == this.param) {
-      url = 'quiz/' + parentpath.slug + '/' + path.slug
-    } else {
+    console.log("Parentpath>>>>>>>", parentpath)
+    console.log("Param>>>>>>>>", this.param)
+    console.log("URL>>>>>>>>", url)
+    console.log("Path>>>>>>>", path)
+
+    if (parentpath == this.param) {
+      url = 'quiz/' + parentpath + '/' + path
+      console.log("If url...........", url)
+    }
+    else if (parentpath !== this.param) {
       url = 'quiz/' + this.param + '/' + parentpath.slug + '/' + path.slug
+      console.log("Else url.........", url)
     }
 
-    this.sharedService.isQuizLiveCheck(url, true);
+    // this.sharedService.isQuizLiveCheck(url, true);
   }
 
   capitalizeFirstLetter(string: string) {

@@ -3,33 +3,81 @@
     <h3>Dashboard</h3>
     <hr />
     <div class="d-flex align-items-start">
-      <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
-          type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+      <div
+        class="nav flex-column nav-pills me-3"
+        id="v-pills-tab"
+        role="tablist"
+        aria-orientation="vertical"
+      >
+        <button
+          class="nav-link active"
+          id="v-pills-home-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#v-pills-home"
+          type="button"
+          role="tab"
+          aria-controls="v-pills-home"
+          aria-selected="true"
+        >
           Home
         </button>
-        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
-          type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="profileUserData()">
+        <button
+          class="nav-link"
+          id="v-pills-profile-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#v-pills-profile"
+          type="button"
+          role="tab"
+          aria-controls="v-pills-profile"
+          aria-selected="false"
+          (click)="profileUserData()"
+        >
           Profile
         </button>
-        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages"
-          type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+        <button
+          class="nav-link"
+          id="v-pills-messages-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#v-pills-messages"
+          type="button"
+          role="tab"
+          aria-controls="v-pills-messages"
+          aria-selected="false"
+        >
           History
         </button>
-        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
-          type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+        <button
+          class="nav-link"
+          id="v-pills-settings-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#v-pills-settings"
+          type="button"
+          role="tab"
+          aria-controls="v-pills-settings"
+          aria-selected="false"
+        >
           Settings
         </button>
       </div>
       <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <div
+          class="tab-pane fade show active"
+          id="v-pills-home"
+          role="tabpanel"
+          aria-labelledby="v-pills-home-tab"
+        >
           This is some placeholder content the Home tab's associated content.
           Clicking another tab will toggle the visibility of this one for the
           next. The tab JavaScript swaps classes to control the content
           visibility and styling. You can use it with tabs, pills, and any other
           .nav-powered navigation.
         </div>
-        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+        <div
+          class="tab-pane fade"
+          id="v-pills-profile"
+          role="tabpanel"
+          aria-labelledby="v-pills-profile-tab"
+        >
           This is some placeholder content the Profile tab's associated content.
           Clicking another tab will toggle the visibility of this one for the
           next. The tab JavaScript swaps classes to control the content
@@ -42,19 +90,129 @@
               <div class="col-xl-4">
                 <!-- Profile picture card-->
                 <div class="card mb-4 mb-xl-0">
-                  <div class="card-header">Profile Picture</div>
-                  <div class="card-body text-center">
+                  <div class="picture card-header">Profile Picture</div>
+                  <div class="picture card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2"
-                      src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                    <img
+                      id="image"
+                      class="img-account-profile rounded-circle mb-2"
+                      [src]="image"
+                      alt=""
+                    />
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">
-                      JPG or PNG no larger than 5 MB
+                      <div class="row">
+                        <div class="col-3">
+                          <img
+                            src="/assets/images/avatar7.png"
+                            alt=""
+                            class="images"
+                            (click)="one($event)"
+                          />
+                        </div>
+                        <div class="col-3">
+                          <img
+                            src="/assets/images/avatar3.png"
+                            alt=""
+                            class="images"
+                            (click)="two()"
+                          />
+                        </div>
+                        <div class="col-3">
+                          <img
+                            src="/assets/images/avatar6.png"
+                            alt=""
+                            class="images"
+                            (click)="three()"
+                          />
+                        </div>
+                        <div class="col-3">
+                          <img
+                            src="/assets/images/avatar8.png"
+                            alt="image"
+                            class="images"
+                            (click)="four()"
+                          />
+                        </div>
+                      </div>
                     </div>
                     <!-- Profile picture upload button-->
+                    <p class="title-text">Select one picture from above.</p>
+                    <p class="text">{{ text }}</p>
                     <button class="btn btn-primary" type="button">
-                      Upload new image
+                      Upload selected image
                     </button>
+                  </div>
+                </div>
+                <div class="second card mb-4 mb-xl-0">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Change password</h3>
+                  </div>
+
+                  <div class="card-body text-center">
+                    <form
+                      class="password"
+                      [formGroup]="formGroup2"
+                      (ngSubmit)="onSubmitData(formGroup2.value)"
+                    >
+                      <div class="form-group">
+                        <input
+                          class="cPassword form-control"
+                          [type]="changetype1 ? 'password' : 'text'"
+                          placeholder="Current Password"
+                          value=""
+                          formControlName="oldpassword"
+                        />
+                      </div>
+                      <span class="eyeicon1" (click)="viewpass1()"
+                        ><i
+                          [ngClass]="
+                            visible1 ? 'fa fa-eye-slash' : ' fa fa-eye'
+                          "
+                        ></i
+                      ></span>
+                      <div class="form-group">
+                        <input
+                          class="nPassword form-control"
+                          [type]="changetype2 ? 'password' : 'text'"
+                          placeholder="New Password"
+                          value=""
+                          formControlName="newpassword"
+                        />
+                        <span class="eyeicon2" (click)="viewpass2()"
+                          ><i
+                            [ngClass]="
+                              visible2 ? 'fa fa-eye-slash' : ' fa fa-eye'
+                            "
+                          ></i
+                        ></span>
+                      </div>
+                      <div class="form-group">
+                        <input
+                          class="nPassword form-control"
+                          [type]="changetype3 ? 'password' : 'text'"
+                          placeholder="Confirm Password"
+                          value=""
+                          formControlName="confirmpassword"
+                        />
+                        <span class="eyeicon3" (click)="viewpass3()"
+                          ><i
+                            [ngClass]="
+                              visible3 ? 'fa fa-eye-slash' : ' fa fa-eye'
+                            "
+                          ></i
+                        ></span>
+                      </div>
+                      <button class="change btn btn-primary" type="submit">
+                        Change Password
+                      </button>
+                      <div *ngIf="result">
+                        <p class="success-msg">{{ successMessage }}</p>
+                      </div>
+                      <p class="error-msg">
+                        {{ errMessage }}
+                      </p>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -63,62 +221,126 @@
                 <div class="card mb-4">
                   <div class="card-header">Profile Details</div>
                   <div class="card-body">
-                    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+                    <form
+                      [formGroup]="formGroup"
+                      (ngSubmit)="onSubmit(formGroup.value)"
+                    >
                       <!-- Form Row-->
                       <div class="row gx-3 mb-3">
                         <!-- Form Group (first name)-->
                         <div class="col-md-6">
-                          <label class="small mb-1" for="inputFirstName">First name</label>
-                          <input class="form-control" id="inputFirstName" type="text"
-                            placeholder="Enter your first name" value="" formControlName="first_name" />
+                          <label class="small mb-1" for="inputFirstName"
+                            >First name</label
+                          >
+                          <input
+                            class="form-control"
+                            id="inputFirstName"
+                            type="text"
+                            placeholder="Enter your first name"
+                            value=""
+                            formControlName="first_name"
+                          />
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
-                          <label class="small mb-1" for="inputLastName">Last name</label>
-                          <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name"
-                            value="" formControlName="last_name" />
+                          <label class="small mb-1" for="inputLastName"
+                            >Last name</label
+                          >
+                          <input
+                            class="form-control"
+                            id="inputLastName"
+                            type="text"
+                            placeholder="Enter your last name"
+                            value=""
+                            formControlName="last_name"
+                          />
                         </div>
                       </div>
                       <!-- Form Row        -->
                       <div class="row gx-3 mb-3">
                         <!-- Form Group (organization name)-->
                         <div class="col-md-6">
-                          <label class="small mb-1" for="inputOrgName">Organization name</label>
-                          <input class="form-control" id="inputOrgName" type="text"
-                            placeholder="Enter your organization name" value="" formControlName="organization" />
+                          <label class="small mb-1" for="inputOrgName"
+                            >Organization name</label
+                          >
+                          <input
+                            class="form-control"
+                            id="inputOrgName"
+                            type="text"
+                            placeholder="Enter your organization name"
+                            value=""
+                            formControlName="organization"
+                          />
                         </div>
                         <!-- Form Group (location)-->
                         <div class="col-md-6">
-                          <label class="small mb-1" for="inputLocation">Location</label>
-                          <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location"
-                            value="" formControlName="location" />
+                          <label class="small mb-1" for="inputLocation"
+                            >Location</label
+                          >
+                          <input
+                            class="form-control"
+                            id="inputLocation"
+                            type="text"
+                            placeholder="Enter your location"
+                            value=""
+                            formControlName="location"
+                          />
                         </div>
                       </div>
                       <!-- Form Group (email address)-->
                       <div class="mb-3" *ngIf="userProfileDetailsByID">
-                        <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                        <input class="form-control" id="inputEmailAddress" type="email"
-                          placeholder="Enter your email address" value="" formControlName="email" />
+                        <label class="small mb-1" for="inputEmailAddress"
+                          >Email address</label
+                        >
+                        <input
+                          class="form-control"
+                          id="inputEmailAddress"
+                          type="email"
+                          placeholder="Enter your email address"
+                          value=""
+                          formControlName="email"
+                        />
                       </div>
                       <!-- Form Row-->
                       <div class="row gx-3 mb-3">
                         <!-- Form Group (phone number)-->
                         <div class="col-md-6" *ngIf="userProfileDetailsByID">
-                          <label class="small mb-1" for="inputPhone">Phone number</label>
-                          <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number"
-                            value="" formControlName="phone" />
+                          <label class="small mb-1" for="inputPhone"
+                            >Phone number</label
+                          >
+                          <input
+                            class="form-control"
+                            id="inputPhone"
+                            type="tel"
+                            placeholder="Enter your phone number"
+                            value=""
+                            formControlName="phone"
+                          />
                         </div>
                         <!-- Form Group (birthday)-->
                         <div class="col-md-6">
-                          <label class="small mb-1" for="inputBirthday">Birthday</label>
-                          <input class="form-control" id="inputBirthday" type="text" name="birthday"
-                            placeholder="Enter your birthday" value="" formControlName="birthday" />
+                          <label class="small mb-1" for="inputBirthday"
+                            >Birthday</label
+                          >
+                          <input
+                            class="form-control"
+                            id="inputBirthday"
+                            type="text"
+                            name="birthday"
+                            placeholder="Enter your birthday"
+                            value=""
+                            formControlName="birthday"
+                          />
                         </div>
                       </div>
                       <!-- Save changes button-->
-                      <button class="btn btn-primary" type="submit">
-                        Save changes
+                      <button
+                        class="save btn btn-primary text-center"
+                        type="submit"
+                      >
+                        Save Changes
                       </button>
+                      <p class="msg">{{ message }}</p>
                     </form>
                   </div>
                 </div>
@@ -126,7 +348,12 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+        <div
+          class="tab-pane fade"
+          id="v-pills-messages"
+          role="tabpanel"
+          aria-labelledby="v-pills-messages-tab"
+        >
           <div class="title">
             This is some placeholder content the User History tab's associated
             content. This is for the User Quiz Result for all topics.
@@ -148,12 +375,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="
+                    <tr
+                      *ngFor="
                         let details of userDetailsByID | paginate : {itemsPerPage: 5,
                         currentPage: page,
                         totalItems: totalLength, };
                         let i = index
-                      " class="details">
+                      "
+                      class="details"
+                    >
                       <th scope="row">{{ i + 1 }}</th>
                       <td>{{ details.topic_name }}</td>
                       <td>{{ details.attendedQuestionCount }}</td>
@@ -162,14 +392,16 @@
                         {{ details.status }}
                       </td>
                       <td>{{ details.point }}</td>
-                      <td>{{ details.createdAt | date:'yyyy-MM-dd' }}</td>
+                      <td>{{ details.createdAt | date : "yyyy-MM-dd" }}</td>
                       <td class="tryAgain" (click)="tryAgain()">Try Again</td>
                     </tr>
                   </tbody>
                 </table>
 
                 <div class="pagination">
-                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                  <pagination-controls
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
                 </div>
 
                 <!-- <ul class="list-group">
@@ -206,7 +438,12 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+        <div
+          class="tab-pane fade"
+          id="v-pills-settings"
+          role="tabpanel"
+          aria-labelledby="v-pills-settings-tab"
+        >
           This is some placeholder content the Settings tab's associated
           content. Clicking another tab will toggle the visibility of this one
           for the next. The tab JavaScript swaps classes to control the content
