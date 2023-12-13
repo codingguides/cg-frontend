@@ -293,12 +293,19 @@ export class DashboardComponent implements OnInit {
     this.changetype3 = !this.changetype3;
   }
 
-  one(element: any) {
+  one(event: Event) {
+    const eventTarget: Element = event.target as Element;
+    console.log("eventTarget>>>>>>>>>",eventTarget)
+    // const elementId: string = eventTarget.id;
+    // const attribVal: any = eventTarget.attributes['src'].nodeValue;
+  
     this.image = '/assets/images/avatar7.png';
     $('.title-text').hide();
     this.text = 'First picture Selected.';
   }
-  two() {
+  two(val:any) {
+    console.log("val>>>>>>>>>>",val)
+    console.log(val.replace('http://localhost:4200', ''))
     this.image = '/assets/images/avatar3.png';
     $('.title-text').hide();
     this.text = 'Second picture Selected.';
