@@ -298,7 +298,7 @@ export class DashboardComponent implements OnInit {
     console.log("eventTarget>>>>>>>>>",eventTarget)
     // const elementId: string = eventTarget.id;
     // const attribVal: any = eventTarget.attributes['src'].nodeValue;
-  
+    console.log('<<<<<<<<<<<<<<,test>>>>>>>>>>>>>')
     this.image = '/assets/images/avatar7.png';
     $('.title-text').hide();
     this.text = 'First picture Selected.';
