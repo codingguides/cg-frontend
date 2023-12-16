@@ -32,9 +32,7 @@
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
           This is some placeholder content the Profile tab's associated content.
           Clicking another tab will toggle the visibility of this one for the
-          next. The tab JavaScript swaps classes to control the content
-          visibility and styling. You can use it with tabs, pills, and any other
-          .nav-powered navigation.
+          next.
           <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <hr class="mt-0 mb-4" />
@@ -42,19 +40,108 @@
               <div class="col-xl-4">
                 <!-- Profile picture card-->
                 <div class="card mb-4 mb-xl-0">
-                  <div class="card-header">Profile Picture</div>
-                  <div class="card-body text-center">
+                  <div class="picture card-header">Profile Picture</div>
+                  <div class="picture card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2"
-                      src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                    <img id="image" class="img-account-profile rounded-circle mb-2" [src]="image" alt="" />
                     <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">
-                      JPG or PNG no larger than 5 MB
+                    <div class="small font-italic text-muted mb-2">
+                      <div class="row">
+                        <div class="col-3">
+                          <img src="/assets/images/avatar7.png" alt="" class="images"
+                            (click)="pictureSelect($any($event.target).src)" />
+                        </div>
+                        <div class="col-3">
+                          <img src="/assets/images/avatar3.png" alt="" class="images"
+                            (click)="pictureSelect($any($event.target).src)" />
+                        </div>
+                        <div class="col-3">
+                          <img src="/assets/images/avatar6.png" alt="" class="images"
+                            (click)="pictureSelect($any($event.target).src)" />
+                        </div>
+                        <div class="col-3">
+                          <img src="/assets/images/avatar8.png" alt="image" class="images"
+                            (click)="pictureSelect($any($event.target).src)" />
+                        </div>
+                      </div>
                     </div>
                     <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button">
-                      Upload new image
-                    </button>
+                    <p class="title-text">Select profile picture from above</p>
+                    <p class="title-text2" style="display: none">
+                      Change profile picture from above
+                    </p>
+                    <i class="fa fa-spinner fa-spin" id="spinner" style="display: none"></i>
+                    <p class="text" style="display: none">{{ text }}</p>
+                    <!-- <button class="btn btn-primary" type="button">
+                      Upload selected image
+                    </button> -->
+                  </div>
+                </div>
+                <div class="second card mb-4 mb-xl-0">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Change password</h3>
+                  </div>
+
+                  <div class="card-body text-center">
+                    <form class="password" [formGroup]="formGroup2" (ngSubmit)="onSubmitData(formGroup2.value)">
+                      <div class="form-group">
+                        <input class="cPassword form-control" [type]="changetype1 ? 'password' : 'text'"
+                          placeholder="Current Password" formControlName="oldpassword" required />
+                        <div style="color: red" *ngIf="
+                            oldpassword &&
+                            oldpassword.invalid &&
+                            oldpassword.touched
+                          ">
+                          <div class="error" [hidden]="!oldpassword.errors?.['required']">
+                            Old Password is required!
+                          </div>
+                        </div>
+                      </div>
+                      <span class="eyeicon1" (click)="viewpass1()"><i [ngClass]="
+                            visible1 ? 'fa fa-eye-slash' : ' fa fa-eye'
+                          "></i></span>
+                      <div class="form-group">
+                        <input class="nPassword form-control" [type]="changetype2 ? 'password' : 'text'"
+                          placeholder="New Password" formControlName="newpassword" required />
+                        <div style="color: red" *ngIf="
+                            newpassword &&
+                            newpassword.invalid &&
+                            newpassword.touched
+                          ">
+                          <div class="error" [hidden]="!newpassword.errors?.['required']">
+                            New Password is required!
+                          </div>
+                        </div>
+                        <span class="eyeicon2" (click)="viewpass2()"><i [ngClass]="
+                              visible2 ? 'fa fa-eye-slash' : ' fa fa-eye'
+                            "></i></span>
+                      </div>
+                      <div class="form-group">
+                        <input class="nPassword form-control" [type]="changetype3 ? 'password' : 'text'"
+                          placeholder="Confirm Password" formControlName="confirmpassword" required />
+                        <div style="color: red" *ngIf="
+                            confirmpassword &&
+                            confirmpassword.invalid &&
+                            confirmpassword.touched
+                          ">
+                          <div class="error" [hidden]="!confirmpassword.errors?.['required']">
+                            Confirm Password is required!
+                          </div>
+                        </div>
+                        <span class="eyeicon3" (click)="viewpass3()"><i [ngClass]="
+                              visible3 ? 'fa fa-eye-slash' : ' fa fa-eye'
+                            "></i></span>
+                      </div>
+                      <button class="change btn btn-primary" type="submit">
+                        Change Password
+                      </button>
+                      <div *ngIf="result">
+                        <p class="success-msg">{{ successMessage }}</p>
+                      </div>
+                      <p class="error-msg">
+                        {{ errMessage }}
+                      </p>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -116,9 +203,10 @@
                         </div>
                       </div>
                       <!-- Save changes button-->
-                      <button class="btn btn-primary" type="submit">
-                        Save changes
+                      <button class="save btn btn-primary text-center" type="submit">
+                        Save Changes
                       </button>
+                      <p class="msg">{{ message }}</p>
                     </form>
                   </div>
                 </div>
@@ -162,7 +250,7 @@
                         {{ details.status }}
                       </td>
                       <td>{{ details.point }}</td>
-                      <td>{{ details.createdAt | date:'yyyy-MM-dd' }}</td>
+                      <td>{{ details.createdAt | date : "yyyy-MM-dd" }}</td>
                       <td class="tryAgain" (click)="tryAgain()">Try Again</td>
                     </tr>
                   </tbody>
@@ -171,37 +259,6 @@
                 <div class="pagination">
                   <pagination-controls (pageChange)="page = $event"></pagination-controls>
                 </div>
-
-                <!-- <ul class="list-group">
-                  <li class="list-group-item">
-                    Topic Name:
-                    <span class="result_outcome">{{ details.topic_name }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Topic Url:
-                    <span class="result_outcome">{{ details.topic_url }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Attend Question:
-                    <span class="result_outcome">{{
-                      details.attendedQuestionCount
-                    }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Right Answer:
-                    <span class="result_outcome">{{
-                      details.rightAnswerCount
-                    }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Result Status:
-                    <span class="result_outcome">{{ details.status }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    User Point:
-                    <span class="result_outcome">{{ details.point }}</span>
-                  </li>
-                </ul> -->
               </div>
             </div>
           </div>
@@ -217,5 +274,6 @@
     </div>
 
     <div class="clearfix"></div>
+      
   </div>
 </div>
