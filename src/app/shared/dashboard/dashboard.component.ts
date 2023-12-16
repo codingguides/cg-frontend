@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'jquery';
 import { ToastrService } from 'ngx-toastr';
@@ -44,7 +49,7 @@ export class DashboardComponent implements OnInit {
   visible3: boolean = true;
   changetype3: boolean = true;
   message: string = '';
-  text: string = '';
+  text: string = ' Profile Picture Selected';
   image: any = '/assets/images/profile-icon-9.png';
 
   constructor(
@@ -52,6 +57,7 @@ export class DashboardComponent implements OnInit {
     private router: ActivatedRoute,
     private _router: Router,
     private formBuilder: FormBuilder,
+    private formBuilder2: FormBuilder,
     private toastr: ToastrService
   ) {
     this.formGroup = this.formBuilder.group({
@@ -65,10 +71,10 @@ export class DashboardComponent implements OnInit {
       password: new FormControl(''),
     });
 
-    this.formGroup2 = this.formBuilder.group({
-      oldpassword: new FormControl(''),
-      newpassword: new FormControl(''),
-      confirmpassword: new FormControl(''),
+    this.formGroup2 = this.formBuilder2.group({
+      oldpassword: new FormControl('', [Validators.required]),
+      newpassword: new FormControl('', [Validators.required]),
+      confirmpassword: new FormControl('', [Validators.required]),
     });
   }
 
@@ -97,13 +103,13 @@ export class DashboardComponent implements OnInit {
     return this.formGroup.get('password');
   }
   get oldpassword() {
-    return this.formGroup.get('oldpassword');
+    return this.formGroup2.get('oldpassword');
   }
   get newpassword() {
-    return this.formGroup.get('newpassword');
+    return this.formGroup2.get('newpassword');
   }
   get confirmpassword() {
-    return this.formGroup.get('confirmpassword');
+    return this.formGroup2.get('confirmpassword');
   }
 
   ngOnInit(): void {
@@ -125,10 +131,6 @@ export class DashboardComponent implements OnInit {
   }
 
   historyUserData(params: object) {
-    // if (this.token) {
-    //   this.userLogin = true;
-    //   console.log('TOKENNNNNNNN>>>>>', this.token);
-
     this.commonservice
       .put(params, `topic/user-analytics/${this._id}`)
       .subscribe((result: any) => {
@@ -142,14 +144,9 @@ export class DashboardComponent implements OnInit {
           });
         }
       });
-    // }
   }
 
   profileUserData() {
-    // if (this.token) {
-    // this.userLogin = true;
-    // console.log("TOKENNNNNNNN>>>>>", this.token);
-
     this.commonservice
       .get(`profile/get/${this._id}`)
       .subscribe((result: any) => {
@@ -167,8 +164,11 @@ export class DashboardComponent implements OnInit {
           console.log('NAME<<<<<<', this.totalName);
           console.log('PICTURE<<<<<<', this.userProfileDetailsByID.profile_pic);
 
-          // this.image = this.userProfileDetailsByID.profile_pic;
-
+          this.image = this.userProfileDetailsByID.profile_pic;
+          if (this.image == this.userProfileDetailsByID.profile_pic) {
+            $('.title-text').hide();
+            $('.title-text2').show();
+          }
           this.formGroup = this.formBuilder.group({
             first_name: new FormControl(
               fullName.split(' ').slice(0, -1).join(' ')
@@ -192,7 +192,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onSubmit(formData: any) {
-    // this.totalName = this.formGroup.value.first_name + " " + this.formGroup.value.last_name;
     const data = {
       name:
         this.formGroup.value.first_name + ' ' + this.formGroup.value.last_name,
@@ -201,7 +200,6 @@ export class DashboardComponent implements OnInit {
       email: this.formGroup.value.email,
       phone: this.formGroup.value.phone,
       birthday: this.formGroup.value.birthday,
-      profile_pic: this.image,
     };
     console.log('data<<<<<<<<', data);
 
@@ -253,7 +251,14 @@ export class DashboardComponent implements OnInit {
     console.log('DETAILS<<<<<<', details);
     if (details.newpassword === details.confirmpassword) {
       console.log('MATCHED....');
-      if (details.oldpassword === details.newpassword) {
+      if (
+        details.oldpassword == '' ||
+        details.newpassword == '' ||
+        details.confirmpassword == ''
+      ) {
+        console.log('DATA NOT FILLED');
+        this.errMessage = 'Data not completely filled!';
+      } else if (details.oldpassword === details.newpassword) {
         this.errMessage = "Can't repeat old password!";
       } else {
         this.commonservice
@@ -293,34 +298,32 @@ export class DashboardComponent implements OnInit {
     this.changetype3 = !this.changetype3;
   }
 
-  one(event: Event) {
-    const eventTarget: Element = event.target as Element;
-    console.log("eventTarget>>>>>>>>>",eventTarget)
-    // const elementId: string = eventTarget.id;
-    // const attribVal: any = eventTarget.attributes['src'].nodeValue;
-    console.log('<<<<<<<<<<<<<<,test>>>>>>>>>>>>>')
-    this.image = '/assets/images/avatar7.png';
+  pictureSelect(val: any) {
+    console.log('val>>>>>>>>>>', val);
+    console.log(val.replace('http://localhost:62292', ''));
+    this.image = val.replace('http://localhost:62292', '');
+
     $('.title-text').hide();
-    this.text = 'First picture Selected.';
-  }
-  two(val:any) {
-    console.log("val>>>>>>>>>>",val)
-    console.log(val.replace('http://localhost:4200', ''))
-    this.image = val.replace('http://localhost:4200', '');
-    $('.title-text').hide();
-    $('.fa-spinner').show();
-    //api call
-    $('.fa-spinner').hide();
-    this.text = 'Second picture Selected.';
-  }
-  three() {
-    this.image = '/assets/images/avatar6.png';
-    $('.title-text').hide();
-    this.text = 'Third picture Selected.';
-  }
-  four() {
-    this.image = '/assets/images/avatar8.png';
-    $('.title-text').hide();
-    this.text = 'Fourth picture Selected.';
+    $('.title-text2').hide();
+    $('#spinner').show();
+
+    const details = { profile_pic: this.image };
+    this.commonservice
+      .put(details, `profile/update/${this._id}`)
+      .subscribe((res: any) => {
+        const result = JSON.parse(JSON.stringify(res));
+
+        setTimeout(function () {
+          $('#spinner').hide();
+        }, 300);
+
+        setTimeout(function () {
+          $('.text').show();
+        }, 300);
+
+        setTimeout(function () {
+          $('.text').hide();
+        }, 1500);
+      });
   }
 }
