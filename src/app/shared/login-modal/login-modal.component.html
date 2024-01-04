@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div [class]="modalClass" id="myModal">
+<div class="login_modal" [class]="modalClass" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
@@ -25,9 +25,11 @@
           <app-sign-up></app-sign-up>
         </div>
       </div>
-      <a class="footer_text text-center" (click)="changeLogin(showLogin)">{{
+      <div class="modal-footer">
+        <a class="footer_text text-center" (click)="changeLogin(showLogin)">{{
         showLoginText
       }}</a>
+      </div>
     </div>
   </div>
 </div>

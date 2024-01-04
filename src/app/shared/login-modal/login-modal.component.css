@@ -1,0 +1,15 @@
+
+
+.login_modal{
+    background: rgba(0,0,0,0.5);
+}
+.login_modal .modal-header h4{
+    color: var(--bs-black);
+}
+.login_modal .modal-footer a{
+    color: #463C64;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: underline !important;
+    cursor: pointer;
+}

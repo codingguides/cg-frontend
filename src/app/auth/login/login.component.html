@@ -1,4 +1,4 @@
-<div class="container">
+<div class="login_form">
   <form
     [formGroup]="login"
     (ngSubmit)="logindata(login.value)"
@@ -7,12 +7,12 @@
     <div *ngIf="error">
       <p class="error-msg">{{ error.msg }}</p>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
       <label>Email</label>
 
       <input
         type="email"
-        class="form-control mb-3 mt-3"
+        class="form-control"
         required
         formControlName="email"
       />
@@ -21,11 +21,11 @@
       </div> -->
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
       <label>Password</label>
       <input
         [type]="changetype ? 'password' : 'text'"
-        class="form-control mb-3 mt-3"
+        class="form-control"
         required
         formControlName="password"
       />
