@@ -23,8 +23,6 @@ export class CommonService {
   });
   castLogin = this.loginstatus.asObservable();
 
-
-
   constructor(private httpClient: HttpClient, private _router: Router) { }
 
   public setHeaderOption() {
@@ -45,7 +43,6 @@ export class CommonService {
 
   public post(postData: Object, endPoints: String) {
     this.setHeaderOption();
-    console.log("this.headerOptions>>>>>>>>>>", this.headerOptions)
     return this.httpClient.post(this.url + endPoints, postData, this.headerOptions)
   }
 
@@ -79,7 +76,7 @@ export class CommonService {
   public getLoggedIn() {
     return this.loginstatus.value;
   }
-
+  
   public getTokenDetails(param: string) {
     const gettoken: any = localStorage.getItem('accessToken');
     const decoded: any = jwt_decode(gettoken);
@@ -91,24 +88,10 @@ export class CommonService {
   castQuizStatus = this.quizStatus.asObservable();
 
   public setQuizStatus(status: any, currentUrl: any, userId: any) {
-    console.log(">>>>>>>>>>>>>>>>>>>>>status>>>>>>>>>>>>>>>>>>>", status, currentUrl, userId)
     this.quizStatus.next({ status, currentUrl, userId });
   }
   public getQuizStatus() {
-    console.log(">>>>>>>>>>>>>>>>>this.castLogin>>>>>>>>>>>>>>>>>>>>>>>", this.castQuizStatus)
     return this.castQuizStatus;
   }
-
-  // private listingData = new BehaviorSubject<object>({ data: "" });
-  // castListingData = this.listingData.asObservable();
-
-  // public setListingData(data: any) {
-  //   console.log(">>>>>>>>>In SET", data)
-  //   this.listingData.next({ data })
-  // }
-  // public getListingData() {
-  //   console.log(">>>>>>>>>>In GET", this.castListingData)
-  //   return this.castListingData;
-  // }
 
 }

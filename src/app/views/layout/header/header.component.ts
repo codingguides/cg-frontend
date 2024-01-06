@@ -22,6 +22,8 @@ export class HeaderComponent {
   dropdownClass: string = 'dropdown-menu';
   href: string = "";
 
+  mflag: any = true
+
   constructor(
     public sharedService: SharedService,
     public commonservice: CommonService,
@@ -34,14 +36,12 @@ export class HeaderComponent {
   searchvalue: string = ""
 
   ngOnInit() {
+    
     this.getMenu();
     this.commonservice.getLoggedIn();
-
-
     this.href = this.router.url;
     if (this.findWord(this.href)) {
       this.searchvalue = this.activerouter.snapshot.params['topic'];
-      alert(this.searchvalue)
     } else {
       this.searchvalue = "";
     }
@@ -60,6 +60,12 @@ export class HeaderComponent {
       this.status = obj.status
       this.name = obj.username
     });
+  }
+
+  onKeyUp(event:any){
+    if(event.target.value == "Code24"){
+      this.mflag = false;
+    }
   }
 
   async getMenu() {

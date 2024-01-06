@@ -1,4 +1,35 @@
 <header>
+
+<!-- The Modal -->
+<div *ngIf="mflag" class="modal maintenance" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="intro" class="p-5 text-center bg-image shadow-1-strong"
+      style="background-image: url('https://mdbootstrap.com/img/new/slides/205.jpg');">
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white px-4" data-mdb-theme="dark">
+            <h1 class="mb-3">Coming Soon!</h1>
+
+            <p>We're working hard to finish the development of this site.</p>
+            <form class="form-inline">
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Password</label>
+                <input type="password" (keyup)="onKeyUp($event)" class="form-control" id="inputPassword2" placeholder="Password For Developer">
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <section class="navbar_wrap">
     <div class="top_header">
       <div class="container-fluid">
