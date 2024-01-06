@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/common/common.service';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 declare var $: any;
@@ -15,6 +22,10 @@ export class SignUpComponent implements OnInit {
   formGroup!: FormGroup;
   signup: FormGroup | any;
   error: any;
+  show: boolean = true;
+  chnageView: boolean = true;
+  display: boolean = true;
+  changeDisplay: boolean = true;
 
   constructor(
     private _route: Router,
@@ -22,30 +33,79 @@ export class SignUpComponent implements OnInit {
     public commonservice: CommonService,
     private formBuilder: FormBuilder
   ) {
-    this.signup = this.formBuilder.group({
-      name: new FormControl(),
-      email: new FormControl(),
-      phone: new FormControl(),
-      password: new FormControl(),
-    });
+    this.signup = this.formBuilder.group(
+      {
+        name: new FormControl('', [Validators.required, this.Name_Validator()]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        ]),
+        phone: new FormControl('', [Validators.pattern('^[6-9][0-9]{9}$')]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{7,}$'
+          ),
+        ]),
+        confirmPassword: new FormControl('', [Validators.required]),
+      },
+      {
+        validator: this.MustMatch('password', 'confirmPassword'),
+      }
+    );
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   get name() {
-    return this.formGroup.get('name');
+    return this.signup.get('name');
   }
 
   get email() {
-    return this.formGroup.get('email');
+    return this.signup.get('email');
   }
 
   get phone() {
-    return this.formGroup.get('phone');
+    return this.signup.get('phone');
   }
 
   get password() {
-    return this.formGroup.get('password');
+    return this.signup.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signup.get('confirmPassword');
+  }
+
+  Name_Validator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      if (control.value == false) {
+        return { Validators: true };
+      } else if (/^[^0-9]+$/.test(control.value) == false) {
+        return { no_Numeric: true };
+      } else if (/^[\w\s]+$/.test(control.value) == false) {
+        return { no_Special_Character: true };
+      }
+      return null;
+    };
+  }
+
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors['MustMatch']) {
+        return;
+      } else if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({
+          MustMatch: true,
+          message: "Confirm password didn't match!",
+        });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 
   async signupdata(formData: any) {
@@ -67,14 +127,14 @@ export class SignUpComponent implements OnInit {
         const apiResult = JSON.parse(JSON.stringify(res));
         console.log(apiResult);
 
-        if (apiResult['result'] == "error") {
+        if (apiResult['result'] == 'error') {
           apiResult.errors.map((err: object) => {
             this.error = JSON.parse(JSON.stringify(err));
             console.log(this.error);
             console.log(this.error['msg']);
-          })
+          });
         } else {
-          this.error = "";
+          this.error = '';
           this.signup.reset();
           // $('#myModal').hide();
           Swal.fire({
@@ -86,5 +146,15 @@ export class SignUpComponent implements OnInit {
           });
         }
       });
+  }
+
+  viewdata() {
+    this.show = !this.show;
+    this.chnageView = !this.chnageView;
+  }
+
+  viewPass() {
+    this.display = !this.display;
+    this.changeDisplay = !this.changeDisplay;
   }
 }

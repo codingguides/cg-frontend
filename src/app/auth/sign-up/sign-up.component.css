@@ -1,5 +1,5 @@
 .form-box1 {
- /*  width: 480px;
+  /*  width: 480px;
   height: auto;
   padding: 25px;
   background-color: #a48ff1;
@@ -10,12 +10,13 @@
   color: white;
   z-index: -1; */
 }
-.login_form{}
-.login_form label{
-    color: var(--bs-black);
-    font-size: 14px;
+.login_form {
 }
-.login_form .btn{
+.login_form label {
+  color: var(--bs-black);
+  font-size: 14px;
+}
+.login_form .btn {
   color: var(--bs-white);
   font-size: 14px;
   background: linear-gradient(90deg, #614b68 0%, #423963 100%);
@@ -27,5 +28,21 @@
   color: red;
   font-size: 15px;
   margin-bottom: -22px;
-  transform: translate(0%, -100%);
+  transform: translate(0%, -90%);
+}
+
+.eyeicon {
+  position: absolute;
+  right: 11px;
+  bottom: 8px;
+  cursor: pointer;
+  color: #a48ff1;
+}
+
+.eyeicon2 {
+  position: absolute;
+  right: 11px;
+  bottom: 8px;
+  cursor: pointer;
+  color: #a48ff1;
 }

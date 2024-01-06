@@ -21,10 +21,9 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModalComponent } from './shared/login-modal/login-modal.component';
 import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
 import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
@@ -37,9 +36,7 @@ import { SearchComponent } from './views/inner/search/search.component';
 import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-sidebar.component';
 
 import { MetaService } from './common/meta.service';
-
-
-
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -68,11 +65,6 @@ import { MetaService } from './common/meta.service';
     SidebarListComponent,
     SearchComponent,
     AdLeftSidebarComponent,
-
-
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -83,9 +75,13 @@ import { MetaService } from './common/meta.service';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     CommonModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground: true,
+    }),
   ],
   providers: [Meta, MetaService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
