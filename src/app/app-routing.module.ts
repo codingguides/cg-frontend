@@ -12,8 +12,7 @@ import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.comp
 import { ExamplesComponent } from './views/home/examples/examples.component';
 import { SearchComponent } from './views/inner/search/search.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
-
-
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -48,10 +47,7 @@ const routes: Routes = [
       descrption: 'Description of quiz Component',
       ogTitle: 'Description of quiz Component for social media',
     }
-  }, //topic/subtopic/quiz
-  //            topic/          subtopic/      quiz
-  //      javascript/quiz-for-beginners/JS Beginners Quiz 1  
-
+  },
   { path: 'search/:topic', component: SearchComponent },
 
   { path: 'login', component: LoginComponent },
@@ -61,8 +57,15 @@ const routes: Routes = [
 
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  {
+    path: 'reset-password/:token', component: ResetPasswordComponent,
+    data: {
+      title: 'Reset password Component ',
+      descrption: 'Description of Reset password Component',
+      ogTitle: 'Description of Reset password Component for social media',
+    }
+  },
   { path: '**', component: ComingSoonComponent },
-
   {
     path: '**', pathMatch: 'full',
     component: PagenotfoundComponent

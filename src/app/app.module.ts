@@ -37,6 +37,7 @@ import { AdLeftSidebarComponent } from './views/layout/ad-left-sidebar/ad-left-s
 
 import { MetaService } from './common/meta.service';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     SidebarListComponent,
     SearchComponent,
     AdLeftSidebarComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

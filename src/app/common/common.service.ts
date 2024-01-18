@@ -12,7 +12,6 @@ import { BehaviorSubject } from 'rxjs';
 export class CommonService {
 
   url: string = `${environment.apiURL}/api/`;
-  // token = localStorage.getItem('accessToken')
   headerOptions: any = {};
 
   private loginstatus = new BehaviorSubject<object>({
@@ -76,7 +75,7 @@ export class CommonService {
   public getLoggedIn() {
     return this.loginstatus.value;
   }
-  
+
   public getTokenDetails(param: string) {
     const gettoken: any = localStorage.getItem('accessToken');
     const decoded: any = jwt_decode(gettoken);
