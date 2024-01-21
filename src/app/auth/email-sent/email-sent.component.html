@@ -1,0 +1,30 @@
+<div class="email_sent_form">
+  <form
+    [formGroup]="email_sent"
+    (ngSubmit)="emailSentData(email_sent.value)"
+    class="form-box"
+    #localForm="ngForm"
+  >
+    <div class="form-group mb-3">
+      <label>Email</label>
+
+      <input
+        type="email"
+        class="form-control"
+        required
+        formControlName="email"
+      />
+      <div
+        style="color: red; font-size: 13px"
+        *ngIf="email && email.invalid && email.touched"
+      >
+        <div [hidden]="!email.errors?.['required']">Email Id is required!</div>
+        <div [hidden]="!email.errors?.['pattern']">Email Id is not valid!</div>
+      </div>
+    </div>
+
+    <button type="submit" id="button" class="btn">Get Email</button>
+    <p id="success-message" style="display: none">{{ success_msg }}</p>
+    <p id="error-message" style="display: none">{{ error_msg }}</p>
+  </form>
+</div>

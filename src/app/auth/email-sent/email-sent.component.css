@@ -1,0 +1,25 @@
+.email_sent_form .btn {
+  color: var(--bs-white);
+  font-size: 14px;
+  background: linear-gradient(90deg, #614b68 0%, #423963 100%);
+  padding: 10px 25px;
+}
+
+#button {
+  margin-top: 30px;
+}
+
+p#success-message {
+  text-align: center;
+  color: green;
+}
+
+p#error-message {
+  text-align: center;
+  color: red;
+}
+
+.email_sent_form label {
+  color: var(--bs-black);
+  font-size: 14px;
+}

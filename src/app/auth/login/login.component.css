@@ -10,12 +10,13 @@
   z-index: 1;
   color: white; */
 }
-.login_form{}
-.login_form label{
-    color: var(--bs-black);
-    font-size: 14px;
+.login_form {
 }
-.login_form .btn{
+.login_form label {
+  color: var(--bs-black);
+  font-size: 14px;
+}
+.login_form .btn {
   color: var(--bs-white);
   font-size: 14px;
   background: linear-gradient(90deg, #614b68 0%, #423963 100%);
@@ -35,4 +36,41 @@
   bottom: 80px;
   cursor: pointer;
   color: #a48ff1;
+}
+
+a.forgot_password {
+  font-size: 13px;
+  cursor: pointer;
+  color: #979faf;
+  font-weight: 400;
+  float: right;
+}
+
+a:hover {
+  color: #463c64;
+  text-decoration: underline !important;
+}
+
+#modal {
+  height: 352px;
+}
+
+.email_sent_modal .modal-header h4 {
+  color: var(--bs-black);
+}
+
+.modal-footer .footer_msg {
+  font-size: 15px;
+  /* text-align: center; */
+  font-weight: 400;
+  color: #463c64;
+  margin-right: 32px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

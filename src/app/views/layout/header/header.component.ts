@@ -3,67 +3,72 @@ import { CommonService } from '../../../common/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../../common/shared.service';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  menu: any
+  menu: any;
   showLogin: boolean = true;
   showLoginText: String = "Don't have an account? Sign Up";
-  loginTrue: any //= localStorage.getItem('accessToken')
+  loginTrue: any; //= localStorage.getItem('accessToken')
   status: boolean = false;
-  username: string = "";
-  modalClass = "modal";
-  name: string = "";
+  username: string = '';
+  modalClass = 'modal';
+  name: string = '';
   dropdownStatus: boolean = false;
   dropdownClass: string = 'dropdown-menu';
-  href: string = "";
+  href: string = '';
 
-  mflag: any = true
+  mflag: any = true;
 
   constructor(
     public sharedService: SharedService,
     public commonservice: CommonService,
     private router: Router,
     private activerouter: ActivatedRoute
-  ) {
+  ) {}
 
-  }
-
-  searchvalue: string = ""
+  searchvalue: string = '';
 
   ngOnInit() {
-    
     this.getMenu();
     this.commonservice.getLoggedIn();
     this.href = this.router.url;
     if (this.findWord(this.href)) {
       this.searchvalue = this.activerouter.snapshot.params['topic'];
     } else {
-      this.searchvalue = "";
+      this.searchvalue = '';
     }
 
     if (localStorage.getItem('accessToken')) {
-      this.name = this.commonservice.getTokenDetails('name').split(' ').map((n: any) => n[0]).join('');
-      console.log("this.name>>>>>>", this.name)
+      this.name = this.commonservice
+        .getTokenDetails('name')
+        .split(' ')
+        .map((n: any) => n[0])
+        .join('');
+      console.log('this.name>>>>>>', this.name);
 
       let id = this.commonservice.getTokenDetails('id');
-      this.commonservice.setLoggedIn(true, this.name, id, localStorage.getItem('accessToken'));
+      this.commonservice.setLoggedIn(
+        true,
+        this.name,
+        id,
+        localStorage.getItem('accessToken')
+      );
     } else {
-      this.commonservice.setLoggedIn(false, this.name, '', '')
+      this.commonservice.setLoggedIn(false, this.name, '', '');
     }
 
     this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
-      this.status = obj.status
-      this.name = obj.username
+      this.status = obj.status;
+      this.name = obj.username;
     });
   }
 
-  onKeyUp(event:any){
-    if(event.target.value == "Code24"){
+  onKeyUp(event: any) {
+    if (event.target.value == 'Code24') {
       this.mflag = false;
     }
   }
@@ -75,29 +80,27 @@ export class HeaderComponent {
       if (apiResult && apiResult.status == 'SUCCESS') {
         this.menu = apiResult && apiResult.payload;
       }
-    })
+    });
   }
 
   openModal() {
     const modalDiv = document.getElementById('myModal');
     if (modalDiv != null) {
-      modalDiv.style.display = 'block'
+      modalDiv.style.display = 'block';
     }
   }
 
   findWord(str: string) {
-    let word = "search"
-    return RegExp('\\b' + word + '\\b').test(str)
+    let word = 'search';
+    return RegExp('\\b' + word + '\\b').test(str);
   }
-
 
   show() {
     this.dropdownStatus = !this.dropdownStatus;
 
     if (this.dropdownStatus == true) {
       this.dropdownClass = 'dropdown-menu show';
-    }
-    else {
+    } else {
       this.dropdownClass = 'dropdown-menu';
     }
   }

@@ -1,12 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from 'src/app/common/common.service';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 declare var $: any;
-
 
 @Component({
   selector: 'app-login',
@@ -18,27 +22,28 @@ export class LoginComponent implements OnInit {
   formGroup!: FormGroup;
   login: FormGroup | any;
   error: any;
-  errr: string = "";
+  errr: string = '';
   error2: any;
   name: any;
   _id: any;
   visible: boolean = true;
   changetype: boolean = true;
-
+  openModal: boolean = true;
+  modalClass = 'modal';
 
   constructor(
     private _route: Router,
     private http: HttpClient,
     public commonservice: CommonService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {
     this.login = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
       password: [''],
     });
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   get email() {
     return this.formGroup.get('email');
@@ -60,29 +65,39 @@ export class LoginComponent implements OnInit {
         },
         'user/login'
       )
-      .subscribe(res => {
-
+      .subscribe((res) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult['payload'])
+        console.log(apiResult['payload']);
 
-        if (apiResult['result'] == "ok") {
+        if (apiResult['result'] == 'ok') {
           if (apiResult && apiResult['data']['payload']) {
             localStorage.clear();
 
             console.log(apiResult && apiResult['data']['token']);
             console.log(apiResult && apiResult['data']['payload']);
 
-            localStorage.setItem("accessToken", apiResult && apiResult['data']['token']);
-            sessionStorage.setItem("accessToken", apiResult && apiResult['data']['token']);
-            this.name = apiResult && apiResult['data']['payload'].name.split(' ').map((n: any) => n[0]).join('');
-            this._id = apiResult && apiResult['data']['payload'].id
-            console.log(this.name)
-            console.log(this._id)
-            let token = apiResult && apiResult['data']['token']
-            this.commonservice.setLoggedIn(true, this.name, this._id, token)
+            localStorage.setItem(
+              'accessToken',
+              apiResult && apiResult['data']['token']
+            );
+            sessionStorage.setItem(
+              'accessToken',
+              apiResult && apiResult['data']['token']
+            );
+            this.name =
+              apiResult &&
+              apiResult['data']['payload'].name
+                .split(' ')
+                .map((n: any) => n[0])
+                .join('');
+            this._id = apiResult && apiResult['data']['payload'].id;
+            console.log(this.name);
+            console.log(this._id);
+            let token = apiResult && apiResult['data']['token'];
+            this.commonservice.setLoggedIn(true, this.name, this._id, token);
           }
           window.location.reload();
-          this.login.reset()
+          this.login.reset();
           $('#myModal').hide();
           Swal.fire({
             position: 'top-end',
@@ -110,20 +125,46 @@ export class LoginComponent implements OnInit {
             // console.log(this.error.param);
             // console.log(this.error['msg']);
             // this.toastr.error(error['msg'], "LOGIN", { timeOut: 5000 });
-          })
+          });
         }
       });
   }
 
   onSave() {
     if (this.closebutton !== undefined) {
-
-      this.closebutton.nativeElement.click()
+      this.closebutton.nativeElement.click();
     }
   }
 
   viewpass() {
     this.visible = !this.visible;
     this.changetype = !this.changetype;
+  }
+
+  onClick(val: boolean) {
+    // const modalDiv = document.getElementById('myModalData');
+    // // const modalDiv2 = document.getElementById('myModal');
+    // // if (modalDiv2 != null) {
+    // //   modalDiv2.style.display = 'none';
+    // // }
+    // // $('#myModal').hide();
+    // if (modalDiv != null) {
+    //   modalDiv.style.display = 'block';
+    //   // modalDiv2.style.display ='none'
+    // }
+    // console.log('1', this.modalClass);
+
+    this.modalClass = 'modal show';
+    // console.log('2', this.modalClass);
+    // console.log(this.openModal, 'VAL1>>>>>', val);
+
+    this.openModal = !val;
+
+    // console.log('VAL2>>>>>', this.openModal);
+  }
+
+  closeModal() {
+    this.modalClass = 'modal hide';
+    this.openModal = true;
   }
 }

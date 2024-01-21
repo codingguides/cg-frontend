@@ -14,40 +14,46 @@ import { SearchComponent } from './views/inner/search/search.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
-
 const routes: Routes = [
   {
-    path: '', component: HomeComponent,
+    path: '',
+    component: HomeComponent,
     data: {
       title: 'Home Component',
       descrption: 'Description of Home Component',
       ogTitle: 'Description of Home Component for social media',
-    }
+    },
   },
   {
-    path: 'quiz/:topic', component: ListingComponent,
+    path: 'quiz/:topic',
+    component: ListingComponent,
     data: {
       title: 'Listing Component ',
       descrption: 'Description of list Component',
       ogTitle: 'Description of list Component for social media',
-    }
+    },
   },
   {
-    path: 'quiz/:topic/:subtopic', component: ListingComponent,
+    path: 'quiz/:topic/:subtopic',
+    component: ListingComponent,
     data: {
       title: 'Topic Component ',
       descrption: 'Description of topic Component',
       ogTitle: 'Description of topic Component for social media',
-    }
+    },
   },
   {
-    path: 'quiz/:topic/:subtopic/:quiz', component: QuizComponent,
+    path: 'quiz/:topic/:subtopic/:quiz',
+    component: QuizComponent,
     data: {
       title: 'Quiz Component ',
       descrption: 'Description of quiz Component',
       ogTitle: 'Description of quiz Component for social media',
-    }
-  },
+    },
+  }, //topic/subtopic/quiz
+  //            topic/          subtopic/      quiz
+  //      javascript/quiz-for-beginners/JS Beginners Quiz 1
+
   { path: 'search/:topic', component: SearchComponent },
 
   { path: 'login', component: LoginComponent },
@@ -57,24 +63,20 @@ const routes: Routes = [
 
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  {
-    path: 'reset-password/:token', component: ResetPasswordComponent,
-    data: {
-      title: 'Reset password Component ',
-      descrption: 'Description of Reset password Component',
-      ogTitle: 'Description of Reset password Component for social media',
-    }
-  },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: '**', component: ComingSoonComponent },
-  {
-    path: '**', pathMatch: 'full',
-    component: PagenotfoundComponent
-  },
 
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: PagenotfoundComponent,
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

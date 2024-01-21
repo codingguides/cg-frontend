@@ -33,6 +33,52 @@
         ><i [ngClass]="visible ? 'fa fa-eye-slash' : ' fa fa-eye'"></i
       ></span>
     </div>
+    <div class="password">
+      <a class="forgot_password" (click)="onClick(openModal)"
+        >Forgot Password</a
+      >
+    </div>
     <button type="submit" class="btn" (click)="onSave()">Sign In</button>
   </form>
+
+  <!-- The Modal -->
+  <div
+    class="email_sent_modal"
+    [class]="modalClass"
+    id="myModalData"
+    *ngIf="!openModal"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content" id="modal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ "Fogot Password" }}
+          </h4>
+          <button
+            type="button"
+            class="btn-close"
+            #closebutton
+            data-bs-dismiss="modal"
+            (click)="closeModal()"
+          ></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!-- <div *ngIf="openModal">
+            <app-login></app-login>
+          </div> -->
+          <div *ngIf="!openModal">
+            <app-email-sent></app-email-sent>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <h6 class="footer_msg">
+            Give your "register" email id to get the reset password link
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
