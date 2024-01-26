@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   title: 'Codingguides',
-  apiURL: "http://api.codingguides.in",
-  siteURL: "http://codingguides.in",
+  apiURL: "https://api.codingguides.in",
+  siteURL: "https://codingguides.in",
   limit: 10,
 };
