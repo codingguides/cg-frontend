@@ -24,6 +24,14 @@ export class ResetPasswordComponent {
   changetype2: boolean = true;
   status = true;
   cautionMessage: string = '';
+  login_obj: any;
+  login_name: string = '';
+  login_id: string = '';
+  login_token: any = '';
+  login_status: boolean = false;
+  login_showWarning: boolean = false;
+  userLogin: boolean = true;
+  alreadyLogin: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,36 +46,85 @@ export class ResetPasswordComponent {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params) => {
-    //   console.log(params);
-    //   // alert(params);
-    // });
     this.getToken = this.route.snapshot.params['token'];
     console.log(this.getToken);
     const decoded = atob(this.getToken);
     const parsed = JSON.parse(decoded);
     console.log(parsed);
     console.log(parsed.timestamp);
-    let date = new Date();
-    console.log(date);
-    let hour = date.getHours() * 60;
+    console.log(parsed.day);
+    console.log(parsed.month);
+    console.log(parsed.year);
+    this._id = parsed['id'];
+    console.log(this._id);
+
+    let myDate = new Date();
+    console.log(myDate);
+    let date = myDate.getDate();
+    let month = myDate.getMonth();
+    let year = myDate.getFullYear();
+    console.log('DATE: ', date, 'MONTH: ', month, 'YEAR: ', year);
+
+    let hour = myDate.getHours() * 60;
     console.log(hour);
-    let mint = date.getMinutes();
+    let mint = myDate.getMinutes();
     console.log(mint);
     let timestamp = hour + mint;
     console.log(timestamp);
 
-    if (timestamp - parsed.timestamp <= 15) {
-      console.log('PASS');
-      this.status = true;
-    } else {
-      console.log('FAIL');
+    this.commonservice.castLogin.subscribe((result) => {
+      this.login_obj = JSON.parse(JSON.stringify(result));
+      this.login_name = this.login_obj.username;
+      this.login_id = this.login_obj.user_id;
+      this.login_token = this.login_obj.token;
+      this.login_status = this.login_obj.status;
+      this.login_showWarning = false;
+      console.log('Token in ngOnInit', this.login_token);
+    });
+
+    if (this.login_token) {
+      this.userLogin = false;
       this.status = false;
-      this.cautionMessage =
-        'Reset Password link is invalid now. Please try again!';
+      console.log('TOKENNNNNNNN>>>>>', this.token);
+      this.alreadyLogin =
+        'You are already logged in. Go to your Dashboard to change your password.';
+    } else {
+      if (parsed.day == date && parsed.month == month && parsed.year == year) {
+        console.log('PASSSSSSSSSSSSSSSSSSSSSSSS');
+        console.log('SUBSTRACTION', timestamp - parsed.timestamp);
+        if (timestamp - parsed.timestamp <= 15) {
+          console.log('PASS');
+          this.status = true;
+        } else {
+          console.log('FAIL');
+          this.status = false;
+          this.cautionMessage =
+            'Reset Password link is invalid now. Please try again!';
+        }
+      } else {
+        console.log('FAILLLLLLLLLLLLLLLLL');
+        this.status = false;
+        this.cautionMessage =
+          'Reset Password link is invalid now. Please try again!';
+      }
     }
-    this._id = parsed['id'];
-    console.log(this._id);
+
+    // if (timestamp - parsed.timestamp <= 15) {
+    //   console.log('PASS');
+    //   this.status = true;
+    // } else {
+    //   console.log('FAIL');
+    //   this.status = false;
+    //   this.cautionMessage =
+    //     'Reset Password link is invalid now. Please try again!';
+    // }
+
+    // if (this.login_token) {
+    //   this.userLogin = false;
+    //   console.log('TOKENNNNNNNN>>>>>', this.token);
+    //   this.alreadyLogin =
+    //     'You are already logged in. Go to you Dashboard to change your password.';
+    // }
   }
 
   get password() {
@@ -135,5 +192,9 @@ export class ResetPasswordComponent {
   viewpass2() {
     this.visible2 = !this.visible2;
     this.changetype2 = !this.changetype2;
+  }
+
+  dashboard() {
+    this.router.navigate(['dashboard']);
   }
 }
