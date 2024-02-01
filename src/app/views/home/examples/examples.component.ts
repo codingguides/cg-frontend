@@ -17,7 +17,12 @@ export class ExamplesComponent {
   keys: any;
   examples: any;
   array: any = []
-
+  topicDetails:[] = [];
+  leftBlogList:[] = [];
+  allBlogList:any = [];
+  activeAll:boolean = true;
+  activeTopic:any = 'All';
+  rightTopic:any = [];
 
   constructor(
     public commonservice: CommonService,
@@ -46,49 +51,29 @@ export class ExamplesComponent {
         const topicDetails = apiResult.payload;
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.examplesHeader = apiResult && topicDetails.topic;
-
-          console.log("examplesHeader>>>>>>>>", this.examplesHeader);
-          console.log("examplesHeader TYPE>>>>>>>>", typeof (this.examplesHeader));
-        }
-        if (apiResult && apiResult.status == 'SUCCESS') {
-          this.examplesList = apiResult && topicDetails.relation;
-          console.log("examplesList>>>>>>>>>", this.examplesList);
-          console.log("examplesList TYPE>>>>>>>>>", typeof (this.examplesList));
-          const keyList = Object.keys(this.examplesList)
-          const getType = (value: any) => Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
-          keyList.forEach((key) => {
-            if (getType(this.examplesList[key]) === 'object') {
-              const newKeyList = (this.examplesList[key].blogDetails);
-              newKeyList.map((example: any) => {
-                this.examples = example
-                const ccc = this.array.push(example)
-                console.log(this.array)
-                console.log("TITLE>>>>>>>>>>>>", this.examples.title)
-                console.log("TITLE>>>>>>>>>>>>Type>>>>", typeof (this.examples.title))
-
-              })
-            }
-          });
-
-          this.keys = Object.keys(this.examplesList)
-          console.log("KEYS>>>>>>>", this.keys);
-          // console.log("XYZ>>>>>>", xyz.blogDetails)
-          console.log("KEYS TYPES>>>>>>>", typeof (this.keys));
-
-
+          this.topicDetails = apiResult && topicDetails.res;
+          this.topicDetails.map((topic:any)=>{
+            this.rightTopic.push(topic && topic['sub_category'])
+            topic && topic['blogDetails'].map((blog:any)=>{
+              this.allBlogList.push(blog)
+            })
+          })
+        }else{
+          
         }
       })
   }
 
-  // async getMenu() {
-  //   await this.commonservice.get('page/get-feature-item').subscribe((res: any) => {
-  //     const apiResult = JSON.parse(JSON.stringify(res));
-  //     console.log(apiResult.payload);
-  //     if (apiResult && apiResult.status == 'SUCCESS') {
-  //       this.menu = apiResult && apiResult.payload;
-  //     }
-  //   })
-  // }
+  getLeftValue(data: any){
+    this.activeTopic = data;
+    this.activeAll = true;
+    if(data !== "All"){
+      this.activeAll = false;
+    }
+    let filterDate = this.topicDetails.filter((topic)=>topic['sub_category'] == data);
+    this.leftBlogList = filterDate && filterDate[0]['blogDetails'];
+  }
+
 
   capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

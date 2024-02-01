@@ -15,15 +15,13 @@
               </div>
             </div>
             <div class="header_description pb-9x">
-              <p
-                class="description"
-                [innerHTML]="examplesHeader.description"
-              ></p>
+              <p class="description" [innerHTML]="examplesHeader.description"></p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="main_section section">
       <div class="container-fluid">
         <div class="example_section">
@@ -32,58 +30,34 @@
               <div class="example_tab_content">
                 <div class="example_section_left">
                   <div class="section_left_container">
-                    <form
-                      class="ctools-auto-submit-full-form ctools-auto-submit-processed jquery-once-2-processed"
-                    >
+                    <form class="ctools-auto-submit-full-form ctools-auto-submit-processed jquery-once-2-processed">
                       <div class="form_widget">
-                        <div class="form_items" *ngFor="let key of keys">
-                          <div class="form_items items_link">
-                            <a href="" class="items_link_node">{{ key }}</a>
+                        <div class="form_items">
+                          <div class="form_items items_link" [ngClass]="activeTopic == 'All' ? 'form_items items_link active' : 'form_items items_link'">
+                            <a (click)="getLeftValue('All')"  class="items_link_node">ALL</a>
                           </div>
-                          <!-- <div class="form_items items_link">
-                            <a href="" class="items_link_node">Introduction</a>
+                        </div>
+                        <div class="form_items" *ngFor="let key of rightTopic">
+                          <div [ngClass]="key == activeTopic ? 'form_items items_link active' : 'form_items items_link'">
+                            <a (click)="getLeftValue(key)" class="items_link_node">{{ key }}</a>
                           </div>
-                          <div class="form_items items_link">
-                            <a href="" class="items_link_node">Functions</a>
-                          </div>
-                          <div class="form_items items_link">
-                            <a href="" class="items_link_node"
-                              >Arrays and Objects</a
-                            >
-                          </div> -->
                         </div>
                       </div>
                     </form>
                   </div>
                 </div>
                 <div class="example_section_right">
-                  <ol>
-                    <li *ngFor="let examples of array">
+                  <ol *ngIf="allBlogList.length > 0 && activeAll == true">
+                    <li *ngFor="let allblog of allBlogList">
+                      <a class="example_link_node">{{allblog['title']}}</a>
+                    </li>
+                  </ol>
+                  <ol *ngIf="leftBlogList.length > 0 && activeAll == false ">
+                    <li *ngFor="let blog of leftBlogList">
                       <a class="example_link_node" href="">{{
-                        examples.title
-                      }}</a>
+                        blog['title']
+                        }}</a>
                     </li>
-                    <!-- <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Add Two Numbers</a
-                      >
-                    </li>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Find the Square Root</a
-                      >
-                    </li>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Calculate the Area of a
-                        Triangle</a
-                      >
-                    </li>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Swap Two Variables</a
-                      >
-                    </li> -->
                   </ol>
                 </div>
               </div>
@@ -99,9 +73,7 @@
         </div>
         <div class="col-lg-3">
           <a href="" title="first example">
-            <div
-              class="card card_spacing card_contents card_contents_blue card_contents_1"
-            >
+            <div class="card card_spacing card_contents card_contents_blue card_contents_1">
               <p class="card_title">JS Examples</p>
               <p class="card_blog">Print Hello World</p>
             </div>
@@ -110,9 +82,7 @@
 
         <div class="col-lg-3">
           <a href="" title="second example">
-            <div
-              class="card card_spacing card_contents card_contents_purple card_contents_2"
-            >
+            <div class="card card_spacing card_contents card_contents_purple card_contents_2">
               <p class="card_title">JS Examples</p>
               <p class="card_blog">Generate a Random Number</p>
             </div>
@@ -121,9 +91,7 @@
 
         <div class="col-lg-3">
           <a href="" title="third example">
-            <div
-              class="card card_spacing card_contents card_contents_blue card_contents_3"
-            >
+            <div class="card card_spacing card_contents card_contents_blue card_contents_3">
               <p class="card_title">JS Examples</p>
               <p class="card_blog">Check Prime Number</p>
             </div>
@@ -132,9 +100,7 @@
 
         <div class="col-lg-3">
           <a href="" title="fourth example">
-            <div
-              class="card card_spacing card_contents card_contents_purple card_contents_4"
-            >
+            <div class="card card_spacing card_contents card_contents_purple card_contents_4">
               <p class="card_title">JS Examples</p>
               <p class="card_blog">Factorial of a Number</p>
             </div>
