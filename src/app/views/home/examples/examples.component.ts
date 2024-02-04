@@ -23,13 +23,17 @@ export class ExamplesComponent {
   rightTopic: any = [];
   limitTo: any = 0;
 
+  top:any = 0;
+  end:any = 4;
+  tempArr:any = [];
+  relatedBlogList: any = []
+
   constructor(
     public commonservice: CommonService,
     private router: ActivatedRoute,
     private _router: Router
   ) {
     this.getslug = this.router.snapshot.params['topic'];
-    console.log('SLUG>>>>>>>>>>', this.getslug);
   }
 
   ngOnInit() {
@@ -46,20 +50,25 @@ export class ExamplesComponent {
       .get(`page/blog/${this.getslug}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult);
 
         const topicDetails = apiResult.payload;
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.examplesHeader = apiResult && topicDetails.topic;
           this.topicDetails = apiResult && topicDetails.res;
-          console.log(this.topicDetails);
-          console.log(this.examplesHeader);
+          var i = 0;
           this.topicDetails.map((topic: any) => {
             this.rightTopic.push(topic && topic['sub_category']);
-            topic &&
-              topic['blogDetails'].map((blog: any) => {
+            topic && topic['blogDetails'].map((blog: any) => {
+                i++;
+                if(i < 5){
+                  this.tempArr.push(blog)
+                  if( i == 4){
+                    this.relatedBlogList.push(this.tempArr);
+                    this.tempArr = [];
+                    i = 0;
+                  }
+                }
                 this.allBlogList.push(blog);
-                console.log(this.allBlogList);
               });
           });
         } else {
@@ -68,7 +77,6 @@ export class ExamplesComponent {
   }
 
   getLeftValue(data: any) {
-    console.log(data);
     this.activeTopic = data;
     this.activeAll = true;
 
@@ -78,7 +86,6 @@ export class ExamplesComponent {
         (topic) => topic['sub_category'] == data
       );
       this.leftBlogList = filterDate && filterDate[0]['blogDetails'];
-      console.log(this.leftBlogList);
     }
   }
 
@@ -89,4 +96,5 @@ export class ExamplesComponent {
   navigate(slug: String) {
     this._router.navigate([`examples/${this.getslug}/${slug}`]);
   }
+  
 }

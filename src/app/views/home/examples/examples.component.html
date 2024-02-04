@@ -110,66 +110,28 @@
           data-bs-ride="carousel"
         >
           <div class="carousel-inner">
-            <div class="carousel-item active">
+            
+            <div [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'" *ngFor="let related of relatedBlogList; index as i">
               <div
                 class="card-wrapper container-sm d-flex justify-content-around"
               >
                 <div
                   class="card card_spacing card_contents card_contents_blue card_contents_1"
                   style="width: 18rem"
-                  *ngFor="let allblog of allBlogList.slice(0, 4)"
+                  *ngFor="let singleBlog of related"
                 >
-                  <div class="card-body" *ngIf="examplesHeader">
+                  <div class="card-body" *ngIf="examplesHeader" (click)="navigate(singleBlog.sort_slug)">
                     <p class="card-title">
                       {{ capitalizeFirstLetter(param) }} Examples
                     </p>
                     <p class="card-text">
-                      {{ allblog["sort_title"] }}
+                      {{ singleBlog.sort_title }}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <div
-                class="card-wrapper container-sm d-flex justify-content-around"
-              >
-                <div
-                  class="card card_spacing card_contents card_contents_blue card_contents_1"
-                  style="width: 18rem"
-                  *ngFor="let allblog of allBlogList.slice(4, 8)"
-                >
-                  <div class="card-body" *ngIf="examplesHeader">
-                    <h5 class="card-title">
-                      {{ capitalizeFirstLetter(param) }} Examples
-                    </h5>
-                    <p class="card-text">
-                      {{ allblog["sort_title"] }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div
-                class="card-wrapper container-sm d-flex justify-content-around"
-              >
-                <div
-                  class="card card_spacing card_contents card_contents_blue card_contents_1"
-                  style="width: 18rem"
-                  *ngFor="let allblog of allBlogList.slice(8, 12)"
-                >
-                  <div class="card-body" *ngIf="examplesHeader">
-                    <h5 class="card-title">
-                      {{ capitalizeFirstLetter(param) }} Examples
-                    </h5>
-                    <p class="card-text">
-                      {{ allblog["sort_title"] }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <button
               class="carousel-control-prev"
               type="button"
