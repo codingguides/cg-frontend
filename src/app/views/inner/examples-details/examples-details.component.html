@@ -1,0 +1,39 @@
+<p>examples-details works!</p>
+
+<section class="inner_wrap">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="left-bar">
+          <div class="view-content">
+            <div class="card-body">
+              <h6>{{ capitalizeFirstLetter(param) }} Examples</h6>
+              <div class="examples-list">
+                <ul class="related-blog-list">
+                  <li class="items" *ngFor="let menu of blogMenuList">
+                    <div
+                      class="list"
+                      [ngClass]="menu.active === true ? 'list active' : 'list'"
+                      (click)="navigate(menu.sort_slug)"
+                    >
+                      <a class="blog-list">{{ menu.sort_title }}</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <!-- <h5 *ngIf="blogDetails && activeAll">{{ blogDetails.description }}</h5>
+        <h5 *ngIf="details && !activeAll">{{ details.description }}</h5> -->
+        <h5>{{ blogDetails.description }}</h5>
+        <!-- <h5 *ngIf="details && !activeAll">{{ details.description }}</h5> -->
+      </div>
+      <div class="col-lg-2">
+        <app-ad-right-sidebar></app-ad-right-sidebar>
+      </div>
+    </div>
+  </div>
+</section>

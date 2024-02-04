@@ -1,32 +1,36 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../../../common/common.service';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-examples',
   templateUrl: './examples.component.html',
-  styleUrls: ['./examples.component.css']
+  styleUrls: ['./examples.component.css'],
 })
 export class ExamplesComponent {
-
   param: any;
-  getslug: string = "";
+  getslug: string = '';
   examplesHeader: any = {};
   examplesList: any = {};
   keys: any;
   examples: any;
-  array: any = []
-
+  array: any = [];
+  topicDetails: [] = [];
+  leftBlogList: [] = [];
+  allBlogList: any = [];
+  activeAll: boolean = true;
+  activeTopic: any = 'All';
+  rightTopic: any = [];
+  limitTo: any = 0;
 
   constructor(
     public commonservice: CommonService,
     private router: ActivatedRoute,
+    private _router: Router
   ) {
-    this.getslug = this.router.snapshot.params['topic']
-    console.log("SLUG>>>>>>>>>>", this.getslug)
+    this.getslug = this.router.snapshot.params['topic'];
+    console.log('SLUG>>>>>>>>>>', this.getslug);
   }
-
 
   ngOnInit() {
     this.getMenuSidebar();
@@ -42,55 +46,47 @@ export class ExamplesComponent {
       .get(`page/blog/${this.getslug}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
+        console.log(apiResult);
 
         const topicDetails = apiResult.payload;
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.examplesHeader = apiResult && topicDetails.topic;
-
-          console.log("examplesHeader>>>>>>>>", this.examplesHeader);
-          console.log("examplesHeader TYPE>>>>>>>>", typeof (this.examplesHeader));
-        }
-        if (apiResult && apiResult.status == 'SUCCESS') {
-          this.examplesList = apiResult && topicDetails.relation;
-          console.log("examplesList>>>>>>>>>", this.examplesList);
-          console.log("examplesList TYPE>>>>>>>>>", typeof (this.examplesList));
-          const keyList = Object.keys(this.examplesList)
-          const getType = (value: any) => Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
-          keyList.forEach((key) => {
-            if (getType(this.examplesList[key]) === 'object') {
-              const newKeyList = (this.examplesList[key].blogDetails);
-              newKeyList.map((example: any) => {
-                this.examples = example
-                const ccc = this.array.push(example)
-                console.log(this.array)
-                console.log("TITLE>>>>>>>>>>>>", this.examples.title)
-                console.log("TITLE>>>>>>>>>>>>Type>>>>", typeof (this.examples.title))
-
-              })
-            }
+          this.topicDetails = apiResult && topicDetails.res;
+          console.log(this.topicDetails);
+          console.log(this.examplesHeader);
+          this.topicDetails.map((topic: any) => {
+            this.rightTopic.push(topic && topic['sub_category']);
+            topic &&
+              topic['blogDetails'].map((blog: any) => {
+                this.allBlogList.push(blog);
+                console.log(this.allBlogList);
+              });
           });
-
-          this.keys = Object.keys(this.examplesList)
-          console.log("KEYS>>>>>>>", this.keys);
-          // console.log("XYZ>>>>>>", xyz.blogDetails)
-          console.log("KEYS TYPES>>>>>>>", typeof (this.keys));
-
-
+        } else {
         }
-      })
+      });
   }
 
-  // async getMenu() {
-  //   await this.commonservice.get('page/get-feature-item').subscribe((res: any) => {
-  //     const apiResult = JSON.parse(JSON.stringify(res));
-  //     console.log(apiResult.payload);
-  //     if (apiResult && apiResult.status == 'SUCCESS') {
-  //       this.menu = apiResult && apiResult.payload;
-  //     }
-  //   })
-  // }
+  getLeftValue(data: any) {
+    console.log(data);
+    this.activeTopic = data;
+    this.activeAll = true;
+
+    if (data !== 'All') {
+      this.activeAll = false;
+      let filterDate = this.topicDetails.filter(
+        (topic) => topic['sub_category'] == data
+      );
+      this.leftBlogList = filterDate && filterDate[0]['blogDetails'];
+      console.log(this.leftBlogList);
+    }
+  }
 
   capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  navigate(slug: String) {
+    this._router.navigate([`examples/${this.getslug}/${slug}`]);
   }
 }

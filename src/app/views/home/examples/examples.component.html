@@ -24,6 +24,7 @@
         </div>
       </div>
     </div>
+
     <div class="main_section section">
       <div class="container-fluid">
         <div class="example_section">
@@ -36,54 +37,59 @@
                       class="ctools-auto-submit-full-form ctools-auto-submit-processed jquery-once-2-processed"
                     >
                       <div class="form_widget">
-                        <div class="form_items" *ngFor="let key of keys">
-                          <div class="form_items items_link">
-                            <a href="" class="items_link_node">{{ key }}</a>
-                          </div>
-                          <!-- <div class="form_items items_link">
-                            <a href="" class="items_link_node">Introduction</a>
-                          </div>
-                          <div class="form_items items_link">
-                            <a href="" class="items_link_node">Functions</a>
-                          </div>
-                          <div class="form_items items_link">
-                            <a href="" class="items_link_node"
-                              >Arrays and Objects</a
+                        <div class="form_items">
+                          <div
+                            class="form_items items_link"
+                            [ngClass]="
+                              activeTopic == 'All'
+                                ? 'form_items items_link active'
+                                : 'form_items items_link'
+                            "
+                          >
+                            <a
+                              (click)="getLeftValue('All')"
+                              class="items_link_node"
+                              >ALL</a
                             >
-                          </div> -->
+                          </div>
+                        </div>
+                        <div class="form_items" *ngFor="let key of rightTopic">
+                          <div
+                            [ngClass]="
+                              key == activeTopic
+                                ? 'form_items items_link active'
+                                : 'form_items items_link'
+                            "
+                          >
+                            <a
+                              (click)="getLeftValue(key)"
+                              class="items_link_node"
+                              >{{ key }}</a
+                            >
+                          </div>
                         </div>
                       </div>
                     </form>
                   </div>
                 </div>
                 <div class="example_section_right">
+                  <ol *ngIf="allBlogList.length > 0 && activeAll == true">
+                    <li *ngFor="let allblog of allBlogList">
+                      <a
+                        class="example_link_node"
+                        (click)="navigate(allblog.sort_slug)"
+                        >{{ allblog["title"] }}</a
+                      >
+                    </li>
+                  </ol>
                   <ol>
-                    <li *ngFor="let examples of array">
-                      <a class="example_link_node" href="">{{
-                        examples.title
-                      }}</a>
-                    </li>
-                    <!-- <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Add Two Numbers</a
+                    <li *ngFor="let blog of leftBlogList">
+                      <a
+                        class="example_link_node"
+                        (click)="navigate(blog['sort_slug'])"
+                        >{{ blog["title"] }}</a
                       >
                     </li>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Find the Square Root</a
-                      >
-                    </li>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Calculate the Area of a
-                        Triangle</a
-                      >
-                    </li>
-                    <li>
-                      <a class="example_link_node" href=""
-                        >JavaScript Program to Swap Two Variables</a
-                      >
-                    </li> -->
                   </ol>
                 </div>
               </div>
@@ -97,60 +103,100 @@
         <div class="col-sm-12">
           <h3 class="popular-example">Related Search</h3>
         </div>
-        <div class="col-lg-3">
-          <a href="" title="first example">
-            <div
-              class="card card_spacing card_contents card_contents_blue card_contents_1"
-            >
-              <p class="card_title">JS Examples</p>
-              <p class="card_blog">Print Hello World</p>
-            </div>
-          </a>
-        </div>
 
-        <div class="col-lg-3">
-          <a href="" title="second example">
-            <div
-              class="card card_spacing card_contents card_contents_purple card_contents_2"
-            >
-              <p class="card_title">JS Examples</p>
-              <p class="card_blog">Generate a Random Number</p>
+        <div
+          id="carouselExampleControls"
+          class="carousel carousel-dark slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div
+                class="card-wrapper container-sm d-flex justify-content-around"
+              >
+                <div
+                  class="card card_spacing card_contents card_contents_blue card_contents_1"
+                  style="width: 18rem"
+                  *ngFor="let allblog of allBlogList.slice(0, 4)"
+                >
+                  <div class="card-body" *ngIf="examplesHeader">
+                    <p class="card-title">
+                      {{ capitalizeFirstLetter(param) }} Examples
+                    </p>
+                    <p class="card-text">
+                      {{ allblog["sort_title"] }}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3">
-          <a href="" title="third example">
-            <div
-              class="card card_spacing card_contents card_contents_blue card_contents_3"
-            >
-              <p class="card_title">JS Examples</p>
-              <p class="card_blog">Check Prime Number</p>
+            <div class="carousel-item">
+              <div
+                class="card-wrapper container-sm d-flex justify-content-around"
+              >
+                <div
+                  class="card card_spacing card_contents card_contents_blue card_contents_1"
+                  style="width: 18rem"
+                  *ngFor="let allblog of allBlogList.slice(4, 8)"
+                >
+                  <div class="card-body" *ngIf="examplesHeader">
+                    <h5 class="card-title">
+                      {{ capitalizeFirstLetter(param) }} Examples
+                    </h5>
+                    <p class="card-text">
+                      {{ allblog["sort_title"] }}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3">
-          <a href="" title="fourth example">
-            <div
-              class="card card_spacing card_contents card_contents_purple card_contents_4"
-            >
-              <p class="card_title">JS Examples</p>
-              <p class="card_blog">Factorial of a Number</p>
+            <div class="carousel-item">
+              <div
+                class="card-wrapper container-sm d-flex justify-content-around"
+              >
+                <div
+                  class="card card_spacing card_contents card_contents_blue card_contents_1"
+                  style="width: 18rem"
+                  *ngFor="let allblog of allBlogList.slice(8, 12)"
+                >
+                  <div class="card-body" *ngIf="examplesHeader">
+                    <h5 class="card-title">
+                      {{ capitalizeFirstLetter(param) }} Examples
+                    </h5>
+                    <p class="card-text">
+                      {{ allblog["sort_title"] }}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- <div class="row">
-      <div class="col-lg-3">
-        <app-sidebar-list></app-sidebar-list>
-      </div>
-      <div class="col-lg-7"></div>
-      <div class="col-lg-2">
-        <app-ad-sidebar></app-ad-sidebar>
-      </div>
-    </div> -->
   </div>
 </section>
