@@ -16,6 +16,8 @@ export class ExamplesDetailsComponent {
   activeAll: boolean = true;
   details: any;
   activeTopic: any = 'All';
+  tempArr: any = [];
+  newArr: any = [];
 
   constructor(
     public commonservice: CommonService,
@@ -23,7 +25,6 @@ export class ExamplesDetailsComponent {
     private _router: Router
   ) {
     this.getslug = this.router.snapshot.params['slug'];
-    console.log('SLUG>>>>>>>>>>', this.getslug);
   }
 
   ngOnInit() {
@@ -33,7 +34,6 @@ export class ExamplesDetailsComponent {
 
   async getMenuSidebar() {
     this.param = this.router.snapshot.params['topic'];
-    console.log(this.param);
   }
 
   async getBlogDetails() {
@@ -43,24 +43,33 @@ export class ExamplesDetailsComponent {
       .get(`page/blog/inner/${this.getslug}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult);
         const totalBlogDetails = apiResult.payload;
 
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.blogDetails = apiResult && totalBlogDetails.blogDetails;
           this.relatedBlogList = apiResult && totalBlogDetails.relatedBlogList;
-          console.log('this.blogDetails>>>>', this.blogDetails);
-          console.log('this.relatedBlogList>>>>>>', this.relatedBlogList);
+
           this.blogMenuList = [];
           this.relatedBlogList.map((data: any) => {
-            // if (data.sort_slug != this.getslug) {
             this.blogMenuList.push({
               active: this.getslug === data.sort_slug ? true : false,
               ...data,
             });
-            // }
           });
-          console.log(this.blogMenuList);
+
+          var i = 0;
+          this.blogMenuList.map((data: any) => {
+            i++;
+            if (i < 5) {
+              this.tempArr.push(data);
+
+              if (i == 4) {
+                this.newArr.push(this.tempArr);
+                this.tempArr = [];
+                i = 0;
+              }
+            }
+          });
         }
       });
   }
@@ -70,8 +79,6 @@ export class ExamplesDetailsComponent {
   }
 
   navigate(slug: String) {
-    // this._router.navigate([`examples/${this.param}/${slug}`]);
-    // this.ngOnInit();
     window.location.href = `examples/${this.param}/${slug}`;
   }
 }

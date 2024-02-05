@@ -1,4 +1,4 @@
-.card-body {
+.view-content .card-body {
   background-color: #fbfbfb;
   border: 1px solid #d3dce6;
   border-radius: 6px;
@@ -11,13 +11,12 @@
   position: relative;
   font-weight: 600;
   color: #423963;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
-  /* text-align: center; */
 }
 
 ul {
@@ -40,10 +39,6 @@ ul {
   background-color: rgba(5, 86, 243, 0.2);
 }
 
-.active {
-  background-color: red;
-}
-
 .list.active {
   background-color: #0556f333 !important;
   color: #0556f3 !important;
@@ -59,4 +54,55 @@ ul {
   width: 4px;
   border-radius: 10px 0 0 10px;
   background-color: #0556f3;
+}
+
+.popular-example {
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+  color: #423963;
+  padding-top: 20px;
+}
+
+.card_contents_blue {
+  border-top: 4px solid #0556f3;
+}
+
+.card_contents_1 {
+  min-height: 132px;
+  margin-bottom: 16px;
+  box-shadow: 0px 12px 24px rgba(2, 30, 84, 0.1);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  color: rgba(37, 38, 94, 0.7);
+}
+
+.card_contents .card-title {
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 16px;
+}
+
+.card_contents .card-text {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-bottom: -3px;
+  color: #25265eb3;
+}
+
+.card-body {
+  background-color: white;
+  cursor: pointer;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 2%;
+}
+
+.card {
+  margin-left: 6px;
+  margin-right: 6px;
 }

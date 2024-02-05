@@ -23,10 +23,14 @@ export class ExamplesComponent {
   rightTopic: any = [];
   limitTo: any = 0;
 
-  top:any = 0;
-  end:any = 4;
-  tempArr:any = [];
-  relatedBlogList: any = []
+  top: any = 0;
+  end: any = 4;
+  tempArr: any = [];
+  relatedBlogList: any = [];
+  menu: any;
+  cazzArr: any = [];
+  menuList: any = [];
+  cazzArr2: any = [];
 
   constructor(
     public commonservice: CommonService,
@@ -39,6 +43,7 @@ export class ExamplesComponent {
   ngOnInit() {
     this.getMenuSidebar();
     this.getExamples();
+    this.getMenu();
   }
 
   async getMenuSidebar() {
@@ -54,16 +59,20 @@ export class ExamplesComponent {
         const topicDetails = apiResult.payload;
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.examplesHeader = apiResult && topicDetails.topic;
+
           this.topicDetails = apiResult && topicDetails.res;
           var i = 0;
           this.topicDetails.map((topic: any) => {
             this.rightTopic.push(topic && topic['sub_category']);
-            topic && topic['blogDetails'].map((blog: any) => {
+            topic &&
+              topic['blogDetails'].map((blog: any) => {
                 i++;
-                if(i < 5){
-                  this.tempArr.push(blog)
-                  if( i == 4){
+                if (i < 5) {
+                  this.tempArr.push(blog);
+
+                  if (i == 4) {
                     this.relatedBlogList.push(this.tempArr);
+
                     this.tempArr = [];
                     i = 0;
                   }
@@ -96,5 +105,30 @@ export class ExamplesComponent {
   navigate(slug: String) {
     this._router.navigate([`examples/${this.getslug}/${slug}`]);
   }
-  
+
+  navigate2(slug: String) {
+    window.location.href = `examples/${slug}`;
+  }
+  async getMenu() {
+    await this.commonservice
+      .get('page/get-feature-item')
+      .subscribe((res: any) => {
+        const apiResult = JSON.parse(JSON.stringify(res));
+        if (apiResult && apiResult.status == 'SUCCESS') {
+          this.menu = apiResult && apiResult.payload;
+          var j = 0;
+          this.menu.map((data: any) => {
+            if (j < 4 && this.getslug !== data.slug) {
+              this.cazzArr.push(data);
+              j++;
+              if (j == 3) {
+                this.menuList.push(this.cazzArr);
+                j = 0;
+                this.cazzArr = [];
+              }
+            }
+          });
+        }
+      });
+  }
 }

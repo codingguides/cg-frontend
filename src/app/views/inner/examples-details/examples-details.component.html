@@ -1,5 +1,3 @@
-<p>examples-details works!</p>
-
 <section class="inner_wrap">
   <div class="container-fluid">
     <div class="row">
@@ -26,13 +24,78 @@
         </div>
       </div>
       <div class="col-lg-7">
-        <!-- <h5 *ngIf="blogDetails && activeAll">{{ blogDetails.description }}</h5>
-        <h5 *ngIf="details && !activeAll">{{ details.description }}</h5> -->
-        <h5>{{ blogDetails.description }}</h5>
-        <!-- <h5 *ngIf="details && !activeAll">{{ details.description }}</h5> -->
+        <h5 [innerHTML]="blogDetails.description"></h5>
       </div>
       <div class="col-lg-2">
         <app-ad-right-sidebar></app-ad-right-sidebar>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row d-none d-md-flex">
+        <div class="col-sm-12">
+          <h3 class="popular-example">Related Search</h3>
+        </div>
+
+        <div
+          id="carouselExampleControls"
+          class="carousel carousel-dark slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div
+              [ngClass]="i == 0 ? 'carousel-item active' : 'carousel-item'"
+              *ngFor="let related of newArr; index as i"
+            >
+              <div
+                class="card-wrapper container-sm d-flex justify-content-around"
+              >
+                <div
+                  class="card card_spacing card_contents card_contents_blue card_contents_1"
+                  style="width: 18rem"
+                  *ngFor="let singleBlog of related"
+                >
+                  <div
+                    class="card-body"
+                    (click)="navigate(singleBlog.sort_slug)"
+                  >
+                    <p class="card-title">
+                      {{ capitalizeFirstLetter(param) }} Examples
+                    </p>
+                    <p class="card-text">
+                      {{ singleBlog.sort_title }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
