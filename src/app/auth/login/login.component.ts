@@ -142,25 +142,11 @@ export class LoginComponent implements OnInit {
   }
 
   onClick(val: boolean) {
-    // const modalDiv = document.getElementById('myModalData');
-    // // const modalDiv2 = document.getElementById('myModal');
-    // // if (modalDiv2 != null) {
-    // //   modalDiv2.style.display = 'none';
-    // // }
-    // // $('#myModal').hide();
-    // if (modalDiv != null) {
-    //   modalDiv.style.display = 'block';
-    //   // modalDiv2.style.display ='none'
-    // }
-    // console.log('1', this.modalClass);
 
     this.modalClass = 'modal show';
-    // console.log('2', this.modalClass);
-    // console.log(this.openModal, 'VAL1>>>>>', val);
-
     this.openModal = !val;
 
-    // console.log('VAL2>>>>>', this.openModal);
+    console.log('VAL2>>>>>', this.openModal);
   }
 
   closeModal() {

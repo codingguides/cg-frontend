@@ -108,6 +108,11 @@ div.items_link.active .items_link_node::after {
   background-color: #0556f3;
 }
 
+.active {
+  background-color: #0556f399;
+  color: rgb(3, 1, 14);
+}
+
 .example_section_right {
   flex: 1;
 }
