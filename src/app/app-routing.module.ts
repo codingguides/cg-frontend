@@ -9,7 +9,7 @@ import { DisclaimerComponent } from './others/disclaimer/disclaimer.component';
 import { PrivacyPolicyComponent } from './others/privacy-policy/privacy-policy.component';
 import { ComingSoonComponent } from './404_page/coming-soon/coming-soon.component';
 import { PagenotfoundComponent } from './404_page/pagenotfound/pagenotfound.component';
-import { ExamplesComponent } from './views/home/examples/examples.component';
+import { ExamplesComponent } from './views/inner/examples/examples.component';
 import { SearchComponent } from './views/inner/search/search.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
