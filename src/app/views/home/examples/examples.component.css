@@ -109,7 +109,7 @@ div.items_link.active .items_link_node::after {
 }
 
 .active {
-  background-color: #0556f399;
+  /* background-color: #0556f399; */
   color: rgb(3, 1, 14);
 }
 
