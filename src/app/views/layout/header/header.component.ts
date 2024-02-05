@@ -31,16 +31,27 @@ export class HeaderComponent {
   ) {}
 
   searchvalue: string = '';
+  activeLocalhost: boolean = true;
 
   ngOnInit() {
+    if (
+      location.hostname === 'localhost' ||
+      location.hostname === '127.0.0.1'
+    ) {
+      this.activeLocalhost = false;
+      this.mflag = false;
+    }
+
     this.getMenu();
     this.commonservice.getLoggedIn();
     this.href = this.router.url;
+    console.log('this.href>>>>>>>>>>>>', this.href);
     if (this.findWord(this.href)) {
       this.searchvalue = this.activerouter.snapshot.params['topic'];
     } else {
       this.searchvalue = '';
     }
+    console.log('this.searchvalue>>>>>>>>>>>>', this.searchvalue);
 
     if (localStorage.getItem('accessToken')) {
       this.name = this.commonservice
