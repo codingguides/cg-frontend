@@ -13,6 +13,10 @@
   margin-left: -11px;
 }
 
+.header_title_image img {
+  height: 100px;
+}
+
 .title_details_title {
   /* color: #7251e9; */
   color: #423963;
@@ -60,7 +64,6 @@
 }
 
 .section_left_container {
-  padding: 12px 0;
   margin-bottom: 24px;
 }
 
@@ -70,6 +73,7 @@
 
 .items_link_node:hover {
   background-color: rgba(5, 86, 243, 0.2);
+  color: #03338f;
 }
 
 a:hover {
@@ -79,21 +83,21 @@ a:hover {
 .items_link_node {
   display: block;
   font-weight: 500;
-  /* justify-content: flex-end; */
   color: #a8a8bf;
   padding: 12px 20px;
   font-size: 16px;
   line-height: 24px;
   transition: all 0.2s ease-in;
+  cursor: pointer;
 }
 
-.items_link_node-active {
-  background-color: rgba(5, 86, 243, 0.2);
-  color: #0556f3;
+div.items_link.active .items_link_node {
+  background-color: #0556f333 !important;
+  color: #0556f3 !important;
   position: relative;
 }
 
-.items_link_node-active::after {
+div.items_link.active .items_link_node::after {
   content: "";
   position: absolute;
   right: 0;
@@ -138,7 +142,6 @@ a:hover {
   counter-increment: li;
   width: 36px;
   height: 36px;
-  /* display: block; */
   background-color: rgba(5, 86, 243, 0.2);
   border-radius: 100%;
   color: rgba(5, 86, 243, 0.6);
@@ -157,37 +160,39 @@ a:hover {
   font-size: 20px;
   line-height: 30px;
   font-weight: 600;
+  color: #614b68;
 }
 
 .card_contents_blue {
   border-top: 4px solid #0556f3;
 }
 
-.card_contents {
-  min-height: 132px;
+.card_contents_1 {
   margin-bottom: 16px;
   box-shadow: 0px 12px 24px rgba(2, 30, 84, 0.1);
   background-position: right bottom;
   background-repeat: no-repeat;
-  padding-top: 12px;
   color: rgba(37, 38, 94, 0.7);
 }
 
-.card_spacing {
-  padding: 16px;
-}
-
-.card_contents .card_title {
+.card_contents .card-title {
   font-size: 12px;
   line-height: 16px;
   margin-bottom: 16px;
 }
 
-.card_contents .card_blog {
+.card_contents .card-text {
   font-size: 16px;
   line-height: 24px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: -3px;
+  color: #25265eb3;
+  float: right;
+  margin-top: 20px;
+}
+
+img {
+  height: 60px;
 }
 
 .card_contents_purple {
@@ -197,21 +202,24 @@ a:hover {
 .example_link_node {
   display: block;
   font-weight: 500;
-  /* justify-content: flex-end; */
   color: rgba(37, 38, 94, 0.7);
-  /* padding: 12px 20px; */
   font-size: 16px;
   line-height: 24px;
   transition: all 0.2s ease-in;
+  cursor: pointer;
 }
 
-/* .example_section.example_section_right ol li a:hover {
-  color: #03338f;
+.card-body {
+  background-color: white;
+  cursor: pointer;
 }
 
-.example_section.example_section_right ol li a {
-  font-weight: 500;
-  color: #a8a8bf;
-  font-size: 16px;
-  line-height: 24px;
-} */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 2%;
+}
+
+.card {
+  margin-left: 6px;
+  margin-right: 6px;
+}

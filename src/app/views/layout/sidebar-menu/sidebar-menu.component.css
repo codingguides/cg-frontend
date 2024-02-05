@@ -1,41 +1,42 @@
-.sideBar{
-  background: #5C4867;
+.sideBar {
+  background: #5c4867;
   border-radius: 4px;
   padding: 1.5rem;
 }
-.sideBar .header{
+.sideBar .header {
   border-bottom: 1px solid var(--bs-white);
   margin-bottom: 1rem;
 }
-.sideBar .header h4{
+.sideBar .header h4 {
   color: var(--bs-white);
   font-size: larger;
 }
-.sideBar .nav-tabs > ul{}
-.sideBar .nav-tabs > li > a{
+.sideBar .nav-tabs > ul {
+}
+.sideBar .nav-tabs > li > a {
   color: var(--bs-white);
   transition: all 150ms linear;
   margin: 0;
 }
-.sideBar .nav-tabs ul li a{
+.sideBar .nav-tabs ul li a {
   color: #ccc;
   display: block;
   margin: 0;
 }
-.sideBar .nav-tabs > li + li{
+.sideBar .nav-tabs > li + li {
   margin-top: 1rem;
 }
-.sideBar .nav-tabs > li ul > li + li{
-  padding-top: .5rem;
+.sideBar .nav-tabs > li ul > li + li {
+  padding-top: 0.5rem;
 }
-.sideBar .nav-tabs > li ul > li > a{
+.sideBar .nav-tabs > li ul > li > a {
   font-size: 14px;
   font-weight: 400;
   padding: 0;
 }
-.sideBar .nav-tabs > li ul > li > a.checked{
+.sideBar .nav-tabs > li ul > li > a.checked {
   color: var(--bs-black);
-  background: #EFEAFE;
+  background: #efeafe;
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
 }
 
@@ -61,4 +62,8 @@ hr.d-none.d-md-block.my-0.ms-0.me-0 {
 
 .nav-link:hover {
   font-weight: 600;
+}
+
+.nav-link.checked {
+  font-weight: 900;
 }

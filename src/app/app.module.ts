@@ -39,6 +39,7 @@ import { MetaService } from './common/meta.service';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { EmailSentComponent } from './auth/email-sent/email-sent.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { ExamplesDetailsComponent } from './views/inner/examples-details/examples-details.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     AdLeftSidebarComponent,
     EmailSentComponent,
     ResetPasswordComponent,
+    ExamplesDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { ExamplesComponent } from './views/home/examples/examples.component';
 import { SearchComponent } from './views/inner/search/search.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { ExamplesDetailsComponent } from './views/inner/examples-details/examples-details.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'disclaimer', component: DisclaimerComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: 'examples/:topic/:slug', component: ExamplesDetailsComponent },
   { path: '**', component: ComingSoonComponent },
 
   {

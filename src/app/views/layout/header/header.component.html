@@ -1,6 +1,10 @@
 <header>
   <!-- The Modal -->
-  <!-- <div *ngIf="mflag" class="modal maintenance" style="display: block">
+  <div
+    *ngIf="mflag || activeLocalhost"
+    class="modal maintenance"
+    style="display: block"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
@@ -42,7 +46,8 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
+  -->
 
   <section class="navbar_wrap">
     <div class="top_header">
