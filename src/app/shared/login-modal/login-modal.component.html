@@ -25,25 +25,40 @@
           <app-sign-up></app-sign-up>
         </div>
       </div>
+      <div class="socialSignIn">
+        <div class="divider">
+          <span>or</span>
+        </div>
+        <div class="socialMedia" style="margin-left: 160px">
+          <asl-google-signin-button
+            *ngIf="!user"
+            type="standard"
+            size="medium"
+            shape="circle"
+            text="signin_with"
+            (click)="googleLogin()"
+          ></asl-google-signin-button>
+        </div>
+      </div>
       <div class="modal-footer">
-        <div
+        <!-- <div
           id="g_id_onload"
           data-client_id="299381234173-8hophpg438700eseohdge8uc5fkndv3t.apps.googleusercontent.com"
           data-context="signin"
           data-ux_mode="popup"
           data-login_uri="http://localhost:4200"
           data-auto_prompt="false"
-        ></div>
+        ></div> -->
 
-        <div
+        <!-- <div
           class="g_id_signin"
           data-type="standard"
           data-shape="rectangular"
           data-theme="outline"
           data-text="signin_with"
           data-size="large"
-          data-logo_alignment="left"
-        ></div>
+          data-logo_alignment="right"
+        ></div> -->
         <a class="footer_text text-center" (click)="changeLogin(showLogin)">{{
           showLoginText
         }}</a>

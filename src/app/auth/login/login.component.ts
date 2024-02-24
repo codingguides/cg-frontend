@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((res) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult['payload']);
+        console.log(apiResult['data']['payload']);
 
         if (apiResult['result'] == 'ok') {
           if (apiResult && apiResult['data']['payload']) {
@@ -96,9 +96,9 @@ export class LoginComponent implements OnInit {
             let token = apiResult && apiResult['data']['token'];
             this.commonservice.setLoggedIn(true, this.name, this._id, token);
           }
-          window.location.reload();
+          // window.location.reload();
           this.login.reset();
-          $('#myModal').hide();
+          // $('#myModal').hide();
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -106,25 +106,11 @@ export class LoginComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500,
           });
-        }
-        // else if (apiResult['result'] == "invalid") {
-        //   console.log(apiResult.errors)
-        //   apiResult.errors.map((err2: object) => {
-        //     this.error2 = JSON.parse(JSON.stringify(err2))
-        //     console.log(this.error2);
-        //   })
-        // }
-        else {
+        } else {
           console.log(apiResult.errors);
           apiResult.errors.map((err: object) => {
             this.error = JSON.parse(JSON.stringify(err));
             console.log(this.error);
-            // const errr = this.error.msg
-            // console.log(typeof errr)
-            // console.log(typeof (this.error));
-            // console.log(this.error.param);
-            // console.log(this.error['msg']);
-            // this.toastr.error(error['msg'], "LOGIN", { timeOut: 5000 });
           });
         }
       });
@@ -142,7 +128,6 @@ export class LoginComponent implements OnInit {
   }
 
   onClick(val: boolean) {
-
     this.modalClass = 'modal show';
     this.openModal = !val;
 

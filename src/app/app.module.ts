@@ -40,7 +40,11 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { EmailSentComponent } from './auth/email-sent/email-sent.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ExamplesDetailsComponent } from './views/inner/examples-details/examples-details.component';
-
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,8 +90,26 @@ import { ExamplesDetailsComponent } from './views/inner/examples-details/example
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,
     }),
+    SocialLoginModule,
   ],
-  providers: [Meta, MetaService],
+  providers: [
+    Meta,
+    MetaService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '674543280684-9jihn2t9o9a2ura9h038to8lcs5fiavh.apps.googleusercontent.com'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

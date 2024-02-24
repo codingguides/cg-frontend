@@ -1,15 +1,33 @@
-
-
-.login_modal{
-    background: rgba(0,0,0,0.5);
+.login_modal {
+  background: rgba(0, 0, 0, 0.5);
 }
-.login_modal .modal-header h4{
-    color: var(--bs-black);
+.login_modal .modal-header h4 {
+  color: var(--bs-black);
 }
-.login_modal .modal-footer a{
-    color: #463C64;
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: underline !important;
-    cursor: pointer;
+.login_modal .modal-footer a {
+  color: #463c64;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
+.socialSignIn {
+  border-top: none;
+  padding-bottom: 10px;
+}
+
+.divider {
+  border-bottom: 1px solid #979faf;
+  line-height: 0.1em;
+  margin: 10px 0 20px 10%;
+  text-align: center;
+  width: 80%;
+}
+
+.divider span {
+  background: #fff;
+  color: #273239;
+  font-size: 14px;
+  padding: 0 10px;
 }
