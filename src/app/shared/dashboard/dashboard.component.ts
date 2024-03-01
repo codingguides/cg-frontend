@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit {
   message: string = '';
   text: string = ' Profile Picture Selected';
   image: any = '/assets/images/profile-icon-9.png';
+  profile_pic: string = '';
 
   constructor(
     public commonservice: CommonService,
@@ -115,10 +116,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.commonservice.castLogin.subscribe((result) => {
       this.obj = JSON.parse(JSON.stringify(result));
+      console.log(this.obj);
       this.name = this.obj.username;
+      console.log(this.name);
       this._id = this.obj.user_id;
       this.token = this.obj.token;
       this.status = this.obj.status;
+      this.profile_pic = this.obj.profile_pic;
+      console.log(this.profile_pic);
       this.showWarning = false;
       console.log('Token in ngOnInit', this.token);
       console.log('ID>>>>>>>>', this._id);
@@ -217,7 +222,7 @@ export class DashboardComponent implements OnInit {
             .split(' ')
             .map((n: any) => n[0])
             .join('');
-
+          this.profile_pic = payload.profile_pic;
           this.formGroup = this.formBuilder.group({
             first_name: new FormControl(
               payload.name.split(' ').slice(0, -1).join(' ')
@@ -236,7 +241,13 @@ export class DashboardComponent implements OnInit {
 
           localStorage.setItem('accessToken', token);
           sessionStorage.setItem('accessToken', token);
-          this.commonservice.setLoggedIn(true, this.name, this._id, token);
+          this.commonservice.setLoggedIn(
+            true,
+            this.name,
+            this._id,
+            token,
+            this.profile_pic
+          );
           this.ngOnInit();
         }
       });
@@ -274,7 +285,7 @@ export class DashboardComponent implements OnInit {
             },
             (error) => {
               this.errMessage = error.error.msg;
-              console.log(this.errMessage);              
+              console.log(this.errMessage);
             }
           );
       }
@@ -312,6 +323,27 @@ export class DashboardComponent implements OnInit {
       .put(details, `profile/update/${this._id}`)
       .subscribe((res: any) => {
         const result = JSON.parse(JSON.stringify(res));
+        console.log(result.status);
+        if (result && result.status == 'SUCCESS') {
+          let payload = result?.payload;
+          let token = result?.token;
+          console.log(payload);
+          this.name = payload.name
+            .split(' ')
+            .map((n: any) => n[0])
+            .join('');
+          this._id = payload._id;
+          this.profile_pic = payload.profile_pic;
+          // localStorage.setItem('accessToken', token);
+          // sessionStorage.setItem('accessToken', token);
+          this.commonservice.setLoggedIn(
+            true,
+            this.name,
+            this._id,
+            token,
+            this.profile_pic
+          );
+        }
 
         setTimeout(function () {
           $('#spinner').hide();

@@ -2,16 +2,16 @@
   float: right;
 }
 
-.maintenance{
+.maintenance {
   backdrop-filter: blur(10px);
   background-color: #01223770;
 }
 
-.maintenance .on{
+.maintenance .on {
   display: block;
 }
 
-.maintenance .off{
+.maintenance .off {
   display: none;
 }
 
@@ -51,4 +51,10 @@ a.nav-link {
 
 .dropdown-item {
   cursor: pointer;
+}
+
+.profile_pic {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
 }

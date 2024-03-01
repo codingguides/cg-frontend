@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   changetype: boolean = true;
   openModal: boolean = true;
   modalClass = 'modal';
+  profile_pic: any;
 
   constructor(
     private _route: Router,
@@ -62,12 +63,13 @@ export class LoginComponent implements OnInit {
         {
           email: email,
           password: password,
+          loginType: 'normal',
         },
         'user/login'
       )
       .subscribe((res) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-        console.log(apiResult['data']['payload']);
+        console.log(apiResult);
 
         if (apiResult['result'] == 'ok') {
           if (apiResult && apiResult['data']['payload']) {
@@ -91,14 +93,22 @@ export class LoginComponent implements OnInit {
                 .map((n: any) => n[0])
                 .join('');
             this._id = apiResult && apiResult['data']['payload'].id;
+            this.profile_pic =
+              apiResult && apiResult['data']['payload']?.profile_pic;
             console.log(this.name);
             console.log(this._id);
             let token = apiResult && apiResult['data']['token'];
-            this.commonservice.setLoggedIn(true, this.name, this._id, token);
+            this.commonservice.setLoggedIn(
+              true,
+              this.name,
+              this._id,
+              token,
+              this.profile_pic
+            );
           }
-          // window.location.reload();
+          window.location.reload();
           this.login.reset();
-          // $('#myModal').hide();
+          $('#myModal').hide();
           Swal.fire({
             position: 'top-end',
             icon: 'success',

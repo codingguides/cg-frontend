@@ -18,6 +18,7 @@ export class CommonService {
     username: '',
     user_id: '',
     token: '',
+    profile_pic: '',
   });
   castLogin = this.loginstatus.asObservable();
 
@@ -79,8 +80,15 @@ export class CommonService {
     });
   }
 
-  public setLoggedIn(status: any, username: any, user_id: any, token: any) {
-    this.loginstatus.next({ status, username, user_id, token });
+  public setLoggedIn(
+    status: any,
+    username: any,
+    user_id: any,
+    token: any,
+    profile_pic: any
+  ) {
+    console.log(status, username, user_id, token, 'STEP 2', profile_pic);
+    this.loginstatus.next({ status, username, user_id, token, profile_pic });
   }
   public getLoggedIn() {
     return this.loginstatus.value;

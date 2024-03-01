@@ -120,6 +120,7 @@ export class SignUpComponent implements OnInit {
           email: email,
           phone: phone,
           password: password,
+          loginType: 'normal',
         },
         'user/signup'
       )

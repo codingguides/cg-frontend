@@ -22,6 +22,8 @@ export class HeaderComponent {
   href: string = '';
 
   mflag: any = true;
+  profile_pic: string = '';
+  picture: string = '';
 
   constructor(
     public sharedService: SharedService,
@@ -62,19 +64,30 @@ export class HeaderComponent {
       console.log('this.name>>>>>>', this.name);
 
       let id = this.commonservice.getTokenDetails('id');
+      this.profile_pic = this.commonservice.getTokenDetails('profile_pic');
+      console.log(this.profile_pic);
+      console.log(typeof this.profile_pic);
       this.commonservice.setLoggedIn(
         true,
         this.name,
         id,
-        localStorage.getItem('accessToken')
+        localStorage.getItem('accessToken'),
+        this.profile_pic
       );
     } else {
-      this.commonservice.setLoggedIn(false, this.name, '', '');
+      this.commonservice.setLoggedIn(
+        false,
+        this.name,
+        '',
+        '',
+        this.profile_pic
+      );
     }
 
     this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
       this.status = obj.status;
       this.name = obj.username;
+      this.profile_pic = obj.profile_pic;
     });
   }
 
