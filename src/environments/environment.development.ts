@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   title: 'Codingguides',
   apiURL: "http://localhost:3059",
   siteURL: "http://localhost:4200",

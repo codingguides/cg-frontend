@@ -87,11 +87,10 @@ export class CommonService {
     token: any,
     profile_pic: any
   ) {
-    console.log(status, username, user_id, token, 'STEP 2', profile_pic);
     this.loginstatus.next({ status, username, user_id, token, profile_pic });
   }
   public getLoggedIn() {
-    return this.loginstatus.value;
+    return this.loginstatus.asObservable();
   }
 
   public getTokenDetails(param: string) {

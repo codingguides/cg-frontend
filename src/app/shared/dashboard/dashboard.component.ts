@@ -114,20 +114,21 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.commonservice.castLogin.subscribe((result) => {
-      this.obj = JSON.parse(JSON.stringify(result));
-      console.log(this.obj);
-      this.name = this.obj.username;
-      console.log(this.name);
-      this._id = this.obj.user_id;
-      this.token = this.obj.token;
-      this.status = this.obj.status;
-      this.profile_pic = this.obj.profile_pic;
-      console.log(this.profile_pic);
-      this.showWarning = false;
-      console.log('Token in ngOnInit', this.token);
-      console.log('ID>>>>>>>>', this._id);
-    });
+
+    if (localStorage.getItem('accessToken')) {
+      this.name = this.commonservice.getTokenDetails('name');
+      this.name = this.name ? this.name.split(' ').map((n: any) => n[0]).join('') : "";
+      this._id = this.commonservice.getTokenDetails('id');
+      this.token = localStorage.getItem('accessToken')
+      this.profile_pic = this.commonservice.getTokenDetails('profile_pic');
+      this.commonservice.setLoggedIn(
+        true,
+        this.name,
+        this._id,
+        localStorage.getItem('accessToken'),
+        this.profile_pic
+      );
+    }
 
     this.historyUserData({
       page: this.page,
@@ -141,11 +142,9 @@ export class DashboardComponent implements OnInit {
       .subscribe((result: any) => {
         if (result && result.status == 'SUCCESS') {
           this.userDetailsByID = result && result.payload;
-          console.log('USER DATA>>>>>>', this.userDetailsByID);
           this.userDetailsByID.map((data: any) => {
             this.statusDetails = data.status;
             this.url = data.topic_url;
-            console.log('URL>>>>>>>>', this.statusDetails);
           });
         }
       });
@@ -157,18 +156,10 @@ export class DashboardComponent implements OnInit {
       .subscribe((result: any) => {
         if (result && result.status == 'SUCCESS') {
           this.userProfileDetailsByID = result && result.payload;
-          console.log('USER PROFILE DATA>>>>>>', this.userProfileDetailsByID);
-          console.log('FULL NAME>>>>', this.userProfileDetailsByID.name);
-          console.log('PASSWORD', this.userProfileDetailsByID.password);
           const fullName = this.userProfileDetailsByID.name;
           this.firstName = fullName.split(' ').slice(0, -1).join(' ');
           this.lastName = fullName.split(' ').slice(-1).join(' ');
-          console.log('FIRST NAME>>>>', this.firstName);
-          console.log('LAST NAME>>>>', typeof this.lastName);
           this.totalName = this.firstName + ' ' + this.lastName;
-          console.log('NAME<<<<<<', this.totalName);
-          console.log('PICTURE<<<<<<', this.userProfileDetailsByID.profile_pic);
-
           this.image = this.userProfileDetailsByID.profile_pic;
           if (this.image == this.userProfileDetailsByID.profile_pic) {
             $('.title-text').hide();
@@ -310,10 +301,8 @@ export class DashboardComponent implements OnInit {
   }
 
   pictureSelect(val: any) {
-    console.log('val>>>>>>>>>>', val);
-    console.log(val.replace('http://localhost:62292', ''));
-    this.image = val.replace('http://localhost:62292', '');
-
+    let host = `${window.location.protocol}//${window.location.host}`
+    this.image = val.replace(host, '');
     $('.title-text').hide();
     $('.title-text2').hide();
     $('#spinner').show();
@@ -334,8 +323,9 @@ export class DashboardComponent implements OnInit {
             .join('');
           this._id = payload._id;
           this.profile_pic = payload.profile_pic;
-          // localStorage.setItem('accessToken', token);
-          // sessionStorage.setItem('accessToken', token);
+          // alert(this.profile_pic)
+          localStorage.setItem('accessToken', token);
+          sessionStorage.setItem('accessToken', token);
           this.commonservice.setLoggedIn(
             true,
             this.name,

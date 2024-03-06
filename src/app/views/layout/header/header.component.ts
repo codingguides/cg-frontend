@@ -24,6 +24,7 @@ export class HeaderComponent {
   mflag: any = true;
   profile_pic: string = '';
   picture: string = '';
+  sortname:string = ""
 
   constructor(
     public sharedService: SharedService,
@@ -45,35 +46,35 @@ export class HeaderComponent {
     }
 
     this.getMenu();
-    this.commonservice.getLoggedIn();
     this.href = this.router.url;
-    console.log('this.href>>>>>>>>>>>>', this.href);
     if (this.findWord(this.href)) {
       this.searchvalue = this.activerouter.snapshot.params['topic'];
     } else {
       this.searchvalue = '';
     }
-    console.log('this.searchvalue>>>>>>>>>>>>', this.searchvalue);
+
+    this.commonservice.getLoggedIn().subscribe((val)=>{
+      const result = JSON.parse(JSON.stringify(val));
+      this.profile_pic = result?.profile_pic;
+      this.name = result?.name;
+      this.status = result?.status;
+    })
 
     if (localStorage.getItem('accessToken')) {
-      this.name = this.commonservice
-        .getTokenDetails('name')
-        .split(' ')
-        .map((n: any) => n[0])
-        .join('');
-      console.log('this.name>>>>>>', this.name);
-
-      let id = this.commonservice.getTokenDetails('id');
-      this.profile_pic = this.commonservice.getTokenDetails('profile_pic');
-      console.log(this.profile_pic);
-      console.log(typeof this.profile_pic);
-      this.commonservice.setLoggedIn(
-        true,
-        this.name,
-        id,
-        localStorage.getItem('accessToken'),
-        this.profile_pic
-      );
+      if(!this.name){
+        this.name = this.commonservice.getTokenDetails('name');
+        this.name = this.name ? this.name.split(' ').map((n: any) => n[0]).join('') : "";
+        this.sortname = this.name.toUpperCase();
+        let id = this.commonservice.getTokenDetails('id');
+        this.profile_pic = this.commonservice.getTokenDetails('profile_pic');
+        this.commonservice.setLoggedIn(
+          true,
+          this.name,
+          id,
+          localStorage.getItem('accessToken'),
+          this.profile_pic
+        );
+      }
     } else {
       this.commonservice.setLoggedIn(
         false,
@@ -84,11 +85,6 @@ export class HeaderComponent {
       );
     }
 
-    this.loginTrue = this.commonservice.castLogin.subscribe((obj: any) => {
-      this.status = obj.status;
-      this.name = obj.username;
-      this.profile_pic = obj.profile_pic;
-    });
   }
 
   onKeyUp(event: any) {
