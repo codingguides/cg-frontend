@@ -20,13 +20,16 @@ export class FeaturesComponent {
   }
 
   async getMenu() {
+    const flag = true
     await this.commonservice
-      .get('page/get-feature-item')
+      .get(`page/get-feature-item/${flag}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
         console.log(apiResult.payload);
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.menu = apiResult && apiResult.payload;
+          console.log("getMenu>>>>>",this.menu)
+
         }
       });
   }

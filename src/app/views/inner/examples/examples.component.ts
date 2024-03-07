@@ -55,11 +55,9 @@ export class ExamplesComponent {
       .get(`page/blog/${this.getslug}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
-
         const topicDetails = apiResult.payload;
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.examplesHeader = apiResult && topicDetails.topic;
-
           this.topicDetails = apiResult && topicDetails.res;
           var i = 0;
           this.topicDetails.map((topic: any) => {
@@ -69,10 +67,8 @@ export class ExamplesComponent {
                 i++;
                 if (i < 5) {
                   this.tempArr.push(blog);
-
                   if (i == 4) {
                     this.relatedBlogList.push(this.tempArr);
-
                     this.tempArr = [];
                     i = 0;
                   }
@@ -110,15 +106,16 @@ export class ExamplesComponent {
     window.location.href = `examples/${slug}`;
   }
   async getMenu() {
+    const flag = false;
     await this.commonservice
-      .get('page/get-feature-item')
+      .get(`page/get-feature-item/${flag}`)
       .subscribe((res: any) => {
         const apiResult = JSON.parse(JSON.stringify(res));
         if (apiResult && apiResult.status == 'SUCCESS') {
           this.menu = apiResult && apiResult.payload;
           var j = 0;
           this.menu.map((data: any) => {
-            if (j < 4 && this.getslug !== data.slug) {
+            if (j < 4 && this.getslug !== data.slug && data.parent_id == null) {
               this.cazzArr.push(data);
               j++;
               if (j == 3) {

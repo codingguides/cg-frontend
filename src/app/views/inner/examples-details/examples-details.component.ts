@@ -62,7 +62,6 @@ export class ExamplesDetailsComponent {
             i++;
             if (i < 5) {
               this.tempArr.push(data);
-
               if (i == 4) {
                 this.newArr.push(this.tempArr);
                 this.tempArr = [];
@@ -70,6 +69,9 @@ export class ExamplesDetailsComponent {
               }
             }
           });
+
+          console.log(">>>>>>>>>>>>>>>>this.tempArr>>>>>>>>>>",this.tempArr)
+
         }
       });
   }
