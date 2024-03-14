@@ -179,7 +179,8 @@
       </div>
       <div class="normal_part d-lg-block d-md-block d-none">
         <div class="container-fluid">
-          <div class="customNav">
+          <a href="/" class="navbar-brand slogo"><img class="img-fluid" src="assets/images/slogo2.png"/></a>
+          <div class="customNav">            
             <ul class="list-unstyled">
               <li class="nav-item" *ngFor="let menulist of menu">
                 <a class="nav-link" (click)="renderUrl(menulist.slug)">{{

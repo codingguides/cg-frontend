@@ -8,6 +8,8 @@
 
 jQuery(window).scroll(function(){
 
+    console.log("hi>>>>")
+
     if (jQuery(this).scrollTop() > 100) {
         //jQuery('.scrollToTop').fadeIn();
         jQuery('.scrollToTop').addClass('show');
@@ -53,7 +55,18 @@ jQuery(window).scroll(function(){
 jQuery(document).ready(function() {
 
     //Sticky Menu
-    jQuery('#nav_bg').stickit({scope: StickScope.Document, zIndex: 101});
+    jQuery('#nav_bg').stickit({scope: StickScope.Document, zIndex: 101, abc:10});
+    $(".slogo").hide();
+    
+    $(window).scroll(function () { 
+        var top = $(window).scrollTop();
+        if(top>=100){
+            $(".slogo").show();
+        }
+        else{
+            $(".slogo").hide();
+        }
+    });
 
     //Side Menu
 

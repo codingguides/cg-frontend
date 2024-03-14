@@ -7,6 +7,13 @@
   background-color: #01223770;
 }
 
+.slogo{
+  float: left;
+  > img{
+    width: 88px;
+  }
+}
+
 .maintenance .on {
   display: block;
 }
